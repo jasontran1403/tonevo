@@ -9,9 +9,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.0",
+    "@tanstack/react-query": "^5.55.4",
+    "@tanstack/react-table": "^8.20.5",
     "@tonconnect/ui-react": "^2.0.9",
+    "add": "^2.0.6",
+    "axios": "^1.7.7",
+    "framer-motion": "^11.5.4",
+    "nice-forms.css": "^0.1.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-datepicker": "^7.3.0",
+    "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-router-dom": "^6.26.2",
+    "react-toastify": "^10.0.5",
+    "shadcn": "^1.0.0",
+    "table": "^6.8.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

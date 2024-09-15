@@ -2,7 +2,7 @@ import { people01, people02, people03, facebook, instagram, linkedin, twitter, a
 
 export const navLinks = [
   {
-    id: "home",
+    id: "",
     title: "Home",
   },
   {
@@ -16,6 +16,56 @@ export const navLinks = [
   {
     id: "clients",
     title: "Clients",
+  },
+  {
+    id: "dashboard",
+    title: "Dashsboard",
+  }
+];
+
+export const connectedNavLinks = [
+  {
+    id: "",
+    title: "Home",
+  },
+  {
+    id: "features",
+    title: "Features",
+  },
+  {
+    id: "product",
+    title: "Product",
+  },
+  {
+    id: "clients",
+    title: "Clients",
+  },
+  {
+    id: "dashboard",
+    title: "Dashboard",
+  }
+];
+
+export const userNavLinks = [
+  {
+    id: "",
+    title: "Home",
+  },
+  {
+    id: "dashboard",
+    title: "Dasboard",
+  },
+  {
+    id: "investments",
+    title: "Investment",
+  },
+  {
+    id: "transactions",
+    title: "Transaction",
+  },
+  {
+    id: "tree",
+    title: "Tree",
   }
 ];
 

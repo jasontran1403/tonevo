@@ -14,8 +14,53 @@
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
 }
 
+.wallet-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.investment-container {
+  display: flex;
+  justify-content: center;
+}
+
+.investment-card {
+  width: 41svw;
+}
+
+.wallet-card {
+  flex: 1 1 calc(20%); /* 3 cards per row with gap */
+  min-width: 20%; /* Adjust this value based on your card width */
+  box-sizing: border-box;
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  .wallet-card {
+    flex: 1 1 100%; /* 1 card per row */
+  }
+
+  .investment-card {
+    width: 90%;
+  }
+
+  .wallet-container {
+    justify-content: center;
+  }
+}
+
 * {
   scroll-behavior: smooth;
+}
+
+.wallet-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
 .text-gradient {
@@ -34,6 +79,10 @@
   text-fill-color: transparent;
 }
 
+#dashboard {
+  min-height: auto;
+}
+
 .bg-blue-gradient {
   background: linear-gradient(
     157.81deg,
@@ -44,6 +93,14 @@
     #5ce1e6 51.94%,
     #33bbcf 90.29%
   );
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;    /* Centers vertically */
+  width: 100vw;           /* Optional: sets container width to full viewport width */
 }
 
 .bg-black-gradient {

@@ -1,11 +1,14 @@
 const styles = {
   boxWidth: "xl:max-w-[1280px] w-full",
+  boxWidthDashboard: "xl:max-w-[60svw] w-full h-full",
 
-  heading2: "font-poppins font-semibold xs:text-[48px] text-[40px] text-white xs:leading-[76.8px] leading-[66.8px] w-full",
-  paragraph: "font-poppins font-normal text-dimWhite text-[18px] leading-[30.8px]",
+  heading2: "font-poppins font-semibold xs:text-[36px] text-[32px] text-white xs:leading-[66.8px] leading-[46.8px] w-full",
+  paragraph: "font-poppins font-normal text-dimWhite text-[18px] leading-[46.8px w-full",
 
-  flexCenter: "flex justify-center items-center",
+  flexCenter: "flex justify-center items-center gap-2",
   flexStart: "flex justify-center items-start",
+  flexBetween: "flex justify-between",
+  flexColumn: "flex flex-col",
 
   paddingX: "sm:px-16 px-6",
   paddingY: "sm:py-16 py-6",

@@ -1,11 +1,105 @@
-import React from 'react';
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import Modal from 'react-modal';
+import ReactDOM from "react-dom/client";
+import Router from "./routes";
+import "./index.css";
+import {
+  THEME,
+  TonConnectUIProvider,
+  useTonWallet,
+} from "@tonconnect/ui-react";
+import { BrowserRouter } from "react-router-dom";
+import { useTonConnectUI } from "@tonconnect/ui-react"; // or any specific hook provided by the SDK
 
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+function App() {
+  const wallet = useTonWallet();
+  const connect = useTonConnectUI();
+  const [lastStatus, setLastStatus] = useState();
+
+  useEffect(() => {
+    var timeout;
+    if (connect[0].connected) {
+      // Lưu địa chỉ ví vào localStorage
+      localStorage.setItem("walletAddress", wallet.account.address);
+      localStorage.setItem("publicKey", wallet.account.publicKey);
+      localStorage.setItem("walletStateInit", wallet.account.walletStateInit);
+      setLastStatus(true);
+      timeout = setTimeout(() => {
+        let data = JSON.stringify({
+          walletAddress: wallet.account.address,
+          publicKey: wallet.account.publicKey,
+          walletStateInit: wallet.account.walletStateInit,
+        });
+    
+        let config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "http://localhost:8080/api/v1/auth/authenticate",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+    
+        Axios.request(config).then((response) => {
+          localStorage.setItem("access_token", response.data.access_token);
+          localStorage.setItem("is_in_tree", response.data.is_in_tree);
+        });
+      }, 500);
+    } else {
+      // Xóa thông tin ví khi ngắt kết nối
+      localStorage.removeItem("walletAddress");
+      localStorage.removeItem("publicKey");
+      localStorage.removeItem("walletStateInit");
+
+      let config = {
+        method: "get",
+        url: `http://localhost:8080/api/v1/auth/logout/${localStorage.getItem(
+          "access_token"
+        )}`,
+      };
+
+      Axios.request(config).then((response) => {
+        if (response.data) {
+          if (lastStatus) {
+            setLastStatus(false);
+            window.location.href = "/";
+          }
+        }
+      });
+    }
+
+    return (() => {
+      clearTimeout(timeout);
+    })
+  }, [connect]);
+
+  return <Router />;
+}
+
+Modal.setAppElement('#root');
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  // <React.StrictMode>
+  <TonConnectUIProvider
+    manifestUrl="http://localhost:5173/tonconnect-manifest.json"
+    uiPreferences={{
+      theme: THEME.LIGHT,
+      borderRadius: "s",
+      colorsSet: {
+        [THEME.DARK]: {
+          connectButton: {
+            background: "#29CC6A",
+          },
+        },
+      },
+    }}
+  >
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </TonConnectUIProvider>
+  // </React.StrictMode>
 );

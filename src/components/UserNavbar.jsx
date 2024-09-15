@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import { close, logo, menu } from "../assets";
-import { connectedNavLinks } from "../constants";
+import { userNavLinks } from "../constants";
 import { TonConnectButton } from "@tonconnect/ui-react";
 
-const Navbar = () => {
+const UserNavbar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
 
@@ -13,19 +13,15 @@ const Navbar = () => {
       <img src={logo} alt="hoobank" className="w-[124px] h-[32px]" />
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
-        {connectedNavLinks.map((nav, index) => (
+        {userNavLinks.map((nav, index) => (
           <li
             key={nav.id}
             className={`font-poppins font-normal cursor-pointer text-[16px] ${
               active === nav.title ? "text-white" : "text-dimWhite"
-            } ${index === connectedNavLinks.length - 1 ? "mr-0" : "mr-10"}`}
+            } ${index === userNavLinks.length - 1 ? "mr-0" : "mr-10"}`}
             onClick={() => setActive(nav.title)}
           >
-            {nav.title === "Dashboard" ? (
-              <a href={`/${nav.id}`}>{nav.title}</a>
-            ) : (
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            )}
+            <a href={`/${nav.id}`}>{nav.title}</a>
           </li>
         ))}
       </ul>
@@ -45,12 +41,12 @@ const Navbar = () => {
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
-            {connectedNavLinks.map((nav, index) => (
+            {userNavLinks.map((nav, index) => (
               <li
                 key={nav.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-dimWhite"
-                } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                } ${index === userNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
               >
                 <a href={`#${nav.id}`}>{nav.title}</a>
@@ -63,4 +59,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default UserNavbar;
