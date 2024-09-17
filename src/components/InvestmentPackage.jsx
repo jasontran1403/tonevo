@@ -4,6 +4,7 @@ import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_ENDPOINT } from "../constants";
 
 const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -46,7 +47,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
     let config = {
       method: "post",
-      url: "http://localhost:8080/api/v1/management/invest",
+      url: `${API_ENDPOINT}management/invest`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

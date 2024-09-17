@@ -8,6 +8,7 @@ import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
 import SwapItem from "./SwapItem";
 import HashCell from "./table/HashCell";
+import { API_ENDPOINT } from "../constants";
 
 const columns = [
   {
@@ -57,7 +58,7 @@ const SwapCard = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `http://localhost:8080/api/v1/management/swap-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

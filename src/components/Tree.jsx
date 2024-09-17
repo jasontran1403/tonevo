@@ -4,6 +4,7 @@ import Button from "./Button2";
 import Modal from "react-modal";
 import "../assets/css/TreeView.css";
 import Form from "../components/Form2";
+import { API_ENDPOINT } from "../constants";
 
 const Tree = () => {
   const [walletAddress, setWalletAddress] = useState(
@@ -50,7 +51,7 @@ const Tree = () => {
 
     let config = {
       method: "post",
-      url: "http://localhost:8080/api/v1/management/generate-sponsor-code",
+      url: `${API_ENDPOINT}management/generate-sponsor-code`,
       headers: {
         "Content-Type": "application/json",
         Authorization: accessToken,
@@ -87,7 +88,7 @@ const Tree = () => {
 
     let config = {
       method: "POST",
-      url: "http://localhost:8080/api/v1/management/userMapDown5Level",
+      url: `${API_ENDPOINT}management/userMapDown5Level`,
       headers: {
         "Content-Type": "application/json",
         Authorization: accessToken,

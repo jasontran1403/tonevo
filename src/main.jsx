@@ -9,6 +9,7 @@ import {
   TonConnectUIProvider,
   useTonWallet,
 } from "@tonconnect/ui-react";
+import { API_ENDPOINT } from "./constants";
 import { BrowserRouter } from "react-router-dom";
 import { useTonConnectUI } from "@tonconnect/ui-react"; // or any specific hook provided by the SDK
 
@@ -36,7 +37,7 @@ function App() {
         let config = {
           method: "post",
           maxBodyLength: Infinity,
-          url: "http://localhost:8080/api/v1/auth/authenticate",
+          url: `${API_ENDPOINT}auth/authenticate`,
           headers: {
             "Content-Type": "application/json",
           },
@@ -56,7 +57,7 @@ function App() {
 
       let config = {
         method: "get",
-        url: `http://localhost:8080/api/v1/auth/logout/${localStorage.getItem(
+        url: `${API_ENDPOINT}auth/logout/${localStorage.getItem(
           "access_token"
         )}`,
       };

@@ -4,6 +4,7 @@ import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_ENDPOINT } from "../constants";
 
 const SwapItem = ({ swapHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -31,7 +32,7 @@ const SwapItem = ({ swapHistory }) => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `http://localhost:8080/api/v1/management/balance/${walletAddress}`,
+      url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -87,7 +88,7 @@ const SwapItem = ({ swapHistory }) => {
 
     let config = {
       method: "post",
-      url: "http://localhost:8080/api/v1/management/swap",
+      url: `${API_ENDPOINT}management/swap`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

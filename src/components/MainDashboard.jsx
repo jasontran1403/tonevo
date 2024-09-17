@@ -6,6 +6,7 @@ import WalletCard from "./WalletCard";
 import InvestmentCard from "./InvestmentCard";
 import StatusCell from "../components/table/StatusCell";
 import DateCell from "../components/table/DataCell";
+import { API_ENDPOINT } from "../constants";
 
 const columns = [
   {
@@ -60,7 +61,7 @@ const MainDashboard = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `http://localhost:8080/api/v1/management/balance/${walletAddress}`,
+      url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

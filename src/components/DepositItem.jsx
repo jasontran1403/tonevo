@@ -4,6 +4,7 @@ import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_ENDPOINT } from "../constants";
 
 const DepositItem = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -43,7 +44,7 @@ const DepositItem = ({ depositHistory }) => {
 
     let config = {
       method: "post",
-      url: "http://localhost:8080/api/v1/management/generate-qr",
+      url: `${API_ENDPOINT}management/generate-qr`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
@@ -77,7 +78,7 @@ const DepositItem = ({ depositHistory }) => {
 
     let config = {
       method: "post",
-      url: "http://localhost:8080/api/v1/management/cancel-deposit",
+      url: `${API_ENDPOINT}management/cancel-deposit`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

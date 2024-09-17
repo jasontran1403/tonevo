@@ -8,6 +8,7 @@ import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
 import DepositItem from "./DepositItem";
 import HashCell from "./table/HashCell";
+import { API_ENDPOINT } from "../constants";
 
 const columns = [
   {
@@ -63,7 +64,7 @@ const DepositCard = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `http://localhost:8080/api/v1/management/bep20-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/bep20-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

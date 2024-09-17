@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
 import { MainDashboard, Footer, UserNavbar, InvestmentCard } from "../components";
+import { API_ENDPOINT } from "../constants";
 
 const Investment = () => {
   const [walletAddress, setWalletAddress] = useState(
@@ -23,7 +24,7 @@ const Investment = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "http://localhost:8080/api/v1/auth/authenticate",
+      url: `${API_ENDPOINT}auth/authenticate`,
       headers: {
         "Content-Type": "application/json",
       },
