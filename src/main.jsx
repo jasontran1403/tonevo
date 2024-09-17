@@ -88,7 +88,7 @@ Modal.setAppElement('#root');
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <TonConnectUIProvider
-    manifestUrl="http://localhost:5173/tonconnect-manifest.json"
+    manifestUrl="https://www.mapchain.org/tonconnect-manifest.json"
     uiPreferences={{
       theme: THEME.LIGHT,
       borderRadius: "s",

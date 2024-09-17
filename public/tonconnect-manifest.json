@@ -1,7 +1,7 @@
 {
-  "url": "https://www.mapchain.org/",
+  "url": "https://www.mapchain.org",
   "name": "Mapchain DApps",
-  "iconUrl": "https://github.com/jasontran1403/tonevo/logo.png",
-  "termsOfUseUrl": "https://github.com/jasontran1403/tonevo/terms-of-use.txt",
-  "privacyPolicyUrl": "https://github.com/jasontran1403/tonevo/privacy-policy.txt"
+  "iconUrl": "https://www.mapchain.org/logo.png",
+  "termsOfUseUrl": "https://www.mapchain.org/terms-of-use.txt",
+  "privacyPolicyUrl": "https://www.mapchain.org/privacy-policy.txt"
 }
