@@ -27,6 +27,7 @@ const Investment = () => {
       url: `${API_ENDPOINT}auth/authenticate`,
       headers: {
         "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };

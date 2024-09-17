@@ -48,6 +48,7 @@ const DepositItem = ({ depositHistory }) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
       responseType: "blob",
@@ -82,6 +83,7 @@ const DepositItem = ({ depositHistory }) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };

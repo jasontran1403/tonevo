@@ -61,6 +61,7 @@ const SwapCard = () => {
       url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
     };
 

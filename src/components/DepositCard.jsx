@@ -67,6 +67,7 @@ const DepositCard = () => {
       url: `${API_ENDPOINT}management/bep20-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
     };
 

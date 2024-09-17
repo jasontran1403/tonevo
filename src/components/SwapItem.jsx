@@ -35,6 +35,7 @@ const SwapItem = ({ swapHistory }) => {
       url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
     };
 
@@ -92,6 +93,7 @@ const SwapItem = ({ swapHistory }) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };

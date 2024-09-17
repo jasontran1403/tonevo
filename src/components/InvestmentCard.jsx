@@ -63,9 +63,10 @@ const InvestmentCard = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `http://localhost:8080/api/v1/management/packages/${walletAddress}`,
+      url: `${API_ENDPOINT}management/packages/${walletAddress}`,
       headers: {
         Authorization: accessToken,
+        "ngrok-skip-browser-warning": "69420",
       },
     };
 

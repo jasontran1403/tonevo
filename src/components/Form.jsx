@@ -33,6 +33,7 @@ const Form = () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: accessToken,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };
