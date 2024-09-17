@@ -4,10 +4,11 @@
 }
 
 .tree {
-    overflow: hidden; /* Allow scrolling when content overflows */
+    overflow: hidden;
     display: flex;
     flex-direction: column; /* Ensure the tree layout aligns vertically */
-    min-height: 100svh; /* Prevents the tree from growing beyond the viewport height */
+    height: 89svh;
+    width: 2400px;
 }
 
 .tree ul {

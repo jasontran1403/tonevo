@@ -23,7 +23,6 @@ const Investment = () => {
 
     let config = {
       method: "post",
-      maxBodyLength: Infinity,
       url: `${API_ENDPOINT}auth/authenticate`,
       headers: {
         "Content-Type": "application/json",
@@ -33,6 +32,7 @@ const Investment = () => {
     };
 
     Axios.request(config).then((response) => {
+      console.log();
       localStorage.setItem("access_token", response.data.access_token);
       setAccessToken(response.data.access_token);
     });

@@ -36,7 +36,6 @@ function App() {
     
         let config = {
           method: "post",
-          maxBodyLength: Infinity,
           url: `${API_ENDPOINT}auth/authenticate`,
           headers: {
             "Content-Type": "application/json",

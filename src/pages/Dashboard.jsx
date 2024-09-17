@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
-import Axios from "axios";
 import styles from "../style";
 import { MainDashboard, UserNavbar } from "../components";
 import Form from "../components/Form";

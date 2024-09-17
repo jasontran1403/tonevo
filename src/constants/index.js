@@ -2,6 +2,78 @@ import { people01, people02, people03, facebook, instagram, linkedin, twitter, a
 
 // export const API_ENDPOINT = "http://localhost:8888/api/v1/";
 export const API_ENDPOINT = "https://personally-sunny-basilisk.ngrok-free.app/api/v1/"
+
+export const users = [
+  {
+    name: 'Jane Cooper 1', 
+    title: 'Regional 1',
+    role: 'Admin',
+    email: 'jane1@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 2', 
+    title: 'Regional 2',
+    role: 'Admin',
+    email: 'jane2@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 3', 
+    title: 'Regional 3',
+    role: 'Admin',
+    email: 'jane3@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 4', 
+    title: 'Regional 4',
+    role: 'Admin',
+    email: 'jane4@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 5', 
+    title: 'Regional 5',
+    role: 'Admin',
+    email: 'jane5@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 6', 
+    title: 'Regional 6',
+    role: 'Admin',
+    email: 'jane6@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 7', 
+    title: 'Regional 7',
+    role: 'Admin',
+    email: 'jane7@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 8', 
+    title: 'Regional 8',
+    role: 'Admin',
+    email: 'jane8@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 9', 
+    title: 'Regional 9',
+    role: 'Admin',
+    email: 'jane9@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 10', 
+    title: 'Regional 10',
+    role: 'Admin',
+    email: 'jane10@gmail.com'
+  },
+  {
+    name: 'Jane Cooper 11', 
+    title: 'Regional 11',
+    role: 'Admin',
+    email: 'jane11@gmail.com'
+  },
+
+];
+
+
 export const navLinks = [
   {
     id: "",

@@ -54,8 +54,8 @@ const Tree = () => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidthDashboard}`}>
+      <div className={`bg-primary ${styles.flexStart}`} >
+        <div className={`${styles.boxWidthDashboard}`} style={{ overflowY: "scroll" }}>
           {isInTree === "true" ? (
             <TreeVisualize />
           ) : (

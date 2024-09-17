@@ -9,6 +9,7 @@ import Swap from "./pages/Swap";
 import Transfer from "./pages/Transfer";
 import Withdraw from "./pages/Withdraw";
 import Tree from "./pages/Tree";
+import TableUser from "./pages/TableUser";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -24,6 +25,10 @@ export default function Router() {
         {
             path: "/",
             element: <LandingPage />
+        },
+        {
+            path: "test",
+            element: <TableUser />
         },
         {
             path: "/dashboard",
