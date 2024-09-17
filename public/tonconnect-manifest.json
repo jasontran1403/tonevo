@@ -1,6 +1,7 @@
 {
-    "url": "https://www.mapchain.org",
-    "name": "Web3 Dapp for Mapchain",
-    "iconUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr6WsCGy-o3brXcj2cmXGkHM_fE_p0gy4X8w&s"
-  }
-  
+  "url": "https://www.mapchain.org/",
+  "name": "Mapchain DApps",
+  "iconUrl": "https://github.com/jasontran1403/tonevo/apple-touch-icon.png",
+  "termsOfUseUrl": "https://github.com/jasontran1403/tonevo/terms-of-use.txt",
+  "privacyPolicyUrl": "https://github.com/jasontran1403/tonevo/privacy-policy.txt"
+}
