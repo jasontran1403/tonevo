@@ -16,6 +16,8 @@ const customStyles = {
   },
 };
 
+
+
 const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")

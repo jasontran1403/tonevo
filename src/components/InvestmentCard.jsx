@@ -5,6 +5,7 @@ import TaskTable from "../components/table/TaskTable";
 import InvestmentPackage from "./InvestmentPackage";
 import StatusCell from "../components/table/StatusCell";
 import DateCell from "../components/table/DataCell";
+import { API_ENDPOINT } from "../constants";
 
 const columns = [
   {

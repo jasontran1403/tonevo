@@ -108,7 +108,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
       className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
     >
       <div className="flex-1 flex flex-col">
-        <h2 className={styles.heading2}>Investment package information</h2>
+        <h4 className={styles.heading4}>Investment package information</h4>
         <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label

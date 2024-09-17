@@ -32,7 +32,6 @@ const Investment = () => {
     };
 
     Axios.request(config).then((response) => {
-      console.log();
       localStorage.setItem("access_token", response.data.access_token);
       setAccessToken(response.data.access_token);
     });
