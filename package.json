@@ -14,6 +14,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.0",
+    "@mui/material": "^6.1.0",
     "@tanstack/react-query": "^5.55.4",
     "@tanstack/react-table": "^8.20.5",
     "@tonconnect/ui-react": "^2.0.9",
