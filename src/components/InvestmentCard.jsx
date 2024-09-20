@@ -6,47 +6,15 @@ import InvestmentPackage from "./InvestmentPackage";
 import StatusCell from "../components/table/StatusCell";
 import DateCell from "../components/table/DataCell";
 import { API_ENDPOINT } from "../constants";
+import InvestmentTable from "./InvestmentTable";
 
-const columns = [
-  {
-    accessorKey: "code",
-    header: "Code",
-    size: 500,
-    enableColumnFilter: true,
-    enableSorting: true,
-    filterFn: "includesString",
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
-    cell: DateCell,
-    size: 200,
-  },
-  {
-    accessorKey: "daily",
-    header: "Reward",
-    size: 200,
-  },
-  {
-    accessorKey: "capital",
-    header: "Capital",
-    size: 200,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: StatusCell,
-    size: 300,
-    enableSorting: true,
-    enableColumnFilter: true,
-    filterFn: (row, columnId, filterStatuses) => {
-      if (filterStatuses.length === 0) return true;
-      const status = row.getValue(columnId);
-      return filterStatuses.includes(status?.id);
-    },
-  },
+const TABLE_HEAD = [
+  "Code",
+  "Date",
+  "Daily Reward",
+  "Capital",
+  "Status",
 ];
-
 
 const InvestmentCard = () => {
   const [walletAddress, setWalletAddress] = useState(
@@ -87,7 +55,7 @@ const InvestmentCard = () => {
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <TaskTable columns={columns} data={listInvestment} />
+        <InvestmentTable TABLE_NAME={"Recent deposit"} TABLE_SUBNAME={"These are details about the lastest deposit"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={listInvestment} />
       </div>
     </>
   );

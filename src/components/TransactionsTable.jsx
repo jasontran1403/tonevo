@@ -15,10 +15,10 @@ import {
   Input,
 } from "@material-tailwind/react";
 
-const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
+const TransactionsTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 5;
+  const rowsPerPage = 9;
 
   // Filter rows based on search term
   const filteredRows = TABLE_ROWS.filter((row) =>
@@ -48,16 +48,43 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    // Create a new Date object
+    const date = new Date(dateString);
+
+    // Format the time
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+
+    // Format the date
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const year = date.getFullYear();
+
+    const formattedDate = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+
+    return formattedDate;
+  };
+
+  const formatNumber = (numberString) => {
+    // Format the number with commas
+    const formattedNumber = new Intl.NumberFormat('en-US').format(numberString);
+  
+    return formattedNumber;
+  };
+  
+
   return (
-    <Card className="h-full w-full flex flex-col">
+    <Card className="h-[85svh] w-full flex flex-col">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Recent Transactions
+              {TABLE_NAME}
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              These are details about the last transactions
+              {TABLE_SUBNAME}
             </Typography>
           </div>
           <div className="flex w-full shrink-0 gap-2 mr-3 md:w-max">
@@ -102,15 +129,14 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
   {currentRows.map(
     (
       {
-        img,
         code,
-        name,
         amount,
+        fee,
+        currency,
         date,
         status,
-        account,
-        accountNumber,
-        expiry,
+        type,
+        hash
       },
       index
     ) => {
@@ -121,23 +147,6 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
 
       return (
         <tr key={code}>
-          <td className={classes}>
-            <div className="flex items-center gap-3">
-              <Avatar
-                src={img}
-                alt={name}
-                size="md"
-                className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-              />
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
-              >
-                {name}
-              </Typography>
-            </div>
-          </td>
           <td className={classes}>
             <div className="flex items-center gap-3">
               <Typography
@@ -155,7 +164,7 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
               color="blue-gray"
               className="font-normal"
             >
-              {amount}
+              {formatDate(date)}
             </Typography>
           </td>
           <td className={classes}>
@@ -164,7 +173,25 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
               color="blue-gray"
               className="font-normal"
             >
-              {date}
+              {formatNumber(amount)} {currency}
+            </Typography>
+          </td>
+          <td className={classes}>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {formatNumber(fee)} {currency}
+            </Typography>
+          </td>
+          <td className={classes}>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {type}
             </Typography>
           </td>
           <td className={classes}>
@@ -174,9 +201,9 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
                 variant="ghost"
                 value={status}
                 color={
-                  status === "paid"
+                  status === "success" || status === "complete"
                     ? "green"
-                    : status === "pending"
+                    : status === "pending" || status === "running"
                     ? "amber"
                     : "red"
                 }
@@ -185,44 +212,24 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
           </td>
           <td className={classes}>
             <div className="flex items-center gap-3">
-              <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
-                <Avatar
-                  src={
-                    account === "visa"
-                      ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
-                      : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
-                  }
-                  size="sm"
-                  alt={account}
-                  variant="square"
-                  className="h-full w-full object-contain p-1"
-                />
-              </div>
               <div className="flex flex-col">
                 <Typography
                   variant="small"
                   color="blue-gray"
                   className="font-normal capitalize"
                 >
-                  {account.split("-").join(" ")} {accountNumber}
-                </Typography>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal opacity-70"
-                >
-                  {expiry}
+                  {hash}
                 </Typography>
               </div>
             </div>
           </td>
-          <td className={classes}>
+          {/* <td className={classes}>
             <Tooltip content="Edit User">
               <IconButton variant="text">
                 <PencilIcon className="h-4 w-4" />
               </IconButton>
             </Tooltip>
-          </td>
+          </td> */}
         </tr>
       );
     }
@@ -260,4 +267,4 @@ const Table = ({ TABLE_HEAD, TABLE_ROWS }) => {
   );
 };
 
-export default Table;
+export default TransactionsTable;

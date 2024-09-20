@@ -1,4 +1,4 @@
-import Table from "../components/Table";
+import TransactionTable from "../components/TransactionTable";
 import styles from "../style";
 import { UserNavbar } from "../components";
 

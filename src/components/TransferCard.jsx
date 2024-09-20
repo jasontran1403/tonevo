@@ -5,19 +5,21 @@ import Button from "./Button";
 import TransactionStatusCell from "./table/TransactionStatusCell";
 import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
-import SwapItem from "./SwapItem";
-import DepositTable from "./DepositTable";
+import TransferItem from "./TransferItem";
+import TransferTable from "./TransferTable";
 import { API_ENDPOINT } from "../constants";
 
 const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
+  "From",
+  "To",
   "Status",
   "Note"
 ];
 
-const SwapCard = () => {
+const TransferCard = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -25,12 +27,12 @@ const SwapCard = () => {
     localStorage.getItem("access_token")
   );
 
-  const [swapHistory, setSwapHistory] = useState([]);
+  const [transferHistory, setTransferHistory] = useState([]);
 
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/transfer-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -39,7 +41,7 @@ const SwapCard = () => {
 
     Axios.request(config)
       .then((response) => {
-        setSwapHistory(response.data);
+        setTransferHistory(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -49,14 +51,14 @@ const SwapCard = () => {
   return (
     <>
       <div className="investment-container">
-        <SwapItem />
+        <TransferItem />
       </div>
 
       <div className={`${styles.flexCenter}`}>
-      <DepositTable TABLE_NAME={"Recent swap"} TABLE_SUBNAME={"These are details about the lastest swap"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={swapHistory} />
+        <TransferTable TABLE_NAME={"Recent internal transfer"} TABLE_SUBNAME={"These are details about the lastest internal transfer"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={transferHistory} />
       </div>
     </>
   );
 };
 
-export default SwapCard;
+export default TransferCard;

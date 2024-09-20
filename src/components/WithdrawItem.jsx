@@ -1,12 +1,12 @@
 import Axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 
-const DepositItem = ({ depositHistory }) => {
+const WithdrawItem = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -16,86 +16,69 @@ const DepositItem = ({ depositHistory }) => {
   const [networkSelected, setNetworkSelected] = useState("");
 
   const [listNetwork, setListNetwork] = useState([
-    { id: 1, name: "USDT BEP20" },
-    { id: 2, name: "Mapchain Token" },
+    { id: 1, name: "Binance Smart Chain" },
+    { id: 2, name: "TON" },
   ]);
 
+  useEffect(() => {
+    setNetworkSelected(listNetwork[0].id);
+  }, []);
+
   const [amount, setAmount] = useState(0);
-  const [qrImage, setQrImage] = useState("");
+  const [toWallet, setToWallet] = useState("");
+  const [balance, setBalance] = useState(100000000);
 
-  const handleSelectPackage = (packageId) => {
-    const selectedPackage = listPackages.find(
-      (pkg) => pkg.id === parseInt(packageId)
-    );
-    if (selectedPackage) {
-      setNetworkSelected(packageId);
-    }
-  };
-
-  const handleCreateDeposit = () => {
-    if (amount <= 0) {
+  const handleWithdraw = () => {
+    if (toWallet === "") {
+      toast.error("Wallet address must not be null", {
+        position: "top-right",
+        autoClose: 1500,
+      });
       return;
     }
-    let data = JSON.stringify({
-      walletAddress: walletAddress,
-      amount: amount,
-      method: 0,
-    });
-
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/generate-qr`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
-      },
-      data: data,
-      responseType: "blob",
-    };
-
-    Axios.request(config)
-      .then((response) => {
-        // Assuming response.data contains the image URL or base64 string
-        const qrCodeBlob = response.data;
-        const qrCodeUrl = URL.createObjectURL(qrCodeBlob);
-        setQrImage(qrCodeUrl);
-        toast.success("Created deposit order!", {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+    if (amount <= 0) {
+      toast.error("Withdraw order amount must be greater than 0", {
+        position: "top-right",
+        autoClose: 1500,
       });
-  };
+      return;
+    }
 
-  const handleCancelDeposit = () => {
     let data = JSON.stringify({
       walletAddress: walletAddress,
-      amount: 0,
-      method: 0,
+      toWalletAddress: toWallet,
+      amount: amount,
+      method: 1,
+      walletType: networkSelected,
+      type: 8,
     });
 
     let config = {
       method: "post",
-      url: `${API_ENDPOINT}management/cancel-deposit`,
+      maxBodyLength: Infinity,
+      url: `${API_ENDPOINT}management/withdraw`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Authorization:
+          `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };
 
-    Axios.request(config)
+    Axios
+      .request(config)
       .then((response) => {
         if (response.data === "ok") {
-          setQrImage("");
-          toast.success("Canceled deposit order!", {
+          toast.success("Create withdraw order success!", {
             position: "top-right",
             autoClose: 1500,
             onClose: () => window.location.reload(),
+          });
+        } else {
+          toast.error(response.data, {
+            position: "top-right",
+            autoClose: 1500,
           });
         }
       })
@@ -110,7 +93,7 @@ const DepositItem = ({ depositHistory }) => {
         className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
       >
         <div className="flex-1 flex flex-col">
-          <h2 className={styles.heading2}>Deposit</h2>
+          <h2 className={styles.heading2}>Withdraw</h2>
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label
@@ -123,7 +106,7 @@ const DepositItem = ({ depositHistory }) => {
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="packageName"
                 value={networkSelected}
-                onChange={(e) => setNetworkSelected(e.target.value)}
+                onChange={(e) => setNetworkSelected(Number(e.target.value))}
               >
                 {listNetwork.map((network) => (
                   <option key={network.id} value={network.id}>
@@ -131,6 +114,24 @@ const DepositItem = ({ depositHistory }) => {
                   </option>
                 ))}
               </select>
+            </div>
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="tokenBalance"
+              >
+                Wallet Address
+              </label>
+              <input
+                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="tokenBalance"
+                type="text"
+                placeholder="Wallet address that recevive that withdraw order amount"
+                value={toWallet}
+                onChange={(e) => {
+                  setToWallet(e.target.value);
+                }}
+              />
             </div>
             <div className="mb-6">
               <label
@@ -164,21 +165,8 @@ const DepositItem = ({ depositHistory }) => {
               />
             </div>
 
-            <div className="mb-6">
-              {qrImage && (
-                <img
-                  src={qrImage}
-                  alt="QR Code"
-                  className="w-[400px] h-auto" // Adjust styling as needed
-                />
-              )}
-            </div>
             <div className="flex items-center justify-between">
-              {qrImage.length === 0 ? (
-                <Button handleClick={handleCreateDeposit} content={"Deposit"} />
-              ) : (
-                <Button handleClick={handleCancelDeposit} content={"Cancel"} />
-              )}
+              <Button handleClick={handleWithdraw} content={"Withdraw"} />
             </div>
           </div>
 
@@ -189,4 +177,4 @@ const DepositItem = ({ depositHistory }) => {
   );
 };
 
-export default DepositItem;
+export default WithdrawItem;

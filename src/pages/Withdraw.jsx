@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
-import { MainDashboard, Footer, UserNavbar } from "../components";
+import { WithdrawCard, Footer, UserNavbar } from "../components";
 
 const Withdraw = () => {
   const [walletAddress, setWalletAddress] = useState(
@@ -26,7 +26,7 @@ const Withdraw = () => {
         <div className={`${styles.boxWidthDashboard}`}>
           {isInTree === "true" ? (
             <>
-              <MainDashboard />
+              <WithdrawCard />
             </>
           ) : (
             <Modal

@@ -9,46 +9,14 @@ import { ToastContainer } from "react-toastify";
 import DepositItem from "./DepositItem";
 import HashCell from "./table/HashCell";
 import { API_ENDPOINT } from "../constants";
+import DepositTable from "./DepositTable";
 
-const columns = [
-  {
-    accessorKey: "code",
-    header: "Code",
-    size: 500,
-    enableColumnFilter: true,
-    enableSorting: true,
-    filterFn: "includesString",
-  },
-  {
-    accessorKey: "date",
-    header: "Date",
-    cell: DateCell,
-    size: 200,
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    size: 200,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: TransactionStatusCell,
-    size: 300,
-    enableSorting: true,
-    enableColumnFilter: true,
-    filterFn: (row, columnId, filterStatuses) => {
-      if (filterStatuses.length === 0) return true;
-      const status = row.getValue(columnId);
-      return filterStatuses.includes(status?.id);
-    },
-  },
-  {
-    accessorKey: "hash",
-    header: "Hash",
-    cell: HashCell,
-    size: 200,
-  },
+const TABLE_HEAD = [
+  "Code",
+  "Date",
+  "Amount",
+  "Status",
+  "Note",
 ];
 
 const DepositCard = () => {
@@ -64,7 +32,7 @@ const DepositCard = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/bep20-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/deposit-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -87,7 +55,7 @@ const DepositCard = () => {
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <TransactionTable columns={columns} data={depositHistory} />
+        <DepositTable TABLE_NAME={"Recent deposit"} TABLE_SUBNAME={"These are details about the lastest deposit"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={depositHistory} />
       </div>
     </>
   );

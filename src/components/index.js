@@ -18,6 +18,13 @@ import DepositCard from "./DepositCard";
 import DepositItem from "./DepositItem";
 import SwapCard from "./SwapCard";
 import SwapItem from "./SwapItem";
+import WalletCard2 from "./WalletCard2";
+import DepositTable from "./DepositTable";
+import TransactionTable from "./TransactionTable";
+import TransferTable from "./TransferTable";
+import WithdrawCard from "./WithdrawCard";
+import TransactionsTable from "./TransactionsTable";
+import TransactionsPage from "./TransactionsPage";
 
 export {
   Navbar,
@@ -39,5 +46,12 @@ export {
   DepositCard,
   DepositItem,
   SwapCard,
-  SwapItem
+  SwapItem,
+  WalletCard2,
+  DepositTable,
+  TransactionTable,
+  TransferTable,
+  WithdrawCard,
+  TransactionsTable,
+  TransactionsPage
 };

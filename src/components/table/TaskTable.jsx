@@ -15,7 +15,9 @@ import theme from "../../theme/theme";
 
 const TaskTable = ({ columns, data }) => {
   const [columnFilters, setColumnFilters] = useState([]);
+
   
+
   const table = useReactTable({
     data,
     columns,

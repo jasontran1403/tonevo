@@ -1,23 +1,22 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../style";
-import Button from "./Button";
-import TransactionStatusCell from "./table/TransactionStatusCell";
-import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
-import SwapItem from "./SwapItem";
-import DepositTable from "./DepositTable";
+import WithdrawItem from "./WithdrawItem";
+import HashCell from "./table/HashCell";
 import { API_ENDPOINT } from "../constants";
+import WithdrawTable from "./WithdrawTable";
 
 const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
+  "To",
   "Status",
-  "Note"
+  "Note",
 ];
 
-const SwapCard = () => {
+const WithdrawCard = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -25,12 +24,12 @@ const SwapCard = () => {
     localStorage.getItem("access_token")
   );
 
-  const [swapHistory, setSwapHistory] = useState([]);
+  const [withdrawHistory, setWithdrawHistory] = useState([]);
 
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -39,7 +38,7 @@ const SwapCard = () => {
 
     Axios.request(config)
       .then((response) => {
-        setSwapHistory(response.data);
+        setWithdrawHistory(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -49,14 +48,14 @@ const SwapCard = () => {
   return (
     <>
       <div className="investment-container">
-        <SwapItem />
+        <WithdrawItem />
       </div>
 
       <div className={`${styles.flexCenter}`}>
-      <DepositTable TABLE_NAME={"Recent swap"} TABLE_SUBNAME={"These are details about the lastest swap"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={swapHistory} />
+        <WithdrawTable TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
       </div>
     </>
   );
 };
 
-export default SwapCard;
+export default WithdrawCard;

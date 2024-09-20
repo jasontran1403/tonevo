@@ -5,7 +5,7 @@
 
 .tree {
     overflow: hidden;
-    display: flex;
+    /* display: flex; */
     flex-direction: column; /* Ensure the tree layout aligns vertically */
     height: 89svh;
     width: 2400px;
