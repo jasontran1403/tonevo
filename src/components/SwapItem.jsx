@@ -28,7 +28,6 @@ const SwapItem = ({ swapHistory }) => {
   ]);
 
   const [listBalance, setListBalance] = useState([]);
-
   useEffect(() => {
     let config = {
       method: "get",
@@ -43,6 +42,7 @@ const SwapItem = ({ swapHistory }) => {
       .then((response) => {
         setBalance(response.data.balances[0].balance);
         setListBalance(response.data.balances);
+        setPrice(response.data.price);
       })
       .catch((error) => {
         console.log(error);
@@ -51,6 +51,7 @@ const SwapItem = ({ swapHistory }) => {
 
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState(0);
+  const [price, setPrice] = useState(0);
   const [amountSwap, setAmountSwap] = useState(0);
 
   useEffect(() => {
@@ -131,7 +132,7 @@ const SwapItem = ({ swapHistory }) => {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
         setAmount(value); // Keep the valid input
-        setAmountSwap(value / 0.1);
+        setAmountSwap(value / price);
       } else {
         setAmount(""); // Reset if invalid
       }
@@ -233,6 +234,22 @@ const SwapItem = ({ swapHistory }) => {
                 id="tokenBalance"
                 type="text" // Use "text" to fully control input validation
                 value={amountSwap}
+                readOnly
+              />
+            </div>
+
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="tokenBalance"
+              >
+                Price
+              </label>
+              <input
+                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                id="tokenBalance"
+                type="text"
+                value={price}
                 readOnly
               />
             </div>

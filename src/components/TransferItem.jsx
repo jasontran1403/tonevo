@@ -14,7 +14,7 @@ const TransferItem = ({ swapHistory }) => {
     localStorage.getItem("access_token")
   );
   const [to, setTo] = useState("");
-  const [balance, setBalance] = useState(100000000);
+  const [balance, setBalance] = useState(1000);
 
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState(0);
