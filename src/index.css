@@ -28,7 +28,7 @@
 }
 
 .investment-card {
-  width: 41svw;
+  width: 100svw;
 }
 
 .wallet-card {
@@ -44,7 +44,7 @@
   }
 
   .investment-card {
-    width: 90%;
+    width: 100svw;
   }
 
   .wallet-container {

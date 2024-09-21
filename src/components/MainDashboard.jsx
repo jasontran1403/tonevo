@@ -9,6 +9,8 @@ import DateCell from "../components/table/DataCell";
 import TransactionTable from "./TransactionTable";
 import { API_ENDPOINT } from "../constants";
 import WalletCard2 from "./WalletCard2";
+import WalletCard3 from "./WalletCard3";
+import WalletCard4 from "./WalletCard4";
 
 const TABLE_HEAD = [
   "Code",
@@ -93,16 +95,16 @@ const MainDashboard = () => {
     <>
       <div className="wallet-container" style={{ flexDirection: "row" }}>
         <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
-        <WalletCard2 content={"Rank"} amount={rank} unit={"Level"} rank={true}/>
+          <WalletCard2 content={"Rank"} amount={rank} unit={"Level"} rank={true}/>
           <WalletCard2 content={"USDT BEP20"} amount={listBalance[0]?.balance} unit={"USDT"} wallet={true} />
           <WalletCard2 content={"Mapchain Token"} amount={listBalance[1]?.balance} unit={"MCT"}  wallet={true} />
-          <WalletCard2 content={"Direct Commission"} amount={listBalance[2]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard2 content={"Binary Commission"} amount={listBalance[3]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard2 content={"Leader Commission"} amount={listBalance[4]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard2 content={"POP Commission"} amount={listBalance[5]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard2 content={"Transfer"} amount={listBalance[6]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard2 content={"Maxout"} amount={listBalance[7]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard2 content={"Daily reward"} amount={listBalance[8]?.balance} unit={"MCT"} wallet={false} />
+          <WalletCard3 content={"Direct Commission"} amount={listBalance[2]?.balance} unit={"MCT"}  wallet={false} />
+          <WalletCard3 content={"Binary Commission"} amount={listBalance[3]?.balance} unit={"MCT"}  wallet={false} />
+          <WalletCard3 content={"Leader Commission"} amount={listBalance[4]?.balance} unit={"MCT"}  wallet={false} />
+          <WalletCard3 content={"POP Commission"} amount={listBalance[5]?.balance} unit={"MCT"} wallet={false} />
+          <WalletCard3 content={"Daily reward"} amount={listBalance[8]?.balance} unit={"MCT"} wallet={false} />
+          <WalletCard4 content={"Transfer"} amount={listBalance[6]?.balance} unit={"MCT"} wallet={false} />
+          <WalletCard4 content={"Maxout"} amount={listBalance[7]?.balance} unit={"MCT"} wallet={false} />
         </div>
         {/* <WalletCard
           className="wallet-card"
