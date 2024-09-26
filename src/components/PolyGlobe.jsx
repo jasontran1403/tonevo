@@ -19,7 +19,7 @@ const cities = [
   { name: "Istanbul", lat: 41.008238, lng: 28.978359 },
   { name: "Bangkok", lat: 13.756331, lng: 100.501762 },
   { name: "Buenos Aires", lat: -34.603684, lng: -58.381559 },
-  { name: "Jakarta", lat: -6.208763, lng: 106.845599 },
+  { name: "Hanoi", lat: 21.028511, lng: 105.804817 },
 ];
 
 const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {

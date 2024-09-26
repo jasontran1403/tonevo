@@ -19,8 +19,8 @@ import binance from "../assets/binance.png";
 import ecosystem from "../assets/ecosystem.png";
 import coinlogo from "../assets/coinlogo.png";
 import allocation from "../assets/allocation.png";
-import roadmap1 from "../assets/roadmap1.png"
-import roadmap2 from "../assets/roadmap2.png"
+import roadmap1 from "../assets/roadmap1.png";
+import roadmap2 from "../assets/roadmap2.png";
 import introducing from "../assets/introducing.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css"; // Import Swiper styles
@@ -575,10 +575,16 @@ const LandingPage = () => {
                   >
                     <SwiperSlide>
                       <div
-                        className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
+                        className="flex flex-1 flex-col w-full p-5 gap-5 p-12"
                         style={{ paddingTop: "230px", paddingBottom: "50px" }}
                       >
-                        <img className="w-full h-96" src={roadmap1}/>
+                        <div className="w-[80%] overflow-hidden mx-auto">
+                          <img
+                            className="w-full h-full"
+                            src={roadmap1}
+                            alt="Roadmap"
+                          />
+                        </div>
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
@@ -586,7 +592,7 @@ const LandingPage = () => {
                         className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
                         style={{ paddingTop: "230px", paddingBottom: "50px" }}
                       >
-                        <img className="w-full h-96" src={roadmap2}/>
+                        <img className="w-full h-96" src={roadmap2} />
                       </div>
                     </SwiperSlide>
                   </Swiper>
