@@ -33,7 +33,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
     let to;
     (function check() {
       if (globeEl.current) {
-        globeEl.current.controls().autoRotate = false;
+        globeEl.current.controls().autoRotate = true;
         globeEl.current.controls().autoRotateSpeed = rorateSpeed;
 
         // Set altitude based on screen width
