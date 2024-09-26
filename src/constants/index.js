@@ -114,31 +114,31 @@ export const navLinks = [
 
 export const connectedNavLinks = [
   {
-    id: "",
+    id: "landingpage",
     title: "Introducing",
   },
   {
-    id: "playtoearn",
+    id: "landingpage",
     title: "P2E",
   },
   {
-    id: "ecosystem",
+    id: "landingpage",
     title: "Ecosystem",
   },
   {
-    id: "products",
+    id: "landingpage",
     title: "Products",
   },
   {
-    id: "experience",
+    id: "landingpage",
     title: "Experience",
   },
   {
-    id: "tokenomic",
+    id: "landingpage",
     title: "Tokenomic",
   },
   {
-    id: "roadmap",
+    id: "landingpage",
     title: "Roadmap",
   },
   {

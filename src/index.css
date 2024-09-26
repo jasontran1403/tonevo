@@ -83,7 +83,15 @@
 }
 
 .logo-glow {
-  
+}
+
+a {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition */
+}
+
+a:hover {
+  background-color: unset !important;
+  color: aqua !important;
 }
 
 /* Media Query for mobile devices */
@@ -100,7 +108,6 @@
     z-index: 9;
   }
 }
-
 
 .wallet-card {
   flex: 1 1 calc(20%); /* 3 cards per row with gap */
@@ -170,8 +177,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centers horizontally */
-  align-items: center;    /* Centers vertically */
-  width: 100vw;           /* Optional: sets container width to full viewport width */
+  align-items: center; /* Centers vertically */
+  width: 100vw; /* Optional: sets container width to full viewport width */
 }
 
 .bg-black-gradient {

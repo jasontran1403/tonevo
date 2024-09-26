@@ -5,7 +5,7 @@ import logo from "../assets/logo.png";
 import { connectedNavLinks } from "../constants";
 import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
 
-const Navbar = () => {
+const Navbar = ({ handleOpenModal }) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const connect = useTonConnectUI();
@@ -20,9 +20,12 @@ const Navbar = () => {
             className={`font-poppins font-normal cursor-pointer text-[16px] ${
               active === nav.title ? "text-white" : "text-dimWhite"
             } ${index === connectedNavLinks.length - 1 ? "mr-0" : "mr-10"}`}
-            onClick={() => setActive(nav.title)}
+            onClick={() => {
+              setActive(nav.title);
+              handleOpenModal(true, index);
+            }}
           >
-            {nav.title === "Dashboard" ? (
+            {nav.id === "dashboard" ? (
               <a href={`/${nav.id}`}>{nav.title}</a>
             ) : (
               <a href={`#${nav.id}`}>{nav.title}</a>
