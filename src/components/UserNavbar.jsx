@@ -10,8 +10,8 @@ const UserNavbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={logo} alt="hoobank" className="w-[90px] h-[80px]" />
+    <nav className="w-full flex py-6 justify-between items-center navbar z-10">
+      <img src={logo} alt="hoobank" className="w-[200px] h-[80px] logo-glow" />
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {userNavLinks.map((nav, index) => (

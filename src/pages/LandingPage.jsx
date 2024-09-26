@@ -68,7 +68,7 @@ const LandingPage = () => {
 
   return (
     <div className="bg-primary w-full overflow-hidden">
-      <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenterNav} absolute z-10`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
         </div>

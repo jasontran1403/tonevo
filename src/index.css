@@ -41,13 +41,15 @@
     transform: translateX(0) scale(1);
   }
   100% {
-    transform: translate(-50px, -150px) scale(0.7); /* Move left and resize to 70% */
+    transform: translate(-100px, -250px) scale(0.7); /* Move left and resize to 70% */
+    z-index: 1;
   }
 }
 
 @keyframes returnToOriginalMobile {
   0% {
-    transform: translate(-50px, -150px) scale(0.7); /* Move left and resize to 70% */
+    transform: translate(-100px, -250px) scale(0.7); /* Move left and resize to 70% */
+    z-index: 1;
   }
   100% {
     transform: translateX(0) scale(1); /* Return to original position and size */
@@ -80,18 +82,22 @@
   animation: returnToOriginal 1.5s forwards; /* Animation to return to original */
 }
 
-
+.logo-glow {
+  
+}
 
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
   .globeAnimation {
     animation: moveAndResizeMobile 1.5s forwards; /* Use mobile animation */
+    z-index: 9;
   }
 }
 
 @media screen and (min-width: 601px) {
   .globeAnimation {
     animation: moveAndResizeDesktop 1.5s forwards; /* Use desktop animation */
+    z-index: 9;
   }
 }
 

@@ -76,19 +76,31 @@ export const users = [
 export const navLinks = [
   {
     id: "",
-    title: "Home",
+    title: "Introducing",
   },
   {
-    id: "features",
-    title: "Features",
+    id: "playtoearn",
+    title: "P2E",
   },
   {
-    id: "product",
-    title: "Product",
+    id: "ecosystem",
+    title: "Ecosystem",
   },
   {
-    id: "clients",
-    title: "Clients",
+    id: "products",
+    title: "Products",
+  },
+  {
+    id: "experience",
+    title: "Experience",
+  },
+  {
+    id: "tokenomic",
+    title: "Tokenomic",
+  },
+  {
+    id: "roadmap",
+    title: "Roadmap",
   },
   {
     id: "dashboard",
@@ -103,28 +115,36 @@ export const navLinks = [
 export const connectedNavLinks = [
   {
     id: "",
-    title: "Home",
+    title: "Introducing",
   },
   {
-    id: "features",
-    title: "Features",
+    id: "playtoearn",
+    title: "P2E",
   },
   {
-    id: "product",
-    title: "Product",
+    id: "ecosystem",
+    title: "Ecosystem",
   },
   {
-    id: "clients",
-    title: "Clients",
+    id: "products",
+    title: "Products",
+  },
+  {
+    id: "experience",
+    title: "Experience",
+  },
+  {
+    id: "tokenomic",
+    title: "Tokenomic",
+  },
+  {
+    id: "roadmap",
+    title: "Roadmap",
   },
   {
     id: "dashboard",
-    title: "Dashboard",
+    title: "Dashsboard",
   },
-  // {
-  //   id: "disconnect",
-  //   title: "Disconnect",
-  // }
 ];
 
 export const userNavLinks = [

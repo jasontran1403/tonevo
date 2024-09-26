@@ -24,7 +24,7 @@ const ModalContainer = styled(motion.div)`
   top: 45%;
   left: 80%;
   transform: translate(-80%, -45%);
-  border-radius: 12px;
+  border-radius: 40px;
   overflow: hidden; // Ensures the border animation stays within the container
 
   // The animated border effect
@@ -43,11 +43,11 @@ const ModalContainer = styled(motion.div)`
   }
 
   @media (max-width: 768px) {
-    width: 70%; // Adjust width for mobile
+    width: 80%; // Adjust width for mobile
     height: 65%; // Adjust height for mobile
-    top: 60%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -30%);
+    transform: translate(-50%, -40%);
     border-radius: 8px; // Smaller border radius for mobile
   }
 

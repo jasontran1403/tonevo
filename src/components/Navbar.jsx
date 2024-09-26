@@ -11,10 +11,9 @@ const Navbar = () => {
   const connect = useTonConnectUI();
 
   return (
-    <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={logo} alt="hoobank" className="w-[90px] h-[80px]" />
-
-      <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+    <nav className="w-full flex flex-1 py-6 justify-between items-center navbar gap-12">
+      <img src={logo} alt="hoobank" className="w-[200px] h-[80px] logo-glow" />
+      <ul className="list-none sm:flex hidden justify-center items-center flex-1 mx-10">
         {connectedNavLinks.map((nav, index) => (
           <li
             key={nav.id}
@@ -32,10 +31,8 @@ const Navbar = () => {
         ))}
       </ul>
       <TonConnectButton
-        className="flex flex-1 justify-end items-center"
-        style={{ float: "right", width: "100px", content: "" }}
+        className="flex justify-end items-center ml-10" // Add margin-left for spacing
       />
-
       <div className="sm:hidden flex flex-1 justify-end items-center">
         <img
           src={toggle ? close : menu}
@@ -56,7 +53,7 @@ const Navbar = () => {
                 key={nav.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-dimWhite"
-                } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
+                } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`} // Adjust the margin-bottom here
                 onClick={() => setActive(nav.title)}
               >
                 {nav.title === "Dashboard" ? (
