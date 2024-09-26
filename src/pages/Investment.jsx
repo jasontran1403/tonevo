@@ -41,7 +41,7 @@ const Investment = () => {
 
   return (
     <div className="bg-primary w-full h-full">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
         <div className={`${styles.boxWidth}`}>
           <UserNavbar />
         </div>

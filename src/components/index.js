@@ -53,5 +53,5 @@ export {
   TransferTable,
   WithdrawCard,
   TransactionsTable,
-  TransactionsPage
+  TransactionsPage,
 };

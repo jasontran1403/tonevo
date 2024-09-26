@@ -100,7 +100,7 @@ const TABLE_ROWS = [
 const TableUser = () => {
   return (
     <div className="bg-primary w-full h-full">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
         <div className={`${styles.boxWidthDashboard}`}>
           <UserNavbar />
         </div>

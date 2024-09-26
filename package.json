@@ -22,15 +22,17 @@
     "@tonconnect/ui-react": "^2.0.9",
     "add": "^2.0.6",
     "axios": "^1.7.7",
-    "framer-motion": "^11.5.4",
+    "framer-motion": "^11.7.0",
     "nice-forms.css": "^0.1.7",
     "react": "^18.2.0",
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.2.0",
+    "react-globe.gl": "^2.27.2",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.2",
     "react-toastify": "^10.0.5",
     "shadcn": "^1.0.0",
+    "styled-components": "^6.1.13",
     "table": "^6.8.2"
   },
   "devDependencies": {
