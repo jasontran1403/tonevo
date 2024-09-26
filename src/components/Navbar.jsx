@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { close, logo, menu } from "../assets";
+import { close, menu } from "../assets";
+import logo from '../assets/logo.png';
 import { connectedNavLinks } from "../constants";
 import { TonConnectButton } from "@tonconnect/ui-react";
 
@@ -10,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
-      <img src={"../src/assets/logo.png"} alt="hoobank" className="w-[90px] h-[80px]" />
+      <img src={logo} alt="hoobank" className="w-[90px] h-[80px]" />
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
         {connectedNavLinks.map((nav, index) => (
