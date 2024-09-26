@@ -103,6 +103,46 @@ a:hover {
     0 0 50px rgba(173, 216, 230, 0.5);  
 }
 
+
+.footer {
+  position: absolute; /* Keeps the footer at the bottom of the screen */
+  bottom: 0;         /* Positions it at the bottom */
+  left: 0;           /* Aligns it to the left */
+  width: 100%;       /* Makes the footer span the full width */
+  height: 100px;     /* Sets the height of the footer */
+  background-color: rgba(0, 0, 0, 0.7); /* Optional: adds a background color */
+  display: flex;     /* Center content */
+  align-items: center; /* Vertically centers the content */
+  justify-content: center; /* Horizontally centers the content */
+  color: white;      /* Text color */
+  font-size: 16px;   /* Text size */
+}
+
+.roadmap1 {
+  border-top-left-radius: 500px;
+  border-top-right-radius: 500px;
+}
+
+.footer-icons {
+  display: flex;                /* Use flexbox for layout */
+  justify-content: center;      /* Center horizontally */
+  align-items: center;          /* Center vertically */
+  height: 100%;                 /* Fill the footer height */
+}
+
+.footer-icons a {
+  margin: 0 15px;              /* Spacing between icons */
+  color: white;                 /* Icon color */
+  font-size: 24px;              /* Size of the icons */
+  transition: color 0.3s;       /* Smooth color transition on hover */
+}
+
+.footer-icons a:hover {
+  color: #5c3aff;               /* Change color on hover */
+}
+
+
+
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
   .globeAnimation {

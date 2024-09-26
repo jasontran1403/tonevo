@@ -19,6 +19,8 @@ import binance from "../assets/binance.png";
 import ecosystem from "../assets/ecosystem.png";
 import coinlogo from "../assets/coinlogo.png";
 import allocation from "../assets/allocation.png";
+import roadmap1 from "../assets/roadmap1.png"
+import roadmap2 from "../assets/roadmap2.png"
 import introducing from "../assets/introducing.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css"; // Import Swiper styles
@@ -72,7 +74,7 @@ const LandingPage = () => {
   return (
     <div className="bg-primary w-full overflow-hidden">
       <div
-        className={`${styles.paddingX} ${styles.flexCenterNav} absolute z-10`}
+        className={`${styles.paddingX} ${styles.flexCenterNav} absolute z-10 navbar`}
       >
         <div className={`${styles.boxWidth}`}>
           <Navbar handleOpenModal={handleOpenModal} />
@@ -179,91 +181,83 @@ const LandingPage = () => {
                     />
                   </CloseButton>
                   <Swiper
-                    style={{ height: "calc(100vh - 100px)" }} // Full height minus top and bottom padding
                     spaceBetween={50}
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                   >
                     <SwiperSlide>
-                      <div
-                        className="flex flex-col flex-auto gap-5 h-full p-5"
-                        style={{ paddingTop: "260px", paddingBottom: "50px" }}
-                      >
+                      <div className="flex flex-col flex-auto gap-5 h-full p-5 p-12">
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           How to play
                         </p>
-                        <p className="text-white">Free to play</p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">Free to play</p>
+                        <p className="text-white pl-4">
                           Mine MCT coins for free at locations owned by your
                           friends
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           Own mining locations to gain more advantages. Buy
                           mining locations:
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Use MCT coins to own mined locations
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Locations are verified on the world map
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Each mining location is unique (NFT)
                         </p>
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div
-                        className="flex flex-col flex-auto gap-5 h-full p-5"
-                        style={{ paddingTop: "260px", paddingBottom: "50px" }}
-                      >
+                      <div className="flex flex-col flex-auto gap-5 h-full p-5 p-12">
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           How to mine
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           Tap on owned locations to receive MCT coins
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           Tap multiple times to receive more MCT coins
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           Mining locations are owned by players who purchased
                           them
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           Mining locations can be traded with other players
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
                           The total number of mining locations is limited
                         </p>
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div
-                        className="flex flex-col flex-auto gap-5 h-full p-5"
-                        style={{ paddingTop: "230px", paddingBottom: "50px" }}
-                      >
+                      <div className="flex flex-col flex-auto gap-5 h-full p-5 p-12">
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           How to use
                         </p>
-                        <p className="text-white">Swap MCT to USDT:</p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">Swap MCT to USDT:</p>
+                        <p className="text-white pl-8">
                           o MCT is accepted for trading on reputable exchanges
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Sell MCT to convert to USDT
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Use MCT to trade and own mining points
                         </p>
-                        <p className="text-white">Financial opportunities:</p>
-                        <p className="text-white">
+                        <p className="text-white pl-4">
+                          Financial opportunities:
+                        </p>
+                        <p className="text-white pl-8">
                           o Participate in the digital financial market
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Earn money from playing games and trading MCT
                         </p>
-                        <p className="text-white">
+                        <p className="text-white pl-8">
                           o Lead a new Blockchain trend with unprecedented
                           growth rate
                         </p>
@@ -345,26 +339,28 @@ const LandingPage = () => {
                       strokeWidth="2"
                     />
                   </CloseButton>
-                  <div className="flex flex-1 flex-col justify-center items-center w-full p-5 gap-5">
+                  <div className="flex flex-1 flex-col w-full p-5 p-12 gap-5">
                     <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                       How to use
                     </p>
-                    <p className="text-white">Swap MCT to USDT:</p>
-                    <p className="text-white">
+                    <p className="text-white pl-4">Swap MCT to USDT:</p>
+                    <p className="text-white pl-8">
                       o MCT is accepted for trading on reputable exchanges
                     </p>
-                    <p className="text-white">o Sell MCT to convert to USDT</p>
-                    <p className="text-white">
+                    <p className="text-white pl-8">
+                      o Sell MCT to convert to USDT
+                    </p>
+                    <p className="text-white pl-8">
                       o Use MCT to trade and own mining points
                     </p>
-                    <p className="text-white">Financial opportunities:</p>
-                    <p className="text-white">
+                    <p className="text-white pl-4">Financial opportunities:</p>
+                    <p className="text-white pl-8">
                       o Participate in the digital financial market
                     </p>
-                    <p className="text-white">
+                    <p className="text-white pl-8">
                       o Earn money from playing games and trading MCT
                     </p>
-                    <p className="text-white">
+                    <p className="text-white pl-8">
                       o Lead a new Blockchain trend with unprecedented growth
                       rate
                     </p>
@@ -376,7 +372,7 @@ const LandingPage = () => {
               <Modal isOpen={isOpen}>
                 <ModalContent>
                   <CloseButton
-                  style={{ zIndex: "9999" }}
+                    style={{ zIndex: "9999" }}
                     onClick={(e) => handleOpenModal(false)}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20.39 20.39"
@@ -412,8 +408,10 @@ const LandingPage = () => {
                     style={{ height: "calc(100vh - 100px)" }} // Adjust height if needed
                   >
                     <SwiperSlide>
-                      <div className="flex flex-1 flex-col  w-full p-5 gap-5"
-                      style={{ paddingTop: "230px", paddingBottom: "50px" }}>
+                      <div
+                        className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
+                        style={{ paddingTop: "230px", paddingBottom: "50px" }}
+                      >
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           Our Key Products
                         </p>
@@ -442,8 +440,10 @@ const LandingPage = () => {
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div className="flex flex-1 flex-col  w-full p-5 gap-5"
-                      style={{ paddingTop: "230px", paddingBottom: "50px" }}>
+                      <div
+                        className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
+                        style={{ paddingTop: "230px", paddingBottom: "50px" }}
+                      >
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           User Experience
                         </p>
@@ -511,18 +511,18 @@ const LandingPage = () => {
                         <p className="text-5xl font-extrabold subpixel-antialiased text-cyan-400">
                           TOKEN MCT
                         </p>
-                        <p className="text-white pl-6">Blockchain: TON</p>
-                        <p className="text-white pl-6">
+                        <p className="text-white pl-4">Blockchain: TON</p>
+                        <p className="text-white pl-4">
                           Algorithm: BPOS (Block-Proof of Stake)
                         </p>
-                        <p className="text-white pl-6">Technology:</p>
-                        <p className="text-white pl-6">
+                        <p className="text-white pl-4">Technology:</p>
+                        <p className="text-white pl-8">
                           o Sharding for enhanced processing speed
                         </p>
-                        <p className="text-white pl-6">
+                        <p className="text-white pl-8">
                           o High scalability for optimal performance
                         </p>
-                        <p className="text-white pl-6">
+                        <p className="text-white pl-8">
                           o TON Cross-chain Bridge connecting BNB Chain
                         </p>
                       </div>
@@ -534,22 +534,72 @@ const LandingPage = () => {
                 </ModalContent>
               </Modal>
             )}
+            {idx === 6 && (
+              <Modal isOpen={isOpen}>
+                <ModalContent>
+                  <CloseButton
+                    style={{ zIndex: "9999" }}
+                    onClick={(e) => handleOpenModal(false)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20.39 20.39"
+                  >
+                    <title>X</title>
+                    <line
+                      x1="19.39"
+                      y1="19.39"
+                      x2="1"
+                      y2="1"
+                      fill="none"
+                      stroke="#5c3aff"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="1"
+                      y1="19.39"
+                      x2="19.39"
+                      y2="1"
+                      fill="none"
+                      stroke="#5c3aff"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="2"
+                    />
+                  </CloseButton>
+                  <Swiper
+                    spaceBetween={50}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                    style={{ height: "calc(100vh - 100px)" }} // Adjust height if needed
+                  >
+                    <SwiperSlide>
+                      <div
+                        className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
+                        style={{ paddingTop: "230px", paddingBottom: "50px" }}
+                      >
+                        <img className="w-full h-96" src={roadmap1}/>
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div
+                        className="flex flex-1 flex-col  w-full p-5 gap-5 p-12"
+                        style={{ paddingTop: "230px", paddingBottom: "50px" }}
+                      >
+                        <img className="w-full h-96" src={roadmap2}/>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </ModalContent>
+              </Modal>
+            )}
           </div>
         </div>
       </div>
 
-      {/* <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Stats />
-          <Business />
-          <Billing />
-          <CardDeal />
-          <Testimonials />
-          <Clients />
-          <CTA />
-          <Footer />
-        </div>
-      </div> */}
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 };

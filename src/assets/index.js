@@ -18,6 +18,8 @@ import discount from "./Discount.svg";
 import facebook from "./facebook.svg";
 import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
+import youtube from "./youtube.svg"
+import telegram from "./telegram.svg"
 import twitter from "./twitter.svg";
 import people01 from "./people01.png";
 import people02 from "./people02.png";
@@ -48,4 +50,6 @@ export {
   people01,
   people02,
   people03,
+  youtube,
+  telegram
 };

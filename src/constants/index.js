@@ -1,4 +1,4 @@
-import { people01, people02, people03, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
+import { people01, people02, people03, facebook, instagram, linkedin, youtube, telegram, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
 
 // export const API_ENDPOINT = "http://localhost:8888/api/v1/";
 export const API_ENDPOINT = "https://personally-sunny-basilisk.ngrok-free.app/api/v1/"
@@ -312,24 +312,19 @@ export const footerLinks = [
 export const socialMedia = [
   {
     id: "social-media-1",
-    icon: instagram,
-    link: "https://www.instagram.com/",
+    icon: youtube,
+    link: "https://www.youtube.com/@Mapchain",
   },
   {
     id: "social-media-2",
     icon: facebook,
-    link: "https://www.facebook.com/",
+    link: "https://www.facebook.com/mapchainsocial",
   },
   {
     id: "social-media-3",
     icon: twitter,
-    link: "https://www.twitter.com/",
-  },
-  {
-    id: "social-media-4",
-    icon: linkedin,
-    link: "https://www.linkedin.com/",
-  },
+    link: "https://x.com/mapchainsocial",
+  }
 ];
 
 export const clients = [
