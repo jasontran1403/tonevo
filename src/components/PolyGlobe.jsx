@@ -106,8 +106,8 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
     <div className={animate ? "globeAnimation" : ""}>
       <Globe
         ref={globeEl}
-        globeImageUrl="https://unpkg.com/three-globe@2.18.0/example/img/earth-blue-marble.jpg"
-        bumpImageUrl="https://unpkg.com/three-globe@2.18.0/example/img/earth-topology.png"
+        globeImageUrl="../src/assets/earth-blue-marble.jpg"
+        bumpImageUrl="../src/assets/earth-topology.png"
         hexPolygonsData={countries}
         backgroundColor="black"
         hexPolygonResolution={3}
