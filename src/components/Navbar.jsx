@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import { close, menu } from "../assets";
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
 import { connectedNavLinks } from "../constants";
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
+  const connect = useTonConnectUI();
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
@@ -30,7 +31,10 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
-      <TonConnectButton className="pl-6" style={{ float: "right" }} />
+      <TonConnectButton
+        className="flex flex-1 justify-end items-center"
+        style={{ float: "right", width: "100px", content: "" }}
+      />
 
       <div className="sm:hidden flex flex-1 justify-end items-center">
         <img
@@ -44,6 +48,7 @@ const Navbar = () => {
           className={`${
             !toggle ? "hidden" : "flex"
           } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
+          style={{ zIndex: 9999 }}
         >
           <ul className="list-none flex justify-end items-start flex-1 flex-col">
             {connectedNavLinks.map((nav, index) => (

@@ -11,6 +11,7 @@ import Withdraw from "./pages/Withdraw";
 import Tree from "./pages/Tree";
 import TableUser from "./pages/TableUser";
 import Transactions from "./pages/Transactions";
+import DisconnectComponent from "./components/DisconnectComponent";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -62,6 +63,10 @@ export default function Router() {
         {
             path: "/tree",
             element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
+        },
+        {
+            path: "/disconnect",
+            element: <DisconnectComponent />
         },
         {
             path: '/404',

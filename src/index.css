@@ -80,6 +80,8 @@
   animation: returnToOriginal 1.5s forwards; /* Animation to return to original */
 }
 
+
+
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
   .globeAnimation {

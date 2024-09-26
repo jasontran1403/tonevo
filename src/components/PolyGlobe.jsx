@@ -73,9 +73,10 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
     size: 50,
     color: ["lightblue"],
     name: cities[index].name,
+    idx: Math.floor(Math.random() * 7) // Random index between 0 and 6
   }));
 
-  const handleShowInfor = (cityName, pointLat, pointLng) => {
+  const handleShowInfor = (cityName, pointLat, pointLng, indexMarker) => {
     if (globeEl.current) {
       const altitude = window.innerWidth <= 768 ? 4 : 3; // Set altitude based on screen width
 
@@ -90,7 +91,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
       }
     }
 
-    handleOpenModal(true);
+    handleOpenModal(true, indexMarker);
   };
 
   const arcsData = [...Array(15 - 1).keys()].map((i) => ({
@@ -155,7 +156,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
 
           el.style["pointer-events"] = "auto";
           el.style.cursor = "pointer";
-          el.onclick = () => handleShowInfor(d.name, d.lat, d.lng);
+          el.onclick = () => handleShowInfor(d.name, d.lat, d.lng, d.idx);
           return el;
         }}
       />

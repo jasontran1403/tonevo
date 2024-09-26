@@ -35,7 +35,7 @@ const ModalContainer = styled(motion.div)`
     left: 0;
     right: 0;
     bottom: 0;
-    border: 1px solid white; // 1px solid white border
+    border: 2px solid #01a1b3; // 1px solid white border
     border-radius: inherit; // Match modal's border-radius
     box-sizing: border-box;
     animation: snake-border 4s linear infinite; // Animation running in a loop

@@ -93,7 +93,11 @@ export const navLinks = [
   {
     id: "dashboard",
     title: "Dashsboard",
-  }
+  },
+  // {
+  //   id: "disconnect",
+  //   title: "Disconnect",
+  // }
 ];
 
 export const connectedNavLinks = [
@@ -116,7 +120,11 @@ export const connectedNavLinks = [
   {
     id: "dashboard",
     title: "Dashboard",
-  }
+  },
+  // {
+  //   id: "disconnect",
+  //   title: "Disconnect",
+  // }
 ];
 
 export const userNavLinks = [
@@ -139,7 +147,11 @@ export const userNavLinks = [
   {
     id: "tree",
     title: "Tree",
-  }
+  },
+  // {
+  //   id: "disconnect",
+  //   title: "Disconnect",
+  // }
 ];
 
 export const features = [
