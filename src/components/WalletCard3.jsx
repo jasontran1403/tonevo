@@ -1,3 +1,5 @@
+import styles from "../style";
+
 const WalletCard3 = ({ content, amount, unit, rank, wallet }) => {
   const formatNumber = (numberString) => {
     // Format the number with commas

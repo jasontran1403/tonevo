@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
-import { MainDashboard, Footer, UserNavbar, InvestmentCard } from "../components";
+import {
+  MainDashboard,
+  Footer,
+  UserNavbar,
+  InvestmentCard,
+} from "../components";
 import { API_ENDPOINT } from "../constants";
 
 const Investment = () => {
@@ -13,6 +18,9 @@ const Investment = () => {
     localStorage.getItem("walletStateInit")
   );
   const [accessToken, setAccessToken] = useState();
+
+  const [isInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [modalIsOpen, setIsOpen] = useState();
 
   useEffect(() => {
     let data = JSON.stringify({
@@ -37,7 +45,21 @@ const Investment = () => {
     });
   }, []);
 
-  useEffect(() => {}), [];
+  useEffect(() => {
+    if (isInTree === "true") {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  }, []);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className="bg-primary w-full h-full">
@@ -48,8 +70,21 @@ const Investment = () => {
       </div>
 
       <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <InvestmentCard />
+        <div className={`${styles.boxWidthDashboard}`}>
+          {isInTree === "true" ? (
+            <>
+              <InvestmentCard />
+            </>
+          ) : (
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Update sponsor"
+            >
+              <Form />
+            </Modal>
+          )}
         </div>
       </div>
     </div>

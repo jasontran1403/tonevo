@@ -91,7 +91,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
             <div className="w-full md:w-72 relative">
               <Input
                 placeholder="Search by code"
-                className="pl-4 pr-10 rounded"
+                className="pl-4 ml-28 w-3/4 pr-10 rounded"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);

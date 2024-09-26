@@ -54,9 +54,10 @@ const InvestmentCard = () => {
         <InvestmentPackage packages={packages} balance={balance} />
       </div>
 
-      <div className={`${styles.flexCenter}`}>
-        <InvestmentTable TABLE_NAME={"Recent deposit"} TABLE_SUBNAME={"These are details about the lastest deposit"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={listInvestment} />
+      <div className="investment-container">
+        <InvestmentTable className="w-full flex justify-center items-center ml-[20px]" TABLE_NAME={"Recent deposit"} TABLE_SUBNAME={"These are details about the lastest deposit"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={listInvestment} />
       </div>
+        
     </>
   );
 };

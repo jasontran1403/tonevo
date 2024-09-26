@@ -11,8 +11,13 @@ const Navbar = ({ handleOpenModal }) => {
   const connect = useTonConnectUI();
 
   return (
-    <nav className="w-full flex flex-1 py-6 justify-between items-center navbar gap-12">
-      <img src={logo} alt="hoobank" className="w-[200px] h-[80px] logo-glow" />
+    <nav className="w-full flex flex-1 justify-between items-center navbar lg:gap-12 gap-10 mt-[20px]">
+      
+      <a href="/"><img
+        src={logo}
+        alt="hoobank"
+        className="lg:w-[200px] lg:h-[80px] w-[160px] h-[60px] logo-glow"
+      /></a>
       <ul className="list-none sm:flex hidden justify-center items-center flex-1 mx-10">
         {connectedNavLinks.map((nav, index) => (
           <li
@@ -34,7 +39,7 @@ const Navbar = ({ handleOpenModal }) => {
         ))}
       </ul>
       <TonConnectButton
-        className="flex justify-end items-center ml-10" // Add margin-left for spacing
+        className="flex justify-end items-center lg:ml-10 mr-8" // Add margin-left for spacing
       />
       <div className="sm:hidden flex flex-1 justify-end items-center">
         <img
@@ -57,9 +62,9 @@ const Navbar = ({ handleOpenModal }) => {
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-dimWhite"
                 } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`} // Adjust the margin-bottom here
-                onClick={() => setActive(nav.title)}
+                onClick={() => {setActive(nav.title); handleOpenModal(true, index);}}
               >
-                {nav.title === "Dashboard" ? (
+                {nav.id === "dashboard" ? (
                   <a href={`/${nav.id}`}>{nav.title}</a>
                 ) : (
                   <a href={`#${nav.id}`}>{nav.title}</a>

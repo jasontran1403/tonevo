@@ -11,14 +11,9 @@ import { API_ENDPOINT } from "../constants";
 import WalletCard2 from "./WalletCard2";
 import WalletCard3 from "./WalletCard3";
 import WalletCard4 from "./WalletCard4";
+import RankCard from "./RankCard";
 
-const TABLE_HEAD = [
-  "Code",
-  "Date",
-  "Amount",
-  "Status",
-  "Note",
-];
+const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
 const columns = [
   {
@@ -93,87 +88,89 @@ const MainDashboard = () => {
 
   return (
     <>
-      <div className="wallet-container" style={{ flexDirection: "row" }}>
-        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
-          <WalletCard2 content={"Rank"} amount={rank} unit={"Level"} rank={true}/>
-          <WalletCard2 content={"USDT BEP20"} amount={listBalance[0]?.balance} unit={"USDT"} wallet={true} />
-          <WalletCard2 content={"Mapchain Token"} amount={listBalance[1]?.balance} unit={"MCT"}  wallet={true} />
-          <WalletCard3 content={"Direct Commission"} amount={listBalance[2]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard3 content={"Binary Commission"} amount={listBalance[3]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard3 content={"Leader Commission"} amount={listBalance[4]?.balance} unit={"MCT"}  wallet={false} />
-          <WalletCard3 content={"POP Commission"} amount={listBalance[5]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard3 content={"Daily reward"} amount={listBalance[8]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard4 content={"Transfer"} amount={listBalance[6]?.balance} unit={"MCT"} wallet={false} />
-          <WalletCard4 content={"Maxout"} amount={listBalance[7]?.balance} unit={"MCT"} wallet={false} />
-        </div>
-        {/* <WalletCard
-          className="wallet-card"
-          content={"USDT BEP20"}
-          amount={listBalance[0]?.balance}
-          unit={"USDT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Mapchain Token"}
-          amount={listBalance[1]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Direct Commission"}
-          amount={listBalance[2]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Binary Commission"}
-          amount={listBalance[3]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Leader Commission"}
-          amount={listBalance[4]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Pop Commission"}
-          amount={listBalance[5]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Transfer Commission"}
-          amount={listBalance[6]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Maxout"}
-          amount={listBalance[7]?.balance}
-          unit={"MCT"}
-        />
-        <WalletCard
-          className="wallet-card"
-          content={"Daily reward"}
-          amount={listBalance[8]?.balance}
-          unit={"MCT"}
-        /> */}
+      <div style={{ display: "flex", flexDirection: "column", width: "100svw" }}>
+  <div>
+    {/* First Row - 3 Items */}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center", // Distributes items evenly
+        width: "100%",
+        gap: "100px",
+        marginTop: "100px",
+      }}
+      className="flex-wrap" // Allow wrapping on small screens
+    >
+      <RankCard content={"Rank"} rank={rank} />
+      <WalletCard2
+        content={"USDT BEP20"}
+        amount={listBalance[0]?.balance}
+        unit={"USDT"}
+        wallet={true}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+      <WalletCard2
+        content={"Mapchain Token"}
+        amount={listBalance[1]?.balance}
+        unit={"MCT"}
+        wallet={true}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+    </div>
 
-        {/* <section
-          className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
-        >
-          <div className="flex-1 flex flex-col">
-            <h2 className={styles.heading2}>Level {rank}</h2>
-          </div>
-        </section> */}
-      </div>
-      {/* <div className={`${styles.flexCenter}`}>
-        <TaskTable columns={columns} data={listTransaction} />
-      </div> */}
-      <div className={`${styles.flexCenter}`}>
-        <TransactionTable TABLE_NAME={"Recent transactions"} TABLE_SUBNAME={"These are details about the lastest transactions"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={listTransaction} />
+    {/* Second Row - 3 Items */}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center", // Distributes items evenly
+        width: "100%",
+        gap: "100px",
+        marginTop: "50px",
+        marginBottom: "50px",
+      }}
+      className="flex-wrap" // Allow wrapping on small screens
+    >
+      <WalletCard3
+        content={"Commission"}
+        amount={
+          listBalance[2]?.balance +
+          listBalance[3]?.balance +
+          listBalance[4]?.balance +
+          listBalance[5]?.balance
+        }
+        unit={"MCT"}
+        wallet={false}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+      <WalletCard3
+        content={"Daily reward"}
+        amount={listBalance[8]?.balance}
+        unit={"MCT"}
+        wallet={false}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+      <WalletCard4
+        content={"Maxout"}
+        amount={listBalance[7]?.balance}
+        unit={"MCT"}
+        wallet={false}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+    </div>
+  </div>
+</div>
+
+
+      <div className="investment-container pt-[20px]">
+        <TransactionTable
+          className="w-full flex justify-center items-center ml-[20px]"
+          TABLE_NAME={"Recent transactions"}
+          TABLE_SUBNAME={"These are details about the lastest transactions"}
+          TABLE_HEAD={TABLE_HEAD}
+          TABLE_ROWS={listTransaction}
+        />
       </div>
     </>
   );

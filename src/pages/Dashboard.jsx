@@ -9,14 +9,12 @@ const customStyles = {
     top: "50%",
     left: "50%",
     right: "auto",
-    minWidth: "20svw",
+    minWidth: "50svw",
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   },
 };
-
-
 
 const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState(
@@ -48,10 +46,8 @@ const Dashboard = () => {
     setIsOpen(false);
   };
 
-  useEffect(() => {}), [];
-
   return (
-    <div className="bg-primary w-full h-full">
+    <div className="bg-primary w-full h-full ">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
         <div className={`${styles.boxWidthDashboard}`}>
           <UserNavbar />

@@ -28,7 +28,7 @@
 }
 
 .investment-card {
-  width: 100svw;
+  width: 80svw;
 }
 
 .App {
@@ -97,25 +97,21 @@ a:hover {
 .introducing {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  box-shadow: 
-    0 4px 30px rgba(0, 0, 0, 0.1),  
-    0 0 25px rgba(173, 216, 230, 0.7),
-    0 0 50px rgba(173, 216, 230, 0.5);  
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), 0 0 25px rgba(173, 216, 230, 0.7),
+    0 0 50px rgba(173, 216, 230, 0.5);
 }
-
 
 .footer {
   position: absolute; /* Keeps the footer at the bottom of the screen */
-  bottom: 0;         /* Positions it at the bottom */
-  left: 0;           /* Aligns it to the left */
-  width: 100%;       /* Makes the footer span the full width */
-  height: 100px;     /* Sets the height of the footer */
-  background-color: rgba(0, 0, 0, 0.7); /* Optional: adds a background color */
-  display: flex;     /* Center content */
+  bottom: 0; /* Positions it at the bottom */
+  left: 0; /* Aligns it to the left */
+  width: 100%; /* Makes the footer span the full width */
+  height: 100px; /* Sets the height of the footer */
+  display: flex; /* Center content */
   align-items: center; /* Vertically centers the content */
   justify-content: center; /* Horizontally centers the content */
-  color: white;      /* Text color */
-  font-size: 16px;   /* Text size */
+  color: white; /* Text color */
+  font-size: 16px; /* Text size */
 }
 
 .roadmap1 {
@@ -124,24 +120,22 @@ a:hover {
 }
 
 .footer-icons {
-  display: flex;                /* Use flexbox for layout */
-  justify-content: center;      /* Center horizontally */
-  align-items: center;          /* Center vertically */
-  height: 100%;                 /* Fill the footer height */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Fill the footer height */
 }
 
 .footer-icons a {
-  margin: 0 15px;              /* Spacing between icons */
-  color: white;                 /* Icon color */
-  font-size: 24px;              /* Size of the icons */
-  transition: color 0.3s;       /* Smooth color transition on hover */
+  margin: 0 15px; /* Spacing between icons */
+  color: white; /* Icon color */
+  font-size: 24px; /* Size of the icons */
+  transition: color 0.3s; /* Smooth color transition on hover */
 }
 
 .footer-icons a:hover {
-  color: #5c3aff;               /* Change color on hover */
+  color: #5c3aff; /* Change color on hover */
 }
-
-
 
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
@@ -171,7 +165,7 @@ a:hover {
   }
 
   .investment-card {
-    width: 100svw;
+    width: 90svw;
   }
 
   .wallet-container {
@@ -321,4 +315,62 @@ a:hover {
 .white__gradient {
   background: rgba(255, 255, 255, 0.6);
   filter: blur(750px);
+}
+
+.history-tl-container {
+  color: white;
+  width: 100%;
+  margin: auto;
+  display: block;
+  position: relative;
+}
+.history-tl-container ul.tl {
+  color: white;
+  margin: 20px 0;
+  padding: 0;
+  display: inline-block;
+}
+.history-tl-container ul.tl li {
+  color: white;
+  list-style: none;
+  margin: auto;
+  margin-left: 100px;
+  min-height: 50px;
+  /*background: rgba(255,255,0,0.1);*/
+  border-left: 1px dashed #86d6ff;
+  padding: 0 0 50px 30px;
+  position: relative;
+}
+.history-tl-container ul.tl li:last-child {
+  border-left: 0;
+}
+.history-tl-container ul.tl li::before {
+  position: absolute;
+  left: -10px;
+  top: 0px;
+  content: " ";
+  border: 8px solid rgba(255, 255, 255, 0.74);
+  border-radius: 500%;
+  background: #258cc7;
+  height: 20px;
+  width: 20px;
+  transition: all 500ms ease-in-out;
+}
+.history-tl-container ul.tl li:hover::before {
+  border-color: #258cc7;
+  transition: all 1000ms ease-in-out;
+}
+ul.tl li .item-title {
+}
+ul.tl li .item-detail {
+  color: white;
+  font-size: 12px;
+}
+ul.tl li .timestamp {
+  color: #8d8d8d;
+  position: absolute;
+  width: 130px;
+  left: -55%;
+  text-align: right;
+  font-size: 12px;
 }

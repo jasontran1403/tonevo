@@ -37,7 +37,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
         globeEl.current.controls().autoRotateSpeed = rorateSpeed;
 
         // Set altitude based on screen width
-        const altitude = window.innerWidth <= 768 ? 3.5 : 2.5; // Adjust altitude based on screen width
+        const altitude = window.innerWidth <= 768 ? 4 : 3; // Adjust altitude based on screen width
         globeEl.current.pointOfView({ lat: 0, lng: 0, altitude });
       } else {
         to = setTimeout(check, 1000);

@@ -61,18 +61,42 @@ const SwapItem = ({ swapHistory }) => {
         
       }
     })
+    console.log(fromSelected);
   }, [fromSelected]);
 
-  const handleCreateDeposit = () => {
-    let swapType = 0;
-
-    if (fromSelected == 1 && toSelected == 2) {
-      swapType = 1;
+  const getSwapType = (fromSelected, toSelected) => {
+    if (fromSelected ===1 && toSelected == 2) {
+      return 1; // USDT BEP20 => MCT
+    } else if (fromSelected == 3 && toSelected == 2) {
+      return 2; // Direct Commission => MCT
+    } else if (fromSelected == 4 && toSelected == 2) {
+      return 3; // Binary Commission => MCT
+    } else if (fromSelected == 5 && toSelected == 2) {
+      return 4; // Leader Commission => MCT
+    } else if (fromSelected == 6 && toSelected == 2) {
+      return 5; // Pop Commission => MCT
+    } else if (fromSelected == 7 && toSelected == 2) {
+      return 6; // Daily Reward => MCT
+    } else if (toSelected == 1 && fromSelected == 2) {
+      return 7; // MCT => USDT BEP20
     }
 
-    if (amount <= 0 || swapType === undefined) {
+    console.log(fromSelected + " - " + toSelected)
+    return null; // Default case
+  };
+
+
+  const handleCreateDeposit = () => {
+    const swapType = getSwapType(fromSelected, toSelected);
+    
+    
+    if (swapType <= 0 && swapType > 7) return;
+
+    if (amount <= 0) {
       return;
     }
+
+    console.log(swapType);
 
     if (amount > balance) {
       toast.error("Swap amount must <= balance!", {
@@ -132,7 +156,14 @@ const SwapItem = ({ swapHistory }) => {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
         setAmount(value); // Keep the valid input
-        setAmountSwap(value / price);
+          
+        if (fromSelected >= 3 && fromSelected <= 7) {
+          setAmountSwap(value);
+        } else {
+          setAmountSwap(value / price);
+        }
+        setFromSelected(fromSelected);
+        setToSelected(toSelected);
       } else {
         setAmount(""); // Reset if invalid
       }

@@ -1,7 +1,7 @@
 import { people01, people02, people03, facebook, instagram, linkedin, youtube, telegram, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
 
-// export const API_ENDPOINT = "http://localhost:8888/api/v1/";
-export const API_ENDPOINT = "https://personally-sunny-basilisk.ngrok-free.app/api/v1/"
+export const API_ENDPOINT = "http://localhost:8888/api/v1/";
+// export const API_ENDPOINT = "https://personally-sunny-basilisk.ngrok-free.app/api/v1/"
 
 export const users = [
   {
@@ -114,31 +114,31 @@ export const navLinks = [
 
 export const connectedNavLinks = [
   {
-    id: "landingpage",
+    id: "introducing",
     title: "Introducing",
   },
   {
-    id: "landingpage",
+    id: "p2e",
     title: "P2E",
   },
   {
-    id: "landingpage",
+    id: "ecosystem",
     title: "Ecosystem",
   },
   {
-    id: "landingpage",
+    id: "products",
     title: "Products",
   },
   {
-    id: "landingpage",
+    id: "experience",
     title: "Experience",
   },
   {
-    id: "landingpage",
+    id: "tokenomic",
     title: "Tokenomic",
   },
   {
-    id: "landingpage",
+    id: "roadmap",
     title: "Roadmap",
   },
   {
@@ -168,10 +168,6 @@ export const userNavLinks = [
     id: "tree",
     title: "Tree",
   },
-  // {
-  //   id: "disconnect",
-  //   title: "Disconnect",
-  // }
 ];
 
 export const features = [
