@@ -14,7 +14,7 @@ const Overlay = styled(motion.div)`
 const ModalContainer = styled(motion.div)`
   width: 50%;
   height: 70%;
-  background: rgba(255, 255, 255, 0.2); // Transparent background for glass effect
+  background: rgba(130, 130, 130, 0.2); // Transparent background for glass effect
   backdrop-filter: blur(10px); // Blur effect for glassmorphism
   box-shadow: 
     0 4px 30px rgba(0, 0, 0, 0.1),           // Soft shadow for depth

@@ -94,6 +94,15 @@ a:hover {
   color: aqua !important;
 }
 
+.introducing {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.1),  
+    0 0 25px rgba(173, 216, 230, 0.7),
+    0 0 50px rgba(173, 216, 230, 0.5);  
+}
+
 /* Media Query for mobile devices */
 @media screen and (max-width: 600px) {
   .globeAnimation {
