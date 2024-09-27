@@ -32,6 +32,8 @@ const Tree = () => {
       left: "50%",
       right: "auto",
       bottom: "auto",
+      paddingLeft: "100px",
+      paddingRight: "100px",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
     },
