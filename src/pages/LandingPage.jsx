@@ -304,7 +304,7 @@ const LandingPage = () => {
                       <img className="w-full h-full" src={ecosystem1} alt="" />
                     </div>
                     <div className="hidden sm:block">
-                      <img className="w-full h-full" src={ecosystem} alt="" />
+                      <img className="lg:w-[80%] lg:h-[50%] w-full h-full" src={ecosystem} alt="" />
                     </div>
                   </div>
                 </ModalContent>
