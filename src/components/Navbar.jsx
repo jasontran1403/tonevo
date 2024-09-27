@@ -11,7 +11,7 @@ const Navbar = ({ handleOpenModal }) => {
   const connect = useTonConnectUI();
 
   return (
-    <nav className="w-full flex flex-1 justify-between items-center navbar lg:gap-12 gap-10 mt-[20px]">
+    <nav className="w-full flex flex-1 justify-between items-center navbar lg:gap-12 gap-8 mt-[20px]">
       
       <a href="/"><img
         src={logo}
