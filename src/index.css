@@ -27,6 +27,14 @@
   justify-content: center;
 }
 
+.bg-image {
+  background-image: url(./assets/background.jpg);
+  background-size: cover;    /* Ensures the image covers the entire area */
+  background-position: center;  /* Centers the background image */
+  background-repeat: no-repeat;  /* Prevents the image from repeating */
+}
+
+
 .investment-card {
   width: 80svw;
 }

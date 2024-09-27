@@ -74,7 +74,7 @@ const LandingPage = () => {
   return (
     <div className="bg-primary w-full overflow-hidden">
       <div
-        className={`${styles.paddingX} ${styles.flexCenterNav} absolute z-10 navbar`}
+        className={`${styles.paddingX} ${styles.flexCenterNav} w-full absolute z-10 navbar`}
       >
         <div className={`${styles.boxWidth}`}>
           <Navbar handleOpenModal={handleOpenModal} />
@@ -414,7 +414,7 @@ const LandingPage = () => {
                     pagination={{ clickable: true }}
                     style={{ height: "calc(100vh - 100px)" }} // Adjust height if needed
                   >
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                       <div className="flex flex-1 flex-col w-full sm:gap-5 sm:p-[100px] sm:pt-[250px] gap-3 pt-[150px] pl-[10px] pr-[10px]">
                         <p className="text-4xl sm:text-2xl font-extrabold subpixel-antialiased text-cyan-400">
                           Our Key Products
@@ -442,7 +442,7 @@ const LandingPage = () => {
                           blockchain Asset included cryptocurrencies
                         </p>
                       </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                     <SwiperSlide>
                       <div className="flex flex-1 flex-col  w-full sm:gap-5 sm:p-[100px] sm:pt-[250px] gap-3 pt-[140px] pl-[10px] pr-[10px]">
                         <p className="text-4xl sm:text-2xl font-extrabold subpixel-antialiased text-cyan-400">

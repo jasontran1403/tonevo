@@ -22,7 +22,7 @@ const Deposit = () => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`bg-primary ${styles.flexStart} bg-image`}>
         <div className={`${styles.boxWidthDashboard}`}>
           {isInTree === "true" ? (
             <>

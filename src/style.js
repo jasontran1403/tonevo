@@ -1,6 +1,6 @@
 const styles = {
   boxWidth: "w-full",
-  boxWidthDashboard: "xl:max-w-[60svw] w-full h-full",
+  boxWidthDashboard: "xl:max-w-[100svw] w-full h-full",
 
   heading2: "font-poppins font-semibold xs:text-[36px] text-[32px] text-white xs:leading-[66.8px] leading-[46.8px] w-full",
   heading4: "font-poppins font-semibold xs:text-[24px] text-[32px] text-white xs:leading-[52px] leading-[42px] w-full",
@@ -8,7 +8,7 @@ const styles = {
 
   flexCenterNav: "flex justify-center items-center gap-2",
   flexCenter: "flex justify-center items-center gap-2 mt-5",
-  flexStart: "flex justify-center items-start",
+  flexStart: "flex flex-col w-full justify-center items-start",
   flexBetween: "flex justify-between",
   flexColumn: "flex flex-col",
 

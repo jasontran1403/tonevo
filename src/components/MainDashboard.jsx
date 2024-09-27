@@ -163,7 +163,7 @@ const MainDashboard = () => {
 </div>
 
 
-      <div className="investment-container pt-[20px]">
+      <div className="investment-container pt-[20px] w-full">
         <TransactionTable
           className="w-full flex justify-center items-center ml-[20px]"
           TABLE_NAME={"Recent transactions"}

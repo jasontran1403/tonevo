@@ -47,15 +47,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-primary w-full h-full ">
+    <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
         <div className={`${styles.boxWidthDashboard}`}>
           <UserNavbar />
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidthDashboard}`}>
+      <div className={`bg-primary ${styles.flexStart} bg-image` }>
           {isInTree === "true" ? (
             <>
               <MainDashboard />
@@ -70,7 +69,6 @@ const Dashboard = () => {
               <Form />
             </Modal>
           )}
-        </div>
       </div>
     </div>
   );

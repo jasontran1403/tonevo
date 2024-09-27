@@ -106,7 +106,7 @@ const TableUser = () => {
         </div>
       </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`bg-primary ${styles.flexStart} bg-image`}>
         <div className={`${styles.boxWidthDashboard}`}>
           <Table TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={TABLE_ROWS}/>
         </div>
