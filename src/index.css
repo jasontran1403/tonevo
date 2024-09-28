@@ -28,7 +28,7 @@
 }
 
 .bg-image {
-  background-image: url(./assets/background.jpg);
+  background-image: url(./assets/BG_DB.jpg);
   background-size: cover;    /* Ensures the image covers the entire area */
   background-position: center;  /* Centers the background image */
   background-repeat: no-repeat;  /* Prevents the image from repeating */

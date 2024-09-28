@@ -12,12 +12,13 @@ const Navbar = ({ handleOpenModal }) => {
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar gap-0 mt-[20px]">
-      
-      <a href="/"><img
-        src={logo}
-        alt="hoobank"
-        className="lg:w-[200px] lg:h-[80px] w-[160px] h-[60px] logo-glow"
-      /></a>
+      <a href="/">
+        <img
+          src={logo}
+          alt="hoobank"
+          className="lg:w-[200px] lg:h-[80px] w-[160px] h-[60px] logo-glow"
+        />
+      </a>
       <ul className="list-none sm:flex hidden justify-center items-center flex-1 mx-10">
         {connectedNavLinks.map((nav, index) => (
           <li
@@ -30,7 +31,7 @@ const Navbar = ({ handleOpenModal }) => {
               handleOpenModal(true, index);
             }}
           >
-            {nav.id === "dashboard" ? (
+            {nav.id === "dashboard" || nav.id === "mapchain-swap" ? (
               <a href={`/${nav.id}`}>{nav.title}</a>
             ) : (
               <a href={`#${nav.id}`}>{nav.title}</a>
@@ -62,9 +63,12 @@ const Navbar = ({ handleOpenModal }) => {
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-dimWhite"
                 } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`} // Adjust the margin-bottom here
-                onClick={() => {setActive(nav.title); handleOpenModal(true, index);}}
+                onClick={() => {
+                  setActive(nav.title);
+                  handleOpenModal(true, index);
+                }}
               >
-                {nav.id === "dashboard" ? (
+                {nav.id === "dashboard" || nav.id === "mapchain-swap" ? (
                   <a href={`/${nav.id}`}>{nav.title}</a>
                 ) : (
                   <a href={`#${nav.id}`}>{nav.title}</a>

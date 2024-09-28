@@ -142,6 +142,10 @@ export const connectedNavLinks = [
     title: "Roadmap",
   },
   {
+    id: "mapchain-swap",
+    title: "Swap",
+  },
+  {
     id: "dashboard",
     title: "Dashsboard",
   },
@@ -163,6 +167,10 @@ export const userNavLinks = [
   {
     id: "transactions",
     title: "Transaction",
+  },
+  {
+    id: "mapchain-swap",
+    title: "Mapchain Swap",
   },
   {
     id: "tree",
@@ -320,6 +328,11 @@ export const socialMedia = [
     id: "social-media-3",
     icon: twitter,
     link: "https://x.com/mapchainsocial",
+  },
+  {
+    id: "social-media-4",
+    icon: telegram,
+    link: "https://t.me/+8nL_WLNuJ7IzMjBl",
   }
 ];
 

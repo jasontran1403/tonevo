@@ -12,6 +12,7 @@ import Tree from "./pages/Tree";
 import TableUser from "./pages/TableUser";
 import Transactions from "./pages/Transactions";
 import DisconnectComponent from "./components/DisconnectComponent";
+import CommingSoon from "./pages/ComingSoon";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -67,6 +68,10 @@ export default function Router() {
         {
             path: "/disconnect",
             element: <DisconnectComponent />
+        },
+        {
+            path: "/mapchain-swap",
+            element: <CommingSoon />
         },
         {
             path: '/404',

@@ -7,7 +7,6 @@ import rank5 from "../assets/rank/5.png";
 import rank6 from "../assets/rank/6.png";
 import rank7 from "../assets/rank/7.png";
 import rank8 from "../assets/rank/8.png";
-import rank9 from "../assets/rank/9.png";
 
 // Create an array of the rank images
 const rankImages = [
@@ -20,7 +19,6 @@ const rankImages = [
   rank6,
   rank7,
   rank8,
-  rank9,
 ];
 
 const RankCard = ({ content, rank }) => {
@@ -43,7 +41,7 @@ const RankCard = ({ content, rank }) => {
         <img
           src={rankImages[rank]} // Access the image based on the rank value
           alt={`Rank ${rank}`} // Add an alt attribute for accessibility
-          className="max-w-[150px] max-h-[150px] min-w-[150px] min-h-[150px]"
+          className="max-w-[80px] max-h-[80px] min-w-[80px] min-h-[80px]"
         />
       </div>
     </div>

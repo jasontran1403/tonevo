@@ -97,7 +97,7 @@ const MainDashboard = () => {
         flexDirection: "row",
         justifyContent: "center", // Distributes items evenly
         width: "100%",
-        gap: "100px",
+        gap: "20px",
         marginTop: "100px",
       }}
       className="flex-wrap" // Allow wrapping on small screens
@@ -126,7 +126,7 @@ const MainDashboard = () => {
         flexDirection: "row",
         justifyContent: "center", // Distributes items evenly
         width: "100%",
-        gap: "100px",
+        gap: "0px",
         marginTop: "50px",
         marginBottom: "50px",
       }}
@@ -147,6 +147,13 @@ const MainDashboard = () => {
       <WalletCard3
         content={"Daily reward"}
         amount={listBalance[8]?.balance}
+        unit={"MCT"}
+        wallet={false}
+        className="flex-1 w-full max-w-xs" // Adjust width for small screens
+      />
+      <WalletCard3
+        content={"Transfer wallet"}
+        amount={listBalance[6]?.balance}
         unit={"MCT"}
         wallet={false}
         className="flex-1 w-full max-w-xs" // Adjust width for small screens
