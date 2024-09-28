@@ -88,87 +88,88 @@ const MainDashboard = () => {
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column", width: "100svw" }}>
-  <div>
-    {/* First Row - 3 Items */}
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center", // Distributes items evenly
-        width: "100%",
-        gap: "20px",
-        marginTop: "100px",
-      }}
-      className="flex-wrap" // Allow wrapping on small screens
-    >
-      <RankCard content={"Rank"} rank={rank} />
-      <WalletCard2
-        content={"USDT BEP20"}
-        amount={listBalance[0]?.balance}
-        unit={"USDT"}
-        wallet={true}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-      <WalletCard2
-        content={"Mapchain Token"}
-        amount={listBalance[1]?.balance}
-        unit={"MCT"}
-        wallet={true}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-    </div>
+      <div
+        style={{ display: "flex", flexDirection: "column", width: "100svw" }}
+      >
+        <div>
+          {/* First Row - 3 Items */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center", // Distributes items evenly
+              width: "100%",
+              gap: "20px",
+              marginTop: "100px",
+            }}
+            className="flex-wrap" // Allow wrapping on small screens
+          >
+            <RankCard content={"Rank"} rank={rank} />
+            <WalletCard2
+              content={"USDT BEP20"}
+              amount={listBalance[0]?.balance}
+              unit={"USDT"}
+              wallet={true}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <WalletCard2
+              content={"Mapchain Token"}
+              amount={listBalance[1]?.balance}
+              unit={"MCT"}
+              wallet={true}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+          </div>
 
-    {/* Second Row - 3 Items */}
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center", // Distributes items evenly
-        width: "100%",
-        gap: "0px",
-        marginTop: "50px",
-        marginBottom: "50px",
-      }}
-      className="flex-wrap" // Allow wrapping on small screens
-    >
-      <WalletCard3
-        content={"Commission"}
-        amount={
-          listBalance[2]?.balance +
-          listBalance[3]?.balance +
-          listBalance[4]?.balance +
-          listBalance[5]?.balance
-        }
-        unit={"MCT"}
-        wallet={false}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-      <WalletCard3
-        content={"Daily reward"}
-        amount={listBalance[8]?.balance}
-        unit={"MCT"}
-        wallet={false}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-      <WalletCard3
-        content={"Transfer wallet"}
-        amount={listBalance[6]?.balance}
-        unit={"MCT"}
-        wallet={false}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-      <WalletCard4
-        content={"Maxout"}
-        amount={listBalance[7]?.balance}
-        unit={"MCT"}
-        wallet={false}
-        className="flex-1 w-full max-w-xs" // Adjust width for small screens
-      />
-    </div>
-  </div>
-</div>
-
+          {/* Second Row - 3 Items */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center", // Distributes items evenly
+              width: "100%",
+              gap: "0px",
+              marginTop: "50px",
+              marginBottom: "50px",
+            }}
+            className="flex-wrap" // Allow wrapping on small screens
+          >
+            <WalletCard3
+              content={"Commission"}
+              amount={
+                listBalance[2]?.balance +
+                listBalance[3]?.balance +
+                listBalance[4]?.balance +
+                listBalance[5]?.balance
+              }
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <WalletCard3
+              content={"Daily reward"}
+              amount={listBalance[8]?.balance}
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <WalletCard3
+              content={"Transfer wallet"}
+              amount={listBalance[6]?.balance}
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <WalletCard4
+              content={"Maxout"}
+              amount={listBalance[7]?.balance}
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+          </div>
+        </div>
+      </div>
 
       <div className="investment-container pt-[20px] w-full">
         <TransactionTable
