@@ -80,7 +80,7 @@ const LandingPage = () => {
           <Navbar handleOpenModal={handleOpenModal} />
         </div>
       </div>
-      <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`bg-primary ${styles.flexStart} test`}>
         <div className={`${styles.boxWidth}`}>
           {/* <Hero /> */}
           <PolyGlobe

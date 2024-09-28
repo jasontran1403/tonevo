@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     var timeout;
 
-    // if (wallet == null) return;
+    if (wallet == null) return;
     if (connect[0].connected) {
       // Lưu địa chỉ ví vào localStorage
       localStorage.setItem("walletAddress", wallet.account.address);

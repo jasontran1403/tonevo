@@ -86,6 +86,9 @@
   animation: moveAndResize 1.5s forwards; /* Animation to move and resize */
 }
 
+#root {
+}
+
 .globeAnimation.return {
   animation: returnToOriginal 1.5s forwards; /* Animation to return to original */
 }
@@ -132,6 +135,10 @@ a:hover {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   height: 100%; /* Fill the footer height */
+}
+
+.test {
+  background-image: url("./assets/space.jpg");
 }
 
 .footer-icons a {

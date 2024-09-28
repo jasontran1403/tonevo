@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Globe from "react-globe.gl";
 import { data } from "../assets/data"; // Import the geojson file
 import earth1 from "../assets/earth-blue-marble.jpg";
+import earthday from "../assets/earth-day.jpg";
 import earth2 from "../assets/earth-topology.png";
 
 const cities = [
@@ -104,13 +105,12 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
       ["yellow", "white", "green"][Math.round(Math.random() * 2)],
     ],
   }));
-
+  // bumpImageUrl={earth2}
   return (
     <div className={animate ? "globeAnimation" : ""}>
       <Globe
         ref={globeEl}
-        globeImageUrl={earth1}
-        bumpImageUrl={earth2}
+        globeImageUrl={earthday}
         hexPolygonsData={countries}
         backgroundColor="rgba(0,0,0,0)"
         hexPolygonResolution={3}
