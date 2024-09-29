@@ -44,30 +44,30 @@ const Tree = () => {
   };
 
   const handleGenerateRef = (placement, side) => {
-    if (placement === undefined) return;
-    let data = JSON.stringify({
-      rootWalletAddress: walletAddress,
-      placement: placement,
-      side: side,
-    });
+    // if (placement === undefined) return;
+    // let data = JSON.stringify({
+    //   rootWalletAddress: walletAddress,
+    //   placement: placement,
+    //   side: side,
+    // });
 
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/generate-sponsor-code`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: accessToken,
-      },
-      data: data,
-    };
+    // let config = {
+    //   method: "post",
+    //   url: `${API_ENDPOINT}management/generate-Sales-code`,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: accessToken,
+    //   },
+    //   data: data,
+    // };
 
-    Axios(config).then((response) => {
-      if (response.data === "You can't change the side of this branch") {
-      } else {
-        setUrl(`${response.data}`);
-      }
-    });
-    setIsOpen(true);
+    // Axios(config).then((response) => {
+    //   if (response.data === "You can't change the side of this branch") {
+    //   } else {
+    //     setUrl(`${response.data}`);
+    //   }
+    // });
+    // setIsOpen(true);
   };
 
   const handleOpenModal = (username) => {
@@ -115,6 +115,7 @@ const Tree = () => {
             <a>
               <p>{userRoot.displayName}</p>
               <p className="sponsor">Sponsor: {userRoot.rootUsername}</p>
+              <p className="sponsor">Sales: {userRoot.sales}</p>
             </a>
             <ul>
               {/* Nhánh trái */}
@@ -148,7 +149,7 @@ const Tree = () => {
                         <>
                           <p>{refF1[0].displayName}</p>
                           <p className="sponsor">
-                            Sponsor: {refF1[0].rootUsername}
+                            Sales: {refF1[0].sales}
                           </p>
                         </>
                       )
@@ -194,7 +195,7 @@ const Tree = () => {
                               <>
                                 <p>{refF2[0].displayName}</p>
                                 <p className="sponsor">
-                                  Sponsor: {refF2[0].rootUsername}
+                                  Sales: {refF2[0].sales}
                                 </p>
                               </>
                             )
@@ -243,8 +244,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[0].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[0].rootUsername}
+                                        Sales:
+                                        {refF3[0].sales}
                                       </p>
                                     </>
                                   )
@@ -286,8 +287,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[0].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[0].rootUsername}
+                                            Sales:
+                                            {refF4[0].sales}
                                           </p>
                                         </>
                                       )
@@ -328,8 +329,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[1].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[1].rootUsername}
+                                            Sales:
+                                            {refF4[1].sales}
                                           </p>
                                         </>
                                       )
@@ -387,8 +388,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[1].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[1].rootUsername}
+                                        Sales:
+                                        {refF3[1].sales}
                                       </p>
                                     </>
                                   )
@@ -429,8 +430,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[2].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[2].rootUsername}
+                                            Sales:
+                                            {refF4[2].sales}
                                           </p>
                                         </>
                                       )
@@ -471,8 +472,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[3].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[3].rootUsername}
+                                            Sales:
+                                            {refF4[3].sales}
                                           </p>
                                         </>
                                       )
@@ -528,7 +529,7 @@ const Tree = () => {
                               <>
                                 <p>{refF2[1].displayName}</p>
                                 <p className="sponsor">
-                                  Sponsor: {refF2[1].rootUsername}
+                                  Sales: {refF2[1].sales}
                                 </p>
                               </>
                             )
@@ -577,8 +578,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[2].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[2].rootUsername}
+                                        Sales:
+                                        {refF3[2].sales}
                                       </p>
                                     </>
                                   )
@@ -619,8 +620,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[4].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[4].rootUsername}
+                                            Sales:
+                                            {refF4[4].sales}
                                           </p>
                                         </>
                                       )
@@ -661,8 +662,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[5].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[5].rootUsername}
+                                            Sales:
+                                            {refF4[5].sales}
                                           </p>
                                         </>
                                       )
@@ -720,8 +721,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[3].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[3].rootUsername}
+                                        Sales:
+                                        {refF3[3].sales}
                                       </p>
                                     </>
                                   )
@@ -762,8 +763,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[6].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[6].rootUsername}
+                                            Sales:
+                                            {refF4[6].sales}
                                           </p>
                                         </>
                                       )
@@ -804,8 +805,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[7].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[7].rootUsername}
+                                            Sales:
+                                            {refF4[7].sales}
                                           </p>
                                         </>
                                       )
@@ -865,7 +866,7 @@ const Tree = () => {
                         <>
                           <p>{refF1[1].displayName}</p>
                           <p className="sponsor">
-                            Sponsor: {refF1[1].rootUsername}
+                            Sales: {refF1[1].sales}
                           </p>
                         </>
                       )
@@ -911,7 +912,7 @@ const Tree = () => {
                               <>
                                 <p>{refF2[2].displayName}</p>
                                 <p className="sponsor">
-                                  Sponsor: {refF2[2].rootUsername}
+                                  Sales: {refF2[2].sales}
                                 </p>
                               </>
                             )
@@ -960,8 +961,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[4].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[4].rootUsername}
+                                        Sales:
+                                        {refF3[4].sales}
                                       </p>
                                     </>
                                   )
@@ -1002,8 +1003,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[8].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[8].rootUsername}
+                                            Sales:
+                                            {refF4[8].sales}
                                           </p>
                                         </>
                                       )
@@ -1044,8 +1045,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[9].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[9].rootUsername}
+                                            Sales:
+                                            {refF4[9].sales}
                                           </p>
                                         </>
                                       )
@@ -1103,8 +1104,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[5].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[5].rootUsername}
+                                        Sales:
+                                        {refF3[5].sales}
                                       </p>
                                     </>
                                   )
@@ -1145,8 +1146,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[10].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[10].rootUsername}
+                                            Sales:
+                                            {refF4[10].sales}
                                           </p>
                                         </>
                                       )
@@ -1187,8 +1188,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[11].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[11].rootUsername}
+                                            Sales:
+                                            {refF4[11].sales}
                                           </p>
                                         </>
                                       )
@@ -1244,7 +1245,7 @@ const Tree = () => {
                               <>
                                 <p>{refF2[3].displayName}</p>
                                 <p className="sponsor">
-                                  Sponsor: {refF2[3].rootUsername}
+                                  Sales: {refF2[3].sales}
                                 </p>
                               </>
                             )
@@ -1293,8 +1294,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[6].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[6].rootUsername}
+                                        Sales:
+                                        {refF3[6].sales}
                                       </p>
                                     </>
                                   )
@@ -1335,8 +1336,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[12].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[12].rootUsername}
+                                            Sales:
+                                            {refF4[12].sales}
                                           </p>
                                         </>
                                       )
@@ -1377,8 +1378,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[13].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[13].rootUsername}
+                                            Sales:
+                                            {refF4[13].sales}
                                           </p>
                                         </>
                                       )
@@ -1436,8 +1437,8 @@ const Tree = () => {
                                     <>
                                       <p>{refF3[7].displayName}</p>
                                       <p className="sponsor">
-                                        Sponsor:
-                                        {refF3[7].rootUsername}
+                                        Sales:
+                                        {refF3[7].sales}
                                       </p>
                                     </>
                                   )
@@ -1478,8 +1479,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[14].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[14].rootUsername}
+                                            Sales:
+                                            {refF4[14].sales}
                                           </p>
                                         </>
                                       )
@@ -1519,8 +1520,8 @@ const Tree = () => {
                                         <>
                                           <p>{refF4[15].displayName}</p>
                                           <p className="sponsor">
-                                            Sponsor:
-                                            {refF4[15].rootUsername}
+                                            Sales:
+                                            {refF4[15].sales}
                                           </p>
                                         </>
                                       )

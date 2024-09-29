@@ -12,6 +12,7 @@ import WalletCard2 from "./WalletCard2";
 import WalletCard3 from "./WalletCard3";
 import WalletCard4 from "./WalletCard4";
 import RankCard from "./RankCard";
+import ReflinkCard from "./ReflinkCard";
 
 const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
@@ -65,6 +66,9 @@ const MainDashboard = () => {
   const [rank, setRank] = useState(0);
   const [listBalance, setListBalance] = useState([]);
   const [listTransaction, setListTransaction] = useState([]);
+  const [leftRefCode, setLeftRefCode] = useState("");
+  const [rightRefCode, setRightRefCode] = useState("");
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -80,6 +84,8 @@ const MainDashboard = () => {
         setListTransaction(response.data.transactionHistory);
         setListBalance(response.data.balances);
         setRank(response.data.rank);
+        setLeftRefCode(response.data.leftRefCode)
+        setRightRefCode(response.data.rightRefCode);
       })
       .catch((error) => {
         console.log(error);
@@ -117,6 +123,13 @@ const MainDashboard = () => {
               amount={listBalance[1]?.balance}
               unit={"MCT"}
               wallet={true}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <ReflinkCard
+              content={"Reflink"}
+              walletAddress={walletAddress}
+              leftRefCode={leftRefCode}
+              rightRefCode={rightRefCode}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
           </div>
