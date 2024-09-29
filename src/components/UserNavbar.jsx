@@ -8,6 +8,19 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 const UserNavbar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    openModal();
+  }
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar mt-[20px]">

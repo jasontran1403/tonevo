@@ -14,10 +14,29 @@ const TransferItem = ({ swapHistory }) => {
     localStorage.getItem("access_token")
   );
   const [to, setTo] = useState("");
-  const [balance, setBalance] = useState(1000);
+  const [balance, setBalance] = useState(0);
 
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState(0);
+
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}management/balance/${walletAddress}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios.request(config)
+      .then((response) => {
+        setBalance(response.data.balances[1].balance);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleCreateDeposit = () => {
     if (amount <= 0) {

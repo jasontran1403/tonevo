@@ -16,7 +16,6 @@ const SwapItem = ({ swapHistory }) => {
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
   const [balance, setBalance] = useState(0);
-
   const [listSwap] = useState([
     { id: 1, name: "USDT BEP20" },
     { id: 2, name: "Mapchain Token" },
@@ -26,8 +25,13 @@ const SwapItem = ({ swapHistory }) => {
     { id: 6, name: "Pop Commission" },
     { id: 7, name: "Daily Reward" },
   ]);
-
   const [listBalance, setListBalance] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [amount, setAmount] = useState(0);
+  const [amountSwap, setAmountSwap] = useState(0);
+  const [fee, setFee] = useState(0);
+  const [isToWalletDisabled, setIsToWalletDisabled] = useState(false);
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -49,56 +53,37 @@ const SwapItem = ({ swapHistory }) => {
       });
   }, []);
 
-  const [amount, setAmount] = useState(0);
-  const [fee, setFee] = useState(0);
-  const [price, setPrice] = useState(0);
-  const [amountSwap, setAmountSwap] = useState(0);
-
+  // Updates To Wallet based on From Wallet selection
   useEffect(() => {
-    listBalance.forEach((item) => {
-      if (item.type == fromSelected) {
-        setBalance(item.balance);
-        
-      }
-    })
-    console.log(fromSelected);
+    if (fromSelected >= 3 && fromSelected <= 7 || fromSelected == 1) {
+      setToSelected(2); // Mapchain Token (id 2)
+      setIsToWalletDisabled(true); // Disable To Wallet dropdown
+    } else if (fromSelected == 2) {
+      setToSelected(1); // USDT BEP20 (id 1)
+      setIsToWalletDisabled(true); // Disable To Wallet dropdown
+    } else {
+      setIsToWalletDisabled(false); // Enable dropdown for other cases
+    }
   }, [fromSelected]);
 
+  // Handle the swap logic based on selected types
   const getSwapType = (fromSelected, toSelected) => {
-    if (fromSelected ===1 && toSelected == 2) {
-      return 1; // USDT BEP20 => MCT
-    } else if (fromSelected == 3 && toSelected == 2) {
-      return 2; // Direct Commission => MCT
-    } else if (fromSelected == 4 && toSelected == 2) {
-      return 3; // Binary Commission => MCT
-    } else if (fromSelected == 5 && toSelected == 2) {
-      return 4; // Leader Commission => MCT
-    } else if (fromSelected == 6 && toSelected == 2) {
-      return 5; // Pop Commission => MCT
-    } else if (fromSelected == 7 && toSelected == 2) {
-      return 6; // Daily Reward => MCT
-    } else if (toSelected == 1 && fromSelected == 2) {
-      return 7; // MCT => USDT BEP20
-    }
-
+    if (fromSelected === 1 && toSelected === 2) return 1; // USDT BEP20 => MCT
+    if (fromSelected === 3 && toSelected === 2) return 2; // Direct Commission => MCT
+    if (fromSelected === 4 && toSelected === 2) return 3; // Binary Commission => MCT
+    if (fromSelected === 5 && toSelected === 2) return 4; // Leader Commission => MCT
+    if (fromSelected === 6 && toSelected === 2) return 5; // Pop Commission => MCT
+    if (fromSelected === 7 && toSelected === 2) return 6; // Daily Reward => MCT
+    if (fromSelected === 2 && toSelected === 1) return 7; // MCT => USDT BEP20
     return null; // Default case
   };
 
-
   const handleCreateDeposit = () => {
     const swapType = getSwapType(fromSelected, toSelected);
-    
-    
-    if (swapType <= 0 && swapType > 7) return;
+    if (!swapType) return;
 
-    if (amount <= 0) {
-      return;
-    }
-
-    console.log(swapType);
-
-    if (amount > balance) {
-      toast.error("Swap amount must <= balance!", {
+    if (amount <= 0 || amount > balance) {
+      toast.error("Invalid amount", {
         position: "top-right",
         autoClose: 1500,
       });
@@ -146,23 +131,13 @@ const SwapItem = ({ swapHistory }) => {
 
   const handleChangeAmount = (amountToSwap) => {
     const value = amountToSwap;
-
-    // Regex to allow only numbers and decimals
     const regex = /^[0-9]*\.?[0-9]*$/;
 
-    // Check if the input value matches the regex (valid number format)
     if (regex.test(value)) {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
-        setAmount(value); // Keep the valid input
-          
-        if (fromSelected >= 3 && fromSelected <= 7) {
-          setAmountSwap(value);
-        } else {
-          setAmountSwap(value / price);
-        }
-        setFromSelected(fromSelected);
-        setToSelected(toSelected);
+        setAmount(value);
+        setAmountSwap(fromSelected >= 3 && fromSelected <= 7 ? value : value / price);
       } else {
         setAmount(""); // Reset if invalid
       }
@@ -172,7 +147,7 @@ const SwapItem = ({ swapHistory }) => {
   };
 
   return (
-    <div className={`investment-container $`}>
+    <div className={`investment-container`}>
       <section
         className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
       >
@@ -180,17 +155,13 @@ const SwapItem = ({ swapHistory }) => {
           <h2 className={styles.heading2}>Swap</h2>
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="packageName"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 Swap from
               </label>
               <select
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="packageName"
                 value={fromSelected}
-                onChange={(e) => setFromSelected(e.target.value)}
+                onChange={(e) => setFromSelected(parseInt(e.target.value))}
               >
                 {listSwap.map((network) => (
                   <option key={network.id} value={network.id}>
@@ -199,51 +170,40 @@ const SwapItem = ({ swapHistory }) => {
                 ))}
               </select>
             </div>
+
             <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 Balance
               </label>
               <input
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text" // Use "text" to fully control input validation
+                type="text"
                 value={balance}
                 readOnly
               />
             </div>
+
             <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 Amount
               </label>
               <input
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text" // Use "text" to fully control input validation
+                type="text"
                 value={amount}
-                min="0.1"
-                onChange={(e) => {
-                  handleChangeAmount(e.target.value);
-                }}
+                onChange={(e) => handleChangeAmount(e.target.value)}
               />
             </div>
+
             <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="packageName"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 Swap to
               </label>
               <select
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="packageName"
                 value={toSelected}
-                onChange={(e) => setToSelected(e.target.value)}
+                onChange={(e) => setToSelected(parseInt(e.target.value))}
+                disabled={isToWalletDisabled}
               >
                 {listSwap.map((network) => (
                   <option key={network.id} value={network.id}>
@@ -252,50 +212,15 @@ const SwapItem = ({ swapHistory }) => {
                 ))}
               </select>
             </div>
+
             <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 You get
               </label>
               <input
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text" // Use "text" to fully control input validation
+                type="text"
                 value={amountSwap}
-                readOnly
-              />
-            </div>
-
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
-                Price
-              </label>
-              <input
-                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text"
-                value={price}
-                readOnly
-              />
-            </div>
-
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
-                Fee
-              </label>
-              <input
-                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text"
-                value={fee}
                 readOnly
               />
             </div>

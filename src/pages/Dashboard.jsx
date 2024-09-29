@@ -46,6 +46,10 @@ const Dashboard = () => {
     setIsOpen(false);
   };
 
+  const handleOpenModal = () => {
+    
+  }
+
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
