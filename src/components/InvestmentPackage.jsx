@@ -14,7 +14,8 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
     localStorage.getItem("access_token")
   );
 
-  const [walletBalance, setWalletBalance] = useState(0);
+  const [mapchain, setMapchain] = useState(0);
+  const [transfer, setTransfer] = useState(0);
 
   const [listBalance, setListBalance] = useState([]);
   useEffect(() => {
@@ -29,34 +30,17 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
     Axios.request(config)
       .then((response) => {
-        setWalletBalance(response.data.balances[1].balance);
-        setListBalance(response.data.balances);
+        setMapchain(response.data.balances[1].balance);
+        setTransfer(response.data.balances[6].balance);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const [listInvest] = useState([
-    { id: 1, name: "Mapchain wallet" },
-    { id: 2, name: "Transfer wallet" },
-  ]);
-
-  const handleChangeWallet = (walletId) => {
-    setWalletType(walletId); // Update wallet type state
-    console.log(listBalance);
-    // Check if balances exist in response
-    if (walletId === 1) {
-      setWalletBalance(listBalance[1].balance);
-    } else {
-      setWalletBalance(listBalance[6].balance);
-    }
-  };
-
   const [listPackages, setListPackages] = useState([]);
   const [packagePrice, setPackagePrice] = useState("");
   const [packageReward, setPackageReward] = useState("");
-  const [currentBalance, setCurrentBalance] = useState(balance);
   const [selectedPackageId, setSelectedPackageId] = useState("");
   const [walletType, setWalletType] = useState(1);
 
@@ -73,14 +57,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
       });
       return;
     }
-
-    if (selectedPackage.price > currentBalance) {
-      toast.error("Balance not enough to buy this package!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
-      return;
-    }
+    
     let data = JSON.stringify({
       packageId: selectedPackageId,
       walletAddress: walletAddress,
@@ -123,7 +100,6 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   useEffect(() => {
     if (packages.length > 0) {
       setListPackages(packages);
-      setCurrentBalance(balance);
 
       const firstPackage = packages[0];
       if (firstPackage) {
@@ -203,53 +179,34 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               readOnly
             />
           </div>
+          
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="tokenBalance"
+              htmlFor="balance"
             >
-              Token balance
+              Mapchain Balance
             </label>
             <input
               className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="tokenBalance"
+              id="balance"
               type="text"
-              value={currentBalance}
+              value={mapchain}
               readOnly
             />
           </div>
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="walletType"
+              htmlFor="transfer"
             >
-              Wallet
-            </label>
-            <select
-              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="walletType"
-              value={walletType} // Reflect the selected wallet
-              onChange={(e) => handleChangeWallet(Number(e.target.value))} // Convert string to number
-            >
-              {listInvest.map((network) => (
-                <option key={network.id} value={network.id}>
-                  {network.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="balance"
-            >
-              Balance
+              Transfer Balance
             </label>
             <input
               className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="balance"
+              id="transfer"
               type="text"
-              value={walletBalance}
+              value={transfer}
               readOnly
             />
           </div>

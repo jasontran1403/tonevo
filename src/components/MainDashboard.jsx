@@ -153,7 +153,7 @@ const MainDashboard = () => {
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            <WalletCard3
+            <WalletCard4
               content={"Transfer wallet"}
               amount={listBalance[6]?.balance}
               unit={"MCT"}
