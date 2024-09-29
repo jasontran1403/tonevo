@@ -16,6 +16,7 @@ const SwapItem = ({ swapHistory }) => {
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
   const [balance, setBalance] = useState(0);
+
   const [listSwap] = useState([
     { id: 1, name: "USDT BEP20" },
     { id: 2, name: "Mapchain Token" },
@@ -25,6 +26,7 @@ const SwapItem = ({ swapHistory }) => {
     { id: 6, name: "Pop Commission" },
     { id: 7, name: "Daily Reward" },
   ]);
+  
   const [listBalance, setListBalance] = useState([]);
   const [price, setPrice] = useState(0);
   const [amount, setAmount] = useState(0);

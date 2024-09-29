@@ -19,6 +19,46 @@ const TransferItem = ({ swapHistory }) => {
   const [amount, setAmount] = useState(0);
   const [fee, setFee] = useState(0);
 
+  const [listWalletType] = useState([
+    { id: 1, name: "Mapchain Wallet" },
+    { id: 2, name: "Transfer Wallet" },
+  ]);
+
+  const [balances, setBalances] = useState([]);
+
+  const [amountSwap, setAmountSwap] = useState(0);
+
+  const [walletTypeId, setWalletTypeId] = useState(1);
+
+  const handleSetWalletType = (walletTypeId) => {
+    setWalletTypeId(Number(walletTypeId));
+    if (walletTypeId == 1) {
+      setBalance(balances[1].balance);
+    } else if (walletTypeId == 2) {
+      setBalance(balances[6].balance);
+    }
+  };
+
+  const [listBalance, setListBalance] = useState([]);
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}management/balance/${walletAddress}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios.request(config)
+      .then((response) => {
+        setBalances(response.data.balances);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   useEffect(() => {
     let config = {
       method: "get",
@@ -61,6 +101,7 @@ const TransferItem = ({ swapHistory }) => {
       amount: amount,
       status: 1,
       type: 0,
+      walletType: walletTypeId,
     });
 
     let config = {
@@ -125,6 +166,27 @@ const TransferItem = ({ swapHistory }) => {
         <div className="flex-1 flex flex-col">
           <h2 className={styles.heading2}>Internal Transfer</h2>
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="walletType"
+              >
+                Wallet Type
+              </label>
+              <select
+                className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="walletType"
+                value={walletTypeId}
+                onChange={(e) => handleSetWalletType(e.target.value)}
+              >
+                {listWalletType.map((pkg) => (
+                  <option key={pkg.id} value={pkg.id}>
+                    {pkg.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
