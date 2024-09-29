@@ -94,6 +94,7 @@ const LandingPage = () => {
               <Modal isOpen={isOpen}>
                 <ModalContent>
                   <CloseButton
+                    style={{ zIndex: "9999" }}
                     onClick={(e) => handleOpenModal(false)}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20.39 20.39"
@@ -271,6 +272,7 @@ const LandingPage = () => {
               <Modal isOpen={isOpen}>
                 <ModalContent>
                   <CloseButton
+                    style={{ zIndex: "9999" }}
                     onClick={(e) => handleOpenModal(false)}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20.39 20.39"
@@ -304,7 +306,11 @@ const LandingPage = () => {
                       <img className="w-full h-full" src={ecosystem1} alt="" />
                     </div>
                     <div className="hidden sm:block">
-                      <img className="lg:w-[80%] lg:h-[50%] w-full h-full" src={ecosystem} alt="" />
+                      <img
+                        className="lg:w-[80%] lg:h-[50%] w-full h-full"
+                        src={ecosystem}
+                        alt=""
+                      />
                     </div>
                   </div>
                 </ModalContent>
@@ -314,6 +320,7 @@ const LandingPage = () => {
               <Modal isOpen={isOpen}>
                 <ModalContent>
                   <CloseButton
+                    style={{ zIndex: "9999" }}
                     onClick={(e) => handleOpenModal(false)}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20.39 20.39"
@@ -478,6 +485,7 @@ const LandingPage = () => {
               <Modal isOpen={isOpen}>
                 <ModalContent>
                   <CloseButton
+                    style={{ zIndex: "9999" }}
                     onClick={(e) => handleOpenModal(false)}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20.39 20.39"
