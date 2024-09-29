@@ -141,7 +141,7 @@ const MainDashboard = () => {
               flexDirection: "row",
               justifyContent: "center", // Distributes items evenly
               width: "100%",
-              gap: "0px",
+              gap: "20px",
               marginTop: "50px",
               marginBottom: "50px",
             }}
