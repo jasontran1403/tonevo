@@ -13,11 +13,18 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
+
+  const [listInvest] = useState([
+    { id: 1, name: "Mapchain wallet" },
+    { id: 2, name: "Transfer wallet" },
+  ]);
+
   const [listPackages, setListPackages] = useState([]);
   const [packagePrice, setPackagePrice] = useState("");
   const [packageReward, setPackageReward] = useState("");
   const [currentBalance, setCurrentBalance] = useState(balance);
   const [selectedPackageId, setSelectedPackageId] = useState("");
+  const [walletType, setWalletType] = useState(1);
 
   const buyPackage = () => {
     if (selectedPackageId === "" || !listPackages.length) return;
@@ -43,6 +50,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
     let data = JSON.stringify({
       packageId: selectedPackageId,
       walletAddress: walletAddress,
+      type: walletType
     });
 
     let config = {
@@ -175,7 +183,28 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               value={currentBalance}
               readOnly
             />
+            
           </div>
+          <div className="mb-6">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="walletType"
+              >
+                Wallet
+              </label>
+              <select
+                className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="packageName"
+                value={walletType}
+                onChange={(e) => setWalletType(e.target.value)}
+              >
+                {listInvest.map((network) => (
+                  <option key={network.id} value={network.id}>
+                    {network.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           <div className="flex items-center justify-between">
             <Button handleClick={buyPackage} content={"Buy"} />
           </div>
