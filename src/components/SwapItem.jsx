@@ -81,7 +81,6 @@ const SwapItem = ({ swapHistory }) => {
       return 7; // MCT => USDT BEP20
     }
 
-    console.log(fromSelected + " - " + toSelected)
     return null; // Default case
   };
 

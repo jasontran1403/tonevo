@@ -14,10 +14,44 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
     localStorage.getItem("access_token")
   );
 
+  const [walletBalance, setWalletBalance] = useState(0);
+
+  const [listBalance, setListBalance] = useState([]);
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}management/balance/${walletAddress}`,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios.request(config)
+      .then((response) => {
+        setWalletBalance(response.data.balances[1].balance);
+        setListBalance(response.data.balances);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [listInvest] = useState([
     { id: 1, name: "Mapchain wallet" },
     { id: 2, name: "Transfer wallet" },
   ]);
+
+  const handleChangeWallet = (walletId) => {
+    setWalletType(walletId); // Update wallet type state
+    console.log(listBalance);
+    // Check if balances exist in response
+    if (walletId === 1) {
+      setWalletBalance(listBalance[1].balance);
+    } else {
+      setWalletBalance(listBalance[6].balance);
+    }
+  };
 
   const [listPackages, setListPackages] = useState([]);
   const [packagePrice, setPackagePrice] = useState("");
@@ -50,7 +84,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
     let data = JSON.stringify({
       packageId: selectedPackageId,
       walletAddress: walletAddress,
-      type: walletType
+      type: walletType,
     });
 
     let config = {
@@ -113,7 +147,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
   return (
     <section
-      className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`} 
+      className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
     >
       <div className="flex-1 flex flex-col">
         <h4 className={styles.heading4}>Investment package information</h4>
@@ -183,28 +217,42 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               value={currentBalance}
               readOnly
             />
-            
           </div>
           <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="walletType"
-              >
-                Wallet
-              </label>
-              <select
-                className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="packageName"
-                value={walletType}
-                onChange={(e) => setWalletType(e.target.value)}
-              >
-                {listInvest.map((network) => (
-                  <option key={network.id} value={network.id}>
-                    {network.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="walletType"
+            >
+              Wallet
+            </label>
+            <select
+              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="walletType"
+              value={walletType} // Reflect the selected wallet
+              onChange={(e) => handleChangeWallet(Number(e.target.value))} // Convert string to number
+            >
+              {listInvest.map((network) => (
+                <option key={network.id} value={network.id}>
+                  {network.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="balance"
+            >
+              Balance
+            </label>
+            <input
+              className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="balance"
+              type="text"
+              value={walletBalance}
+              readOnly
+            />
+          </div>
           <div className="flex items-center justify-between">
             <Button handleClick={buyPackage} content={"Buy"} />
           </div>
