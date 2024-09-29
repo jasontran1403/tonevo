@@ -11,6 +11,7 @@ import { API_ENDPOINT } from "../constants";
 import WalletCard2 from "./WalletCard2";
 import WalletCard3 from "./WalletCard3";
 import WalletCard4 from "./WalletCard4";
+import WalletCard5 from "./WalletCard5";
 import RankCard from "./RankCard";
 import ReflinkCard from "./ReflinkCard";
 
@@ -166,7 +167,7 @@ const MainDashboard = () => {
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            <WalletCard4
+            <WalletCard5
               content={"Transfer wallet"}
               amount={listBalance[6]?.balance}
               unit={"MCT"}
