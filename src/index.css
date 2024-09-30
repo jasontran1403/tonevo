@@ -116,8 +116,8 @@ select {
 /* For dark mode */
 @media (prefers-color-scheme: dark) {
   select {
-    background-color: #333333; /* Background color for dark mode */
-    color: #ffffff; /* Text color for dark mode */
+    background-color: #ffffff; /* Background color for dark mode */
+    color: #000000; /* Text color for dark mode */
     border: 1px solid #555555; /* Darker border for dark mode */
   }
 }
