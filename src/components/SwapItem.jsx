@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import styles from "../style";
 import Button from "./Button";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import 'sweetalert2/src/sweetalert2.scss';
+import "sweetalert2/src/sweetalert2.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
@@ -99,7 +99,7 @@ const SwapItem = ({ swapHistory }) => {
 
     Swal.fire({
       title: "Confirm Transfer",
-      text: `Are you sure you want to swap ${amount} from ${listSwap[fromSelected].name} to ${listSwap[toSelected].name}?`,
+      text: `Are you sure you want to swap?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, transfer it!",
@@ -191,7 +191,11 @@ const SwapItem = ({ swapHistory }) => {
               <select
                 className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={fromSelected}
-                onChange={(e) => setFromSelected(parseInt(e.target.value))}
+                onChange={(e) => {
+                  setFromSelected(parseInt(e.target.value));
+                  let index = e.target.value - 1;
+                  setBalance(listBalance[index].balance);
+                }}
               >
                 {listSwap.map((network) => (
                   <option key={network.id} value={network.id}>
