@@ -79,7 +79,7 @@
 .sponsor {
     font-size: 10px;
     font-style: italic;
-    color: lightblue;
+    color: fc3535;
 }
 
 .tree li a {
@@ -89,12 +89,13 @@
     min-width: 120px;
     min-height: 90px;
     text-decoration: none;
-    color: #325088;
+    color: #fc3535;
     font-weight: bold;
     font-family: arial, verdana, tahoma;
     font-size: 15px;
     display: inline-block;
     transition: all 0.5s;
+    cursor: pointer;
 }
 
 ul li a {
