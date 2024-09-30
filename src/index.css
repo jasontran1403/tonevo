@@ -334,10 +334,12 @@ a:hover {
 
 .history-tl-container {
   color: white;
-  width: 100%;
+  width: 90%;
   margin: auto;
+  margin-top: 50px;
   display: block;
   position: relative;
+  font-size: 14x;
 }
 .history-tl-container ul.tl {
   color: white;
@@ -353,7 +355,7 @@ a:hover {
   min-height: 50px;
   /*background: rgba(255,255,0,0.1);*/
   border-left: 1px dashed #86d6ff;
-  padding: 0 0 50px 30px;
+  padding: 0 0 20px 30px;
   position: relative;
 }
 .history-tl-container ul.tl li:last-child {
@@ -384,7 +386,7 @@ ul.tl li .item-detail {
 ul.tl li .timestamp {
   color: #8d8d8d;
   position: absolute;
-  width: 130px;
+  width: 100px;
   left: -55%;
   text-align: right;
   font-size: 12px;

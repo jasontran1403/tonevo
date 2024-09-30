@@ -79,30 +79,48 @@
 .sponsor {
     font-size: 10px;
     font-style: italic;
-    color: red;
+    color: lightblue;
 }
 
 .tree li a {
     border: 1px solid #ccc;
-    min-width: 100px;
-    height: 70px;
+    width: auto;
+    height: auto;
+    min-width: 120px;
+    min-height: 90px;
     text-decoration: none;
-    color: #666;
+    color: #325088;
     font-weight: bold;
     font-family: arial, verdana, tahoma;
     font-size: 15px;
     display: inline-block;
-    border-radius: 5px;
     transition: all 0.5s;
 }
 
 ul li a {
     padding-top: 10px;
+    padding-bottom: 10px;
     cursor: pointer;
+}
+.glass-button {
+    background: rgba(255, 255, 255, 0.1); /* Light background with transparency */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    color: lightblue; /* Text color */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    backdrop-filter: blur(10px); /* Blur effect for glass morphism */
+    transition: all 0.3s ease; /* Smooth transition */
+    margin-top: 2%; /* Margin at the top */
+    margin-left: 5%; /* Margin on the left */
+    position: absolute;
+    z-index: 9999;
 }
 
-ul li a:hover {
-    padding-top: 10px;
-    background-color: rgb(169, 247, 179);
-    cursor: pointer;
+.glass-button:hover {
+    background: rgba(255, 255, 255, 0.3); /* Change background on hover */
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Darker border on hover */
+    color: white; /* Change text color on hover */
 }
+

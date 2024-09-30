@@ -3,17 +3,17 @@ import Axios from "axios";
 import "../assets/css/TreeView.css";
 import { API_ENDPOINT } from "../constants";
 
-const Tree = () => {
-  const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
-  );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
-  const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
-  );
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
-  );
+const Test = () => {
+    const [walletAddress, setWalletAddress] = useState(
+        localStorage.getItem("walletAddress")
+      );
+      const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+      const [walletStateInit, setWalletStateInit] = useState(
+        localStorage.getItem("walletStateInit")
+      );
+      const [accessToken, setAccessToken] = useState(
+        localStorage.getItem("access_token")
+      );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
   const [currWallet, setCurrWallet] = useState(walletAddress);
@@ -50,7 +50,7 @@ const Tree = () => {
   };
 
   const handleClick = (address) => {
-
+    console.log(address);
     setPrevWallets((prev) => [...prev, currWallet]); // Push current wallet to prev wallets stack
     setCurrWallet(address); // Update current wallet to the new address
   };
@@ -60,7 +60,6 @@ const Tree = () => {
       if (prev.length === 0) return prev; // No previous wallets
       const lastWallet = prev[prev.length - 1]; // Get the last wallet
       setCurrWallet(lastWallet); // Set it as current wallet
-      console.log("ok");
       return prev.slice(0, -1); // Remove the last wallet from the stack
     });
   };
@@ -112,12 +111,8 @@ const Tree = () => {
 
   return (
     <div className="tree">
-      <button
-        className="glass-button"
-        onClick={handleGoBack}
-        disabled={prevWallets.length === 0}
-      >
-        Back
+      <button className="glass-button" onClick={handleGoBack} disabled={prevWallets.length === 0}>
+        Go Back
       </button>
       <ul className="tree-ul">
         {renderTree(treeData)} {/* Render the entire tree */}
@@ -126,4 +121,4 @@ const Tree = () => {
   );
 };
 
-export default Tree;
+export default Test;

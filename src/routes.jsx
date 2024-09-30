@@ -13,6 +13,7 @@ import TableUser from "./pages/TableUser";
 import Transactions from "./pages/Transactions";
 import DisconnectComponent from "./components/DisconnectComponent";
 import CommingSoon from "./pages/ComingSoon";
+import Test from "./pages/Test";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -28,10 +29,6 @@ export default function Router() {
         {
             path: "/",
             element: <LandingPage />
-        },
-        {
-            path: "test",
-            element: <TableUser />
         },
         {
             path: "/dashboard",
@@ -52,6 +49,10 @@ export default function Router() {
         {
             path: "/swap",
             element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/test",
+            element: <Test />
         },
         {
             path: "/transfer",
