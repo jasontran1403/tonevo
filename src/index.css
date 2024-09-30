@@ -104,6 +104,24 @@ a:hover {
   background-color: unset !important;
 }
 
+select {
+  background-color: #ffffff; /* Default background color for light mode */
+  color: #000000; /* Text color for light mode */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px; /* Padding for aesthetics */
+  appearance: none; /* Remove default arrow */
+}
+
+/* For dark mode */
+@media (prefers-color-scheme: dark) {
+  select {
+    background-color: #333333; /* Background color for dark mode */
+    color: #ffffff; /* Text color for dark mode */
+    border: 1px solid #555555; /* Darker border for dark mode */
+  }
+}
+
 .introducing {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
