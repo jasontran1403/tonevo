@@ -2,11 +2,15 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import styles from "../style";
 import Button from "./Button";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import 'sweetalert2/src/sweetalert2.scss';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 
 const SwapItem = ({ swapHistory }) => {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -26,7 +30,7 @@ const SwapItem = ({ swapHistory }) => {
     { id: 6, name: "Pop Commission" },
     { id: 7, name: "Daily Reward" },
   ]);
-  
+
   const [listBalance, setListBalance] = useState([]);
   const [price, setPrice] = useState(0);
   const [amount, setAmount] = useState(0);
@@ -57,7 +61,7 @@ const SwapItem = ({ swapHistory }) => {
 
   // Updates To Wallet based on From Wallet selection
   useEffect(() => {
-    if (fromSelected >= 3 && fromSelected <= 7 || fromSelected == 1) {
+    if ((fromSelected >= 3 && fromSelected <= 7) || fromSelected == 1) {
       setToSelected(2); // Mapchain Token (id 2)
       setIsToWalletDisabled(true); // Disable To Wallet dropdown
     } else if (fromSelected == 2) {
@@ -81,6 +85,7 @@ const SwapItem = ({ swapHistory }) => {
   };
 
   const handleCreateDeposit = () => {
+    if (buttonDisabled) return;
     const swapType = getSwapType(fromSelected, toSelected);
     if (!swapType) return;
 
@@ -92,43 +97,64 @@ const SwapItem = ({ swapHistory }) => {
       return;
     }
 
-    let data = JSON.stringify({
-      walletAddress: walletAddress,
-      amount: amount,
-      type: swapType,
-    });
-
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/swap`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
+    Swal.fire({
+      title: "Confirm Transfer",
+      text: `Are you sure you want to swap ${amount} from ${listSwap[fromSelected].name} to ${listSwap[toSelected].name}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, transfer it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+      customClass: {
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
       },
-      data: data,
-    };
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setButtonDisabled(true);
+        let data = JSON.stringify({
+          walletAddress: walletAddress,
+          amount: amount,
+          type: swapType,
+        });
 
-    Axios.request(config)
-      .then((response) => {
-        if (response.data === "ok") {
-          toast.success("Swap success!", {
-            position: "top-right",
-            autoClose: 1500,
-            onClose: () => {
-              window.location.reload();
-            },
+        let config = {
+          method: "post",
+          url: `${API_ENDPOINT}management/swap`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+          data: data,
+        };
+
+        Axios.request(config)
+          .then((response) => {
+            if (response.data === "ok") {
+              setButtonDisabled(true);
+              toast.success("Swap success!", {
+                position: "top-right",
+                autoClose: 1500,
+                onClose: () => {
+                  window.location.reload();
+                },
+              });
+            } else {
+              setButtonDisabled(false);
+              toast.error(response.data, {
+                position: "top-right",
+                autoClose: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            setButtonDisabled(false);
+            console.log(error);
           });
-        } else {
-          toast.error(response.data, {
-            position: "top-right",
-            autoClose: 1500,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
   };
 
   const handleChangeAmount = (amountToSwap) => {
@@ -139,7 +165,9 @@ const SwapItem = ({ swapHistory }) => {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
         setAmount(value);
-        setAmountSwap(fromSelected >= 3 && fromSelected <= 7 ? value : value / price);
+        setAmountSwap(
+          fromSelected >= 3 && fromSelected <= 7 ? value : value / price
+        );
       } else {
         setAmount(""); // Reset if invalid
       }

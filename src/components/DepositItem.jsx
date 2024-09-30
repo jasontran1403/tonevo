@@ -5,6 +5,8 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import 'sweetalert2/src/sweetalert2.scss';
 
 const DepositItem = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -42,66 +44,102 @@ const DepositItem = ({ depositHistory }) => {
       method: 0,
     });
 
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/generate-qr`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
+    Swal.fire({
+      title: 'Confirm deposit',
+      text: `Are you sure you want to deposit ${amount}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, transfer it!',
+      cancelButtonText: 'No, cancel',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'custom-confirm-button', // Custom class for confirm button
+        cancelButton: 'custom-cancel-button',   // Custom class for cancel button
       },
-      data: data,
-      responseType: "blob",
-    };
-
-    Axios.request(config)
-      .then((response) => {
-        // Assuming response.data contains the image URL or base64 string
-        const qrCodeBlob = response.data;
-        const qrCodeUrl = URL.createObjectURL(qrCodeBlob);
-        setQrImage(qrCodeUrl);
-        toast.success("Created deposit order!", {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let config = {
+          method: "post",
+          url: `${API_ENDPOINT}management/generate-qr`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+          data: data,
+          responseType: "blob",
+        };
+    
+        Axios.request(config)
+          .then((response) => {
+            // Assuming response.data contains the image URL or base64 string
+            const qrCodeBlob = response.data;
+            const qrCodeUrl = URL.createObjectURL(qrCodeBlob);
+            setQrImage(qrCodeUrl);
+            toast.success("Created deposit order!", {
+              position: "top-right",
+              autoClose: 1500,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   };
 
   const handleCancelDeposit = () => {
-    let data = JSON.stringify({
-      walletAddress: walletAddress,
-      amount: 0,
-      method: 0,
-    });
 
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/cancel-deposit`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
+    Swal.fire({
+      title: 'Confirm cancel deposit',
+      text: `Are you sure you want to cancel ${amount}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, transfer it!',
+      cancelButtonText: 'No, cancel',
+      reverseButtons: true,
+      customClass: {
+        confirmButton: 'custom-confirm-button', // Custom class for confirm button
+        cancelButton: 'custom-cancel-button',   // Custom class for cancel button
       },
-      data: data,
-    };
-
-    Axios.request(config)
-      .then((response) => {
-        if (response.data === "ok") {
-          setQrImage("");
-          toast.success("Canceled deposit order!", {
-            position: "top-right",
-            autoClose: 1500,
-            onClose: () => window.location.reload(),
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let data = JSON.stringify({
+          walletAddress: walletAddress,
+          amount: 0,
+          method: 0,
+        });
+    
+        let config = {
+          method: "post",
+          url: `${API_ENDPOINT}management/cancel-deposit`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+          data: data,
+        };
+    
+        Axios.request(config)
+          .then((response) => {
+            if (response.data === "ok") {
+              setQrImage("");
+              toast.success("Canceled deposit order!", {
+                position: "top-right",
+                autoClose: 1500,
+                onClose: () => window.location.reload(),
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
+    
   };
 
   return (

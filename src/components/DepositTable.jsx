@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import 'sweetalert2/src/sweetalert2.scss';
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -62,34 +64,51 @@ const DepositTable = ({
       return;
     }
 
-    let config = {
-      method: "get",
-      url: `${API_ENDPOINT}management/cancel/${depositCode}`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
-      }
-    };
+    Swal.fire({
+      title: "Confirm cancel deposit",
+      text: `Are you sure you want to cancel?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, transfer it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+      customClass: {
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
+      },
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let config = {
+          method: "get",
+          url: `${API_ENDPOINT}management/cancel/${depositCode}`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+        };
 
-    Axios.request(config)
-      .then((response) => {
-        if (response.data === "ok") {
-          toast.success("Cancel deposit success!", {
-            position: "top-right",
-            autoClose: 1500,
-            onClose: () => window.location.reload(),
+        Axios.request(config)
+          .then((response) => {
+            if (response.data === "ok") {
+              toast.success("Cancel deposit success!", {
+                position: "top-right",
+                autoClose: 1500,
+                onClose: () => window.location.reload(),
+              });
+            } else {
+              toast.error(response.data, {
+                position: "top-right",
+                autoClose: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        } else {
-          toast.error(response.data, {
-            position: "top-right",
-            autoClose: 1500,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
   };
 
   // Previous page handler

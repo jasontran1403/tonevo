@@ -2,11 +2,14 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import styles from "../style";
 import Button from "./Button";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 
 const InvestmentPackage = ({ packages = [], balance = 0 }) => {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -45,6 +48,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   const [walletType, setWalletType] = useState(1);
 
   const buyPackage = () => {
+    if (buttonDisabled) return;
     if (selectedPackageId === "" || !listPackages.length) return;
 
     const selectedPackage = listPackages.find(
@@ -57,42 +61,63 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
       });
       return;
     }
-    
-    let data = JSON.stringify({
-      packageId: selectedPackageId,
-      walletAddress: walletAddress,
-      type: walletType,
-    });
 
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}management/invest`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-        "ngrok-skip-browser-warning": "69420",
+    Swal.fire({
+      title: "Confirm cancel deposit",
+      text: `Are you sure you want to cancel?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, transfer it!",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true,
+      customClass: {
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
       },
-      data: data,
-    };
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setButtonDisabled(true);
+        let data = JSON.stringify({
+          packageId: selectedPackageId,
+          walletAddress: walletAddress,
+          type: walletType,
+        });
 
-    Axios.request(config)
-      .then((response) => {
-        if (response.data === "ok") {
-          toast.success("Invest success!", {
-            position: "top-right",
-            autoClose: 1500,
-            onClose: () => window.location.reload(),
+        let config = {
+          method: "post",
+          url: `${API_ENDPOINT}management/invest`,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "ngrok-skip-browser-warning": "69420",
+          },
+          data: data,
+        };
+
+        Axios.request(config)
+          .then((response) => {
+            if (response.data === "ok") {
+              setButtonDisabled(true);
+              toast.success("Invest success!", {
+                position: "top-right",
+                autoClose: 1500,
+                onClose: () => window.location.reload(),
+              });
+            } else {
+              setButtonDisabled(false);
+              toast.error(response.data, {
+                position: "top-right",
+                autoClose: 1500,
+              });
+            }
+          })
+          .catch((error) => {
+            setButtonDisabled(false);
+            console.log(error);
           });
-        } else {
-          toast.error(response.data, {
-            position: "top-right",
-            autoClose: 1500,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
 
     // Add code to handle the purchase here
   };
@@ -179,7 +204,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               readOnly
             />
           </div>
-          
+
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"

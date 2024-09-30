@@ -113,6 +113,35 @@ select {
   appearance: none; /* Remove default arrow */
 }
 
+.custom-confirm-button {
+  background-color: lightblue;  /* Light blue background */
+  color: white;                 /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.custom-cancel-button {
+  background-color: orangered;  /* Orangered background */
+  color: white;                 /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.custom-confirm-button:hover {
+  background-color: #87ceeb;    /* Darker blue on hover */
+}
+
+.custom-cancel-button:hover {
+  background-color: #ff4500;    /* Darker orangered on hover */
+}
+
+
 /* For dark mode */
 @media (prefers-color-scheme: dark) {
   select {
