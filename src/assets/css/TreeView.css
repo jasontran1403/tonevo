@@ -66,6 +66,19 @@
     border-radius: 5px 0 0 0;
 }
 
+.glass {
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    backdrop-filter: blur(10px); /* Glass morph effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  
+  /* Glass morph effect on hover */
+  .glass:hover {
+    background: rgba(255, 255, 255, 0.5); /* More visible on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+
 .tree ul ul::before {
     content: '';
     position: absolute;

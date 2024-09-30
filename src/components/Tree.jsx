@@ -72,9 +72,10 @@ const Tree = () => {
 
     return (
       <li key={`${depth}-${position}`}>
-        <div className={`node ${!displayName ? "placeholder" : ""}`}>
+        <div className={`node  ${!displayName ? "placeholder" : ""}`}>
           {displayName ? (
             <a
+            className="glass"
               onClick={() => {
                 handleClick(node.userInfo.walletAddress);
               }}
