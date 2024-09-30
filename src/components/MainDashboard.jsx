@@ -152,7 +152,6 @@ const MainDashboard = () => {
               content={"Commission"}
               amount={
                 listBalance[2]?.balance +
-                listBalance[3]?.balance +
                 listBalance[4]?.balance +
                 listBalance[5]?.balance
               }
