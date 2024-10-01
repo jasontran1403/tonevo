@@ -20,16 +20,17 @@ const UserNavbar = () => {
 
   const handleOpenModal = () => {
     openModal();
-  }
+  };
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar mt-[20px]">
-      
-      <a href="/"><img
-        src={logo}
-        alt="hoobank"
-        className="lg:w-[200px] lg:h-[80px] w-[160px] h-[60px] logo-glow"
-      /></a>
+      <a href="/" className="pb-[70px]">
+        <img
+          src={logo}
+          alt="hoobank"
+          className="hidden md:flex lg:w-[200px] lg:h-[80px] w-[160px] h-[60px] logo-glow"
+        />
+      </a>
       <ul className="list-none sm:flex hidden justify-center items-center flex-1 mx-10">
         {userNavLinks.map((nav, index) => (
           <li

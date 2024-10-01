@@ -35,7 +35,7 @@ export default function Router() {
             element: isConnectedToWallet ? <Dashboard /> : <Navigate to="/" />
         },
         {
-            path: "/investments",
+            path: "/staking",
             element: isConnectedToWallet ? <Investment /> : <Navigate to="/" />
         },
         {

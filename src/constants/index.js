@@ -161,8 +161,8 @@ export const userNavLinks = [
     title: "Dasboard",
   },
   {
-    id: "investments",
-    title: "Investment",
+    id: "staking",
+    title: "Staking",
   },
   {
     id: "transactions",

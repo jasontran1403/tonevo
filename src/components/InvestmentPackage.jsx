@@ -47,6 +47,18 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   const [selectedPackageId, setSelectedPackageId] = useState("");
   const [walletType, setWalletType] = useState(1);
 
+  const formattedPrice = (amount) => {
+    let currencyCode = "MCT";
+    const formattedNumber = new Intl.NumberFormat("en-US", {
+      style: "decimal",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(amount);
+
+    // Append the currency code after the formatted number
+    return `${formattedNumber} ${currencyCode.toUpperCase()}`;
+  };
+
   const buyPackage = () => {
     if (buttonDisabled) return;
     if (selectedPackageId === "" || !listPackages.length) return;
@@ -151,14 +163,14 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
       className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
     >
       <div className="flex-1 flex flex-col">
-        <h4 className={styles.heading4}>Investment package information</h4>
+        <h4 className={styles.heading4}>Staking information</h4>
         <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="packageName"
             >
-              Package name
+              Staking name
             </label>
             <select
               className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -179,14 +191,14 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="email"
             >
-              Package price
+              Staking price
             </label>
             <input
               className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="text"
               readOnly
-              value={packagePrice}
+              value={formattedPrice(packagePrice)}
             />
           </div>
           <div className="mb-6">
@@ -216,7 +228,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="balance"
               type="text"
-              value={mapchain}
+              value={formattedPrice(mapchain)}
               readOnly
             />
           </div>
@@ -231,12 +243,12 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
               className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="transfer"
               type="text"
-              value={transfer}
+              value={formattedPrice(transfer)}
               readOnly
             />
           </div>
           <div className="flex items-center justify-between">
-            <Button handleClick={buyPackage} content={"Buy"} />
+            <Button handleClick={buyPackage} content={"Stake"} />
           </div>
         </div>
 

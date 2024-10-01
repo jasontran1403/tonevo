@@ -155,6 +155,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
               </Typography>
             </div>
           </td>
+          
           <td className={classes}>
             <Typography
               variant="small"

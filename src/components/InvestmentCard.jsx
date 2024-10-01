@@ -9,7 +9,7 @@ import { API_ENDPOINT } from "../constants";
 import InvestmentTable from "./InvestmentTable";
 
 const TABLE_HEAD = [
-  "Code",
+  "Staking code",
   "Date",
   "Daily Reward",
   "Capital",

@@ -18,7 +18,7 @@ const Navbar = ({ handleOpenModal }) => {
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar gap-0 mt-[20px]">
-      <a href="/">
+      <a href="/" className="pb-[70px]">
         <img
           src={logo}
           alt="hoobank"

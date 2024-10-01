@@ -16,7 +16,7 @@ const Test = () => {
       );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
-  const [currWallet, setCurrWallet] = useState("0:8872ef465346d045bf6b0c0077c441381473207aeb68a00963a9cb8e0b5b1cca");
+  const [currWallet, setCurrWallet] = useState("0:d9b533a4a261a5edbc80fe9f2886e5cfabf5acb642634091a23218d0c4dc881d");
   const [userRoot, setUserRoot] = useState({});
   const [treeData, setTreeData] = useState(null);
 
