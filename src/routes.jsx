@@ -14,6 +14,7 @@ import Transactions from "./pages/Transactions";
 import DisconnectComponent from "./components/DisconnectComponent";
 import CommingSoon from "./pages/ComingSoon";
 import Test from "./pages/Test";
+import Maintance from "./pages/Maintance";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -40,7 +41,7 @@ export default function Router() {
         },
         {
             path: "/withdraw",
-            element: isConnectedToWallet ? <Withdraw /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/deposit",
@@ -48,7 +49,7 @@ export default function Router() {
         },
         {
             path: "/swap",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/test",
