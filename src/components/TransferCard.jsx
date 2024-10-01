@@ -13,8 +13,7 @@ const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
-  "From",
-  "To",
+  "Destination",
   "Status",
   "Note"
 ];

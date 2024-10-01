@@ -48,6 +48,8 @@ const TransferTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
     }
   };
 
+  console.log(TABLE_ROWS);
+
   const formatDate = (dateString) => {
     // Create a new Date object
     const date = new Date(dateString);
@@ -134,9 +136,9 @@ const TransferTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
         currency,
         date,
         from,
-        to,
         status,
-        hash
+        hash,
+        method
       },
       index
     ) => {
@@ -190,19 +192,6 @@ const TransferTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
             </div>
           </td>
           <td className={classes}>
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal capitalize"
-                >
-                  {to}
-                </Typography>
-              </div>
-            </div>
-          </td>
-          <td className={classes}>
             <div className="w-max">
               <Chip
                 size="sm"
@@ -226,7 +215,7 @@ const TransferTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
                   color="blue-gray"
                   className="font-normal capitalize"
                 >
-                  {hash}
+                  {method}
                 </Typography>
               </div>
             </div>

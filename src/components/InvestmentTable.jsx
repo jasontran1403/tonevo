@@ -171,7 +171,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
               color="blue-gray"
               className="font-normal"
             >
-              {formatNumber(daily)} MCT
+              {formatNumber(daily)}%
             </Typography>
           </td>
 

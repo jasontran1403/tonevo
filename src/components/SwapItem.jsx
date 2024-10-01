@@ -194,7 +194,11 @@ const SwapItem = ({ swapHistory }) => {
                 onChange={(e) => {
                   setFromSelected(parseInt(e.target.value));
                   let index = e.target.value - 1;
-                  setBalance(listBalance[index].balance);
+                  if (index != 6) {
+                    setBalance(listBalance[index].balance)
+                  } else {
+                    setBalance(listBalance[8].balance)
+                    };
                 }}
               >
                 {listSwap.map((network) => (
