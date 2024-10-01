@@ -14,6 +14,7 @@ import Transactions from "./pages/Transactions";
 import DisconnectComponent from "./components/DisconnectComponent";
 import CommingSoon from "./pages/ComingSoon";
 import Test from "./pages/Test";
+import Maintance from "./pages/Maintance";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -32,39 +33,39 @@ export default function Router() {
         },
         {
             path: "/dashboard",
-            element: isConnectedToWallet ? <Dashboard /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/staking",
-            element: isConnectedToWallet ? <Investment /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/withdraw",
-            element: isConnectedToWallet ? <Withdraw /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/deposit",
-            element: isConnectedToWallet ? <Deposit /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/swap",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/test",
-            element: <Test />
+            element: <Maintance />
         },
         {
             path: "/transfer",
-            element: isConnectedToWallet ? <Transfer /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/transactions",
-            element: isConnectedToWallet ? <Transactions /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/tree",
-            element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/disconnect",
@@ -72,7 +73,7 @@ export default function Router() {
         },
         {
             path: "/mapchain-swap",
-            element: <CommingSoon />
+            element: <Maintance />
         },
         {
             path: '/404',

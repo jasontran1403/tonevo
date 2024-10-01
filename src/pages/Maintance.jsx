@@ -9,7 +9,7 @@ const Maintance = () => {
         </div>
         <div className="remove">
           <p>
-          We are updating the withdrawal page as soon as possible, please come back later.
+            We are updating the Mapchain Smart Contract, please come back later.
           </p>
           <a href="/">Return to the Homepage</a>
         </div>
