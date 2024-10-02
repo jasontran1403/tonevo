@@ -13,7 +13,7 @@ const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
-  "Destination",
+  "From/To",
   "Status",
   "Note"
 ];
@@ -25,6 +25,7 @@ const TransferCard = () => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
+
 
   const [transferHistory, setTransferHistory] = useState([]);
 
@@ -46,6 +47,9 @@ const TransferCard = () => {
         console.log(error);
       });
   }, []);
+
+  
+
 
   return (
     <>

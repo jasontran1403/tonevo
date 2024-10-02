@@ -3,7 +3,7 @@ import Axios from "axios";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import 'sweetalert2/src/sweetalert2.scss';
+import "sweetalert2/src/sweetalert2.scss";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -196,7 +196,7 @@ const DepositTable = ({
           </thead>
           <tbody className="min-h-[20rem]">
             {currentRows.map(
-              ({ code, amount, currency, date, status, hash }, index) => {
+              ({ code, amount, currency, date, status, hash, fee }, index) => {
                 const isLast = index === currentRows.length - 1;
                 const classes = isLast
                   ? "p-4"
@@ -221,16 +221,22 @@ const DepositTable = ({
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {formatDate(date)}
+                        <h1>{formatDate(date)}</h1>
                       </Typography>
                     </td>
+
                     <td className={classes}>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {formatNumber(amount)} {currency}
+                        <p>
+                          {formatNumber(amount)} {currency}
+                        </p>
+                        <p>
+                          {formatNumber(fee)} {currency}
+                        </p>
                       </Typography>
                     </td>
                     <td className={classes}>

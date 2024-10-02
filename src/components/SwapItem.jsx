@@ -85,6 +85,7 @@ const SwapItem = ({ swapHistory }) => {
   };
 
   const handleCreateDeposit = () => {
+    console.log("ok");
     if (buttonDisabled) return;
     const swapType = getSwapType(fromSelected, toSelected);
     if (!swapType) return;
@@ -160,14 +161,32 @@ const SwapItem = ({ swapHistory }) => {
   const handleChangeAmount = (amountToSwap) => {
     const value = amountToSwap;
     const regex = /^[0-9]*\.?[0-9]*$/;
-
+  
     if (regex.test(value)) {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
         setAmount(value);
-        setAmountSwap(
-          fromSelected >= 3 && fromSelected <= 7 ? value : value / price
-        );
+  
+        // Check if price is valid before dividing
+        if (price > 0) {
+          if (fromSelected === 1 && toSelected === 2) {
+            // USDT to MCT
+            setAmountSwap(value / price); // 1 USDT gets 10 MCT (when price = 0.1)
+          } else if (fromSelected === 2 && toSelected === 1) {
+            // MCT to USDT
+            setAmountSwap(value * price); // 1 MCT gets 0.1 USDT (when price = 0.1)
+          } else if (fromSelected >= 3 && fromSelected <= 7) {
+            // For commission types, the value remains the same
+            setAmountSwap(value);
+          }
+        } else {
+          // Handle the case where the price is invalid (e.g., set to 0)
+          setAmountSwap(0);
+          toast.error("Invalid price, please try again later", {
+            position: "top-right",
+            autoClose: 1500,
+          });
+        }
       } else {
         setAmount(""); // Reset if invalid
       }
@@ -175,6 +194,7 @@ const SwapItem = ({ swapHistory }) => {
       setAmount(""); // Clear input if non-numeric characters are entered
     }
   };
+  
 
   return (
     <div className={`investment-container`}>

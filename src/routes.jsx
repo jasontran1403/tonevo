@@ -33,39 +33,39 @@ export default function Router() {
         },
         {
             path: "/dashboard",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Dashboard /> : <Navigate to="/" />
         },
         {
             path: "/staking",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Investment /> : <Navigate to="/" />
         },
         {
             path: "/withdraw",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Withdraw /> : <Navigate to="/" />
         },
         {
             path: "/deposit",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Deposit /> : <Navigate to="/" />
         },
         {
             path: "/swap",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
         },
         {
             path: "/test",
-            element: <Maintance />
+            element: <Test />
         },
         {
             path: "/transfer",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Transfer /> : <Navigate to="/" />
         },
         {
             path: "/transactions",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Transactions /> : <Navigate to="/" />
         },
         {
             path: "/tree",
-            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
         },
         {
             path: "/disconnect",
@@ -73,7 +73,7 @@ export default function Router() {
         },
         {
             path: "/mapchain-swap",
-            element: <Maintance />
+            element: <CommingSoon />
         },
         {
             path: '/404',

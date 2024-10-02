@@ -7,8 +7,8 @@
     overflow: hidden;
     /* display: flex; */
     flex-direction: column; /* Ensure the tree layout aligns vertically */
-    height: 89svh;
-    width: 2400px;
+    height: 1200px;
+    width: 2800px;
 }
 
 .tree ul {
@@ -90,17 +90,17 @@
 }
 
 .sponsor {
-    font-size: 10px;
+    font-size: 12px;
     font-style: italic;
-    color: fc3535;
+    color: lightcyan;
 }
 
 .tree li a {
     border: 1px solid #ccc;
     width: auto;
     height: auto;
-    min-width: 120px;
-    min-height: 90px;
+    min-width: 150px;
+    min-height: 160px;
     text-decoration: none;
     color: #fc3535;
     font-weight: bold;

@@ -16,7 +16,7 @@ const Test = () => {
       );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
-  const [currWallet, setCurrWallet] = useState("0:d9b533a4a261a5edbc80fe9f2886e5cfabf5acb642634091a23218d0c4dc881d");
+  const [currWallet, setCurrWallet] = useState("root");
   const [userRoot, setUserRoot] = useState({});
   const [treeData, setTreeData] = useState(null);
 
@@ -68,7 +68,6 @@ const Test = () => {
     if (depth > 4) return null; // Limit depth to 5 levels (0-4)
 
     const displayName = node?.userInfo?.displayName || null;
-
     return (
       <li key={`${depth}-${position}`}>
         <div className={`node ${!displayName ? "placeholder" : ""}`}>
@@ -78,7 +77,8 @@ const Test = () => {
                 handleClick(node.userInfo.walletAddress);
               }}
             >
-              <p>{displayName}</p>
+              <p>Name: {displayName}</p>
+              <p>Rank {node.userInfo?.rank}</p>
               <p className="sponsor">
                 Sponsor: {node.userInfo?.rootDisplayName || "N/A"}
               </p>
@@ -87,6 +87,8 @@ const Test = () => {
               </p>
               <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p>
               <p className="sponsor">Sales: {node.userInfo?.sales || 0}</p>
+              <p className="sponsor">Left: {node.userInfo?.teamSalesLeft || 0}</p>
+              <p className="sponsor">Right: {node.userInfo?.teamSalesRight || 0}</p>
             </a>
           ) : (
             <a>
