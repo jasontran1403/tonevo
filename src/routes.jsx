@@ -45,7 +45,7 @@ export default function Router() {
         },
         {
             path: "/deposit",
-            element: isConnectedToWallet ? <Deposit /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <Maintance /> : <Navigate to="/" />
         },
         {
             path: "/swap",
