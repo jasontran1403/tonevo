@@ -39,8 +39,8 @@ const RankCard = ({ content, rank }) => {
         </span>
         {/* Use the rank value to select the appropriate image */}
         <img
-          src={rankImages[rank]} // Access the image based on the rank value
-          alt={`Rank ${rank}`} // Add an alt attribute for accessibility
+          src={rankImages[rank-1]} // Access the image based on the rank value
+          alt={`Rank ${rank-1}`} // Add an alt attribute for accessibility
           className="max-w-[80px] max-h-[80px] min-w-[80px] min-h-[80px]"
         />
       </div>
