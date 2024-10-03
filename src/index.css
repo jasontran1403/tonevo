@@ -123,6 +123,11 @@ select {
   border-radius: 5px;
 }
 
+.remove a {
+  text-decoration: none; /* Remove underline from link */
+  font-size: 1.2rem; /* Responsive font size */
+}
+
 .custom-cancel-button {
   background-color: orangered;  /* Orangered background */
   color: white;                 /* White text */

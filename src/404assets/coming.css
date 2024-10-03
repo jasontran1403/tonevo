@@ -49,6 +49,12 @@ body {
   position: relative;
   z-index: -1;
 }
+
+.remove {
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%)
+}
   
 .notfound-responsive .notfound-404 h1 {
   font-family: 'Montserrat', sans-serif;
