@@ -19,6 +19,8 @@ const DisconnectComponent = () => {
         localStorage.removeItem("publicKey");
         localStorage.removeItem("walletStateInit");
         localStorage.removeItem("access_token");
+        localStorage.removeItem("is_in_tree");
+        localStorage.removeItem("is_lock");
 
         connector.disconnect;
 

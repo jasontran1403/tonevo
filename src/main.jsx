@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 import ReactDOM from "react-dom/client";
 import Router from "./routes";
 import "./index.css";
@@ -13,7 +13,6 @@ import { API_ENDPOINT } from "./constants";
 import { BrowserRouter } from "react-router-dom";
 import { useTonConnectUI } from "@tonconnect/ui-react"; // or any specific hook provided by the SDK
 
-
 function App() {
   const wallet = useTonWallet();
   const connect = useTonConnectUI();
@@ -22,7 +21,7 @@ function App() {
   useEffect(() => {
     var timeout;
 
-    if (wallet == null) return;
+    if (wallet === null) return;
     if (connect[0].connected) {
       // Lưu địa chỉ ví vào localStorage
       localStorage.setItem("walletAddress", wallet.account.address);
@@ -35,7 +34,7 @@ function App() {
           publicKey: wallet.account.publicKey,
           walletStateInit: wallet.account.walletStateInit,
         });
-    
+
         let config = {
           method: "post",
           url: `${API_ENDPOINT}auth/authenticate`,
@@ -45,10 +44,12 @@ function App() {
           },
           data: data,
         };
-    
+
         Axios.request(config).then((response) => {
           localStorage.setItem("access_token", response.data.access_token);
           localStorage.setItem("is_in_tree", response.data.is_in_tree);
+          localStorage.setItem("is_lock", response.data.is_lock);
+          localStorage.setItem("bep20", response.data.bep20);
         });
       }, 500);
     } else {
@@ -56,6 +57,8 @@ function App() {
       localStorage.removeItem("walletAddress");
       localStorage.removeItem("publicKey");
       localStorage.removeItem("walletStateInit");
+      localStorage.removeItem("is_in_tree");
+      localStorage.removeItem("is_lock");
 
       let config = {
         method: "get",
@@ -77,15 +80,15 @@ function App() {
       });
     }
 
-    return (() => {
+    return () => {
       clearTimeout(timeout);
-    })
+    };
   }, [connect]);
 
   return <Router />;
 }
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

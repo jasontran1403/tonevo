@@ -19,11 +19,12 @@ const DepositItem = ({ depositHistory }) => {
 
   const [listNetwork, setListNetwork] = useState([
     { id: 1, name: "USDT BEP20" },
-    { id: 2, name: "Mapchain Token" },
+    // { id: 2, name: "Mapchain Token" },
   ]);
 
   const [amount, setAmount] = useState(0);
   const [qrImage, setQrImage] = useState("");
+  const [depositWallet] = useState(localStorage.getItem("bep20"));
 
   const handleSelectPackage = (packageId) => {
     const selectedPackage = listPackages.find(
@@ -207,8 +208,13 @@ const DepositItem = ({ depositHistory }) => {
                 <img
                   src={qrImage}
                   alt="QR Code"
-                  className="w-[400px] h-auto" // Adjust styling as needed
+                  className="w-[300px] h-auto" // Adjust styling as needed
                 />
+              )}
+            </div>
+            <div className="mb-6" style={{ color: "white", fontSize: "20px" }}>
+              {qrImage && (
+                <p>Wallet addess: {depositWallet}</p>
               )}
             </div>
             <div className="flex items-center justify-between">

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
+import Axios from "axios";
 import styles from "../style";
+import { SwapCardUsdtMCT, Footer, UserNavbar } from "../components";
+import Modal from "react-modal";
 import styled from "styled-components";
-
-import { MainDashboard, UserNavbar } from "../components";
-import Form from "../components/Form";
 import LockModal from "../components/LockModal";
 
 const CloseButton = styled.svg`
@@ -35,7 +34,9 @@ const customStyles = {
   },
 };
 
-const Dashboard = () => {
+const SwapUsdtMCT = () => {
+  const isSmallScreen = window.innerWidth <= 768;
+
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -43,64 +44,54 @@ const Dashboard = () => {
   const [walletStateInit, setWalletStateInit] = useState(
     localStorage.getItem("walletStateInit")
   );
-  const [isOpen, toggle] = useState(false);
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
+  const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
   const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
-
-  const [isInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [modalIsOpen, setIsOpen] = useState();
   const [isLock] = useState(localStorage.getItem("is_lock"));
-
-  const [modalIsOpen, setIsOpen] = useState(false);
   const [modalLock, setModalLock] = useState(false);
 
-  function handleOpenModal(open) {
-    closeLockModal();
-  }
-
-  useEffect(() => {
-    if (!notificationModalOpen) {
-      // Only proceed when notification is closed
-      if (isInTree === "true") {
-        setIsOpen(false);
-      } else if (isInTree === "false") {
-        setIsOpen(true);
-      }
-
-      if (isLock === "true") {
-        setModalLock(true);
-      } else if (isLock === "false") {
-        setModalLock(false);
-      }
-    }
-  }, [notificationModalOpen, isInTree, isLock]); // Trigger when notification modal closes
-
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeNotificationModal = () => {
+    setNotificationModalOpen(false); // Close the notification and continue logic
+    window.location.href = "/dashboard";
   };
+  useEffect(() => {
+    // Only proceed when notification is closed
+    if (isInTree === "true") {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+
+    if (isLock === "true") {
+      setModalLock(true);
+    } else {
+      setModalLock(false);
+    }
+  }, [isInTree, isLock]); // Trigger when notification modal closes
 
   const closeLockModal = () => {
     setModalLock(false);
   };
 
-  // Determine if the screen is small or large
-  const isSmallScreen = window.innerWidth <= 768;
-
-  const closeNotificationModal = () => {
-    setNotificationModalOpen(false); // Close the notification and continue logic
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
+  function handleOpenModal(open) {
+    closeLockModal();
+  }
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
-        <div className={`${styles.boxWidthDashboard}`}>
+        <div className={`${styles.boxWidth}`}>
           <UserNavbar />
         </div>
       </div>
 
-      {/* Notification Modal */}
-      <Modal
+      {/* <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
         style={customStyles}
@@ -156,9 +147,8 @@ const Dashboard = () => {
             Close
           </button>
         </div>
-      </Modal>
+      </Modal> */}
 
-      {/* Lock Modal */}
       {isLock === "true" ? (
         <LockModal
           isOpen={modalLock}
@@ -215,24 +205,28 @@ const Dashboard = () => {
             </p>
           </div>
         </LockModal>
-      ) : isInTree === "true" ? (
-        <div className={`bg-primary ${styles.flexStart} bg-image`}>
-          <MainDashboard />
-        </div>
       ) : (
         <div className={`bg-primary ${styles.flexStart} bg-image`}>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Update sponsor"
-          >
-            <Form />
-          </Modal>
+          <div className={`${styles.boxWidthDashboard}`}>
+            {isInTree === "true" ? (
+              <>
+                <SwapCardUsdtMCT />
+              </>
+            ) : (
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Update sponsor"
+              >
+                <Form />
+              </Modal>
+            )}
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default Dashboard;
+export default SwapUsdtMCT;

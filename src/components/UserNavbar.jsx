@@ -1,14 +1,17 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import Axios from "axios";
 import { close, menu } from "../assets";
 import logo from "../assets/logo.png";
 import { userNavLinks } from "../constants";
-import { TonConnectButton } from "@tonconnect/ui-react";
+import { TonConnectButton, useTonConnectUI } from "@tonconnect/ui-react";
+import { API_ENDPOINT } from "../constants";
 
 const UserNavbar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [tonConnectUI] = useTonConnectUI();
+  const [wallet] = useState(localStorage.getItem("walletAddress"));
 
   const openModal = () => {
     setIsOpen(true);
@@ -20,6 +23,30 @@ const UserNavbar = () => {
 
   const handleOpenModal = () => {
     openModal();
+  };
+
+  const handleDisconnect = async () => {
+    await tonConnectUI.disconnect();
+    // Xóa thông tin ví khi ngắt kết nối
+    localStorage.removeItem("walletAddress");
+    localStorage.removeItem("publicKey");
+    localStorage.removeItem("walletStateInit");
+    localStorage.removeItem("is_in_tree");
+    localStorage.removeItem("is_lock");
+    localStorage.removeItem("bep20");
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}auth/logout/${localStorage.getItem("access_token")}`,
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios.request(config).then((response) => {
+      if (response.data) {
+        window.location.href = "/";
+      }
+    });
   };
 
   return (
@@ -47,9 +74,37 @@ const UserNavbar = () => {
           </li>
         ))}
       </ul>
-      <TonConnectButton
-        className="flex justify-end items-center lg:ml-10 mr-8" // Add margin-left for spacing
-      />
+      <div className="flex justify-end items-center">
+        {wallet?.length > 0 ? (
+          <button
+            onClick={handleDisconnect}
+            style={{
+              marginTop: "20px",
+              padding: "10px 20px", // Adjust padding for top-bottom and left-right
+              backgroundColor: "#01a1b3", // Background color
+              color: "#ffffff", // Text color
+              border: "none", // No border
+              borderRadius: "5px", // Rounded corners
+              fontSize: "18px", // Font size
+              cursor: "pointer", // Pointer cursor on hover
+              transition: "background-color 0.3s ease", // Smooth transition for hover effect
+              textAlign: "center", // Center text in the button
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#018b9c")
+            } // Darker on hover
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#01a1b3")
+            } // Original color when not hovered
+          >
+            Disconnect
+          </button>
+        ) : (
+          <TonConnectButton
+            className="lg:ml-10 mr-4" // Add margin-left for spacing
+          />
+        )}
+      </div>
       <div className="sm:hidden flex flex-1 justify-end items-center">
         <img
           src={toggle ? close : menu}

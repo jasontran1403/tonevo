@@ -16,7 +16,7 @@ const Test = () => {
       );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
-  const [currWallet, setCurrWallet] = useState("root");
+  const [currWallet, setCurrWallet] = useState("0:8872ef465346d045bf6b0c0077c441381473207aeb68a00963a9cb8e0b5b1cca");
   const [userRoot, setUserRoot] = useState({});
   const [treeData, setTreeData] = useState(null);
 
@@ -78,7 +78,7 @@ const Test = () => {
               }}
             >
               <p>Name: {displayName}</p>
-              <p>Rank {node.userInfo?.rank}</p>
+               {node.userInfo?.rank > 0 ? <p>Vip {node.userInfo?.rank}</p> : <></>}
               <p className="sponsor">
                 Sponsor: {node.userInfo?.rootDisplayName || "N/A"}
               </p>

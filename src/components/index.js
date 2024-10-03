@@ -25,6 +25,8 @@ import TransferTable from "./TransferTable";
 import WithdrawCard from "./WithdrawCard";
 import TransactionsTable from "./TransactionsTable";
 import TransactionsPage from "./TransactionsPage";
+import SwapCardUsdtMCT from "./SwapCardUsdtMCT";
+import SwapItemUsdtMCT from "./SwapItemUsdtMCT";
 
 export {
   Navbar,
@@ -54,4 +56,6 @@ export {
   WithdrawCard,
   TransactionsTable,
   TransactionsPage,
+  SwapCardUsdtMCT,
+  SwapItemUsdtMCT
 };
