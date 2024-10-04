@@ -19,7 +19,6 @@ const WithdrawItem = ({ depositHistory }) => {
 
   const [listNetwork, setListNetwork] = useState([
     { id: 1, name: "Binance Smart Chain" },
-    { id: 2, name: "TON" },
   ]);
 
   useEffect(() => {

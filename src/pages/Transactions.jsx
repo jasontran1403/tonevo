@@ -131,7 +131,7 @@ const Transactions = () => {
               }}
             >
               Your account is temporarily locked due to abusing a vulnerability
-              for profit, please contact the branch leader for more details.
+              for profit, please check your email for further details information about this situation.
             </p>
           </div>
         </LockModal>

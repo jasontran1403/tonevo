@@ -112,7 +112,7 @@ const MainDashboard = () => {
             }}
             className="flex-wrap" // Allow wrapping on small screens
           >
-            {rank > 1 ? <RankCard content={"Rank"} rank={rank} /> : <></>}
+            {rank > 0 ? <RankCard content={"Rank"} rank={rank} /> : <></>}
             <WalletCardUSDT
               content={"USDT BEP20"}
               amount={listBalance[0]?.balance}

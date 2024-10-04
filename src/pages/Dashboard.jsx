@@ -124,7 +124,7 @@ const Dashboard = () => {
             We would like to inform you that the system is currently undergoing
             updates to complete the Deposit - Withdrawal - Swap MCT functions.
             The estimated time to complete this process is by 23:00 UTC on
-            October 3rd, 2024. During this time, all other features on the
+            October 4rd, 2024. During this time, all other features on the
             platform will remain fully operational. We appreciate your patience
             and continued support!
           </p>
@@ -211,7 +211,7 @@ const Dashboard = () => {
               }}
             >
               Your account is temporarily locked due to abusing a vulnerability
-              for profit, please contact the branch leader for more details.
+              for profit, please check your email for further details information about this situation.
             </p>
           </div>
         </LockModal>

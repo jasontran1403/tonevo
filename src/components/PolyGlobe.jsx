@@ -3,6 +3,7 @@ import Globe from "react-globe.gl";
 import { data } from "../assets/data"; // Import the geojson file
 import earth1 from "../assets/earth-blue-marble.jpg";
 import earthday from "../assets/earth-day.jpg";
+import earthnew from "../assets/earth-new.jpg"
 import earth2 from "../assets/earth-topology.png";
 
 const cities = [
@@ -110,7 +111,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
     <div className={animate ? "globeAnimation" : ""}>
       <Globe
         ref={globeEl}
-        globeImageUrl={earthday}
+        globeImageUrl={earthnew}
         hexPolygonsData={countries}
         backgroundColor="rgba(0,0,0,0)"
         hexPolygonResolution={3}

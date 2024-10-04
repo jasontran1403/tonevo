@@ -9,6 +9,7 @@ import Swap from "./pages/Swap";
 import SwapUsdtMCT from "./pages/SwapUsdtMCT";
 import Transfer from "./pages/Transfer";
 import Withdraw from "./pages/Withdraw";
+import WithdrawMCT from "./pages/WithdrawMCT";
 import Tree from "./pages/Tree";
 import TableUser from "./pages/TableUser";
 import Transactions from "./pages/Transactions";
@@ -43,6 +44,10 @@ export default function Router() {
         {
             path: "/withdraw",
             element: isConnectedToWallet ? <Withdraw /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-mct",
+            element: isConnectedToWallet ? <WithdrawMCT /> : <Navigate to="/" />
         },
         {
             path: "/deposit",
