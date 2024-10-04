@@ -69,16 +69,12 @@ const Withdraw = () => {
         >
           <h2>Announcement</h2>
           <p>
-            We would like to inform you that the system is currently undergoing
-            updates to complete the Deposit - Withdrawal - Swap MCT functions.
-            The estimated time to complete this process is by 23:00 UTC on
-            October 4rd, 2024. During this time, all other features on the
-            platform will remain fully operational. We appreciate your patience
-            and continued support!
+            This function will be reactivated soon. Expected time: 19:00 UTC on
+            October 5, 2024
           </p>
-          <p>Best regards,</p>
+          <p>Sincerely,</p>
           <p>
-            <strong>The MapChain Development Team</strong>
+            <strong>The Mapchain Team</strong>
           </p>
           <button
             onClick={closeNotificationModal}

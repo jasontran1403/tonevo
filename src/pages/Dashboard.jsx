@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import styles from "../style";
 import styled from "styled-components";
-
+import promotion from "../assets/promotion.jpg";
 import { MainDashboard, UserNavbar } from "../components";
 import Form from "../components/Form";
 import LockModal from "../components/LockModal";
@@ -107,54 +107,25 @@ const Dashboard = () => {
         contentLabel="Announcement"
       >
         <div
+          onClick={closeNotificationModal}
           style={{
+            height: "100%", // Ensure the container takes full height of the modal
+            width: "100%",
             display: "flex",
-            flexDirection: "column",
-            fontSize: isSmallScreen ? "18px" : "30px", // Adjust font size based on screen size
-            justifyContent: "center",
-            gap: "10px",
-            alignItems: "flex-start", // Align items to the left
-            padding: "5%",
-            lineHeight: isSmallScreen ? "20px" : "50px", // Adjust line height based on screen size
-            height: "100%", // Ensure the content takes the full height of the modal
+            justifyContent: "center", // Center the image horizontally
+            alignItems: "center", // Center the image vertically
+            cursor: "pointer",
           }}
         >
-          <h2>Announcement</h2>
-          <p>
-            We would like to inform you that the system is currently undergoing
-            updates to complete the Deposit - Withdrawal - Swap MCT functions.
-            The estimated time to complete this process is by 23:00 UTC on
-            October 4rd, 2024. During this time, all other features on the
-            platform will remain fully operational. We appreciate your patience
-            and continued support!
-          </p>
-          <p>Best regards,</p>
-          <p>
-            <strong>The MapChain Development Team</strong>
-          </p>
-          <button
-            onClick={closeNotificationModal}
+          <img
+            src={promotion}
             style={{
-              marginTop: "20px",
-              padding: "10px 20px", // Adjust padding for top-bottom and left-right
-              backgroundColor: "#01a1b3", // Background color
-              color: "#ffffff", // Text color
-              border: "none", // No border
-              borderRadius: "5px", // Rounded corners
-              fontSize: "18px", // Font size
-              cursor: "pointer", // Pointer cursor on hover
-              transition: "background-color 0.3s ease", // Smooth transition for hover effect
-              textAlign: "center", // Center text in the button
+              maxHeight: "100%", // Ensure the image doesn't overflow vertically
+              maxWidth: "100%", // Ensure the image doesn't overflow horizontally
+              objectFit: "contain", // Ensure the image scales while maintaining aspect ratio
             }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = "#018b9c")
-            } // Darker on hover
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = "#01a1b3")
-            } // Original color when not hovered
-          >
-            Close
-          </button>
+            alt="Promotion"
+          />
         </div>
       </Modal>
 
@@ -211,7 +182,8 @@ const Dashboard = () => {
               }}
             >
               Your account is temporarily locked due to abusing a vulnerability
-              for profit, please check your email for further details information about this situation.
+              for profit, please check your email for further details
+              information about this situation.
             </p>
           </div>
         </LockModal>
