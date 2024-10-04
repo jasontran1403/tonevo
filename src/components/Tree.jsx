@@ -88,7 +88,7 @@ const Tree = () => {
               <p className="sponsor">
                 Placement: {node.userInfo?.placementDisplayName || "N/A"}
               </p>
-              <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p>
+              {/* <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p> */}
               <p className="sponsor">Sales: {node.userInfo?.sales || 0}</p>
               <p className="sponsor">Left: {node.userInfo?.teamSalesLeft || 0}</p>
               <p className="sponsor">Right: {node.userInfo?.teamSalesRight || 0}</p>
