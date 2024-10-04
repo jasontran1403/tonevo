@@ -34,10 +34,10 @@ const RankCard = ({ content, rank }) => {
         
         {/* Use the rank value to select the appropriate image */}
         {rank > 0 ? <><div className="flex flex-col items-center pb-10"><h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white pt-10">
-          {content}
+          VIP {formatNumber(rank)}
         </h5>
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          Rank level {formatNumber(rank)}
+          {/* VIP {formatNumber(rank)} */}
         </span> <img
           src={rankImages[rank]} // Access the image based on the rank value
           alt={`Rank ${rank-1}`} // Add an alt attribute for accessibility

@@ -100,7 +100,7 @@
     width: auto;
     height: auto;
     min-width: 150px;
-    min-height: 160px;
+    min-height: 100px;
     text-decoration: none;
     color: #fc3535;
     font-weight: bold;
@@ -112,8 +112,8 @@
 }
 
 ul li a {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-top: 10px; */
+    /* padding-bottom: 10px; */
     cursor: pointer;
 }
 .glass-button {

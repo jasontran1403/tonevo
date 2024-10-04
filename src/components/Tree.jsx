@@ -80,14 +80,14 @@ const Tree = () => {
                 handleClick(node.userInfo.walletAddress);
               }}
             >
-              <p>Name: {displayName}</p>
+              <p>{displayName}</p>
                {node.userInfo?.rank > 0 ? <p>Vip {node.userInfo?.rank}</p> : <></>}
               <p className="sponsor">
                 Sponsor: {node.userInfo?.rootDisplayName || "N/A"}
               </p>
-              <p className="sponsor">
+              {/* <p className="sponsor">
                 Placement: {node.userInfo?.placementDisplayName || "N/A"}
-              </p>
+              </p> */}
               {/* <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p> */}
               <p className="sponsor">Sales: {node.userInfo?.sales || 0}</p>
               <p className="sponsor">Left: {node.userInfo?.teamSalesLeft || 0}</p>

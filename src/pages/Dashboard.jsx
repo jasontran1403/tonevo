@@ -21,19 +21,18 @@ const customStyles = {
     top: "50%",
     left: "50%",
     right: "auto",
-    width: "70%", // Default width for larger screens
-    maxWidth: "800px",
+    width: window.innerWidth < 768 ? "100svw" : "70svw", // Dynamic width based on screen size
     height: "auto",
     bottom: "auto",
-    marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    padding: "2rem",
+    padding: "0px!important",
   },
   overlay: {
-    zIndex: 1000, // Ensure it stays on top
-    backgroundColor: "rgba(0, 0, 0, 0.75)", // Dark background for better focus
+    zIndex: 1000,
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
   },
 };
+
 
 const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState(

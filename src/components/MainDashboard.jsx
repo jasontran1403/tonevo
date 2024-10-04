@@ -127,6 +127,13 @@ const MainDashboard = () => {
               wallet={true}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
+            <WalletCard5
+              content={"Transfer wallet"}
+              amount={listBalance[6]?.balance}
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
             <ReflinkCard
               content={"Reflink"}
               walletAddress={walletAddress}
@@ -150,6 +157,13 @@ const MainDashboard = () => {
             className="flex-wrap" // Allow wrapping on small screens
           >
             <WalletCard3
+              content={"Daily reward"}
+              amount={listBalance[8]?.balance}
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
+            <WalletCard3
               content={"Direct Commission"}
               amount={
                 listBalance[2]?.balance
@@ -169,15 +183,6 @@ const MainDashboard = () => {
             />
             
             <WalletCard3
-              content={"Leader Commission"}
-              amount={
-                listBalance[4]?.balance
-              }
-              unit={"MCT"}
-              wallet={false}
-              className="flex-1 w-full max-w-xs" // Adjust width for small screens
-            />
-            <WalletCard3
               content={"Pop Commission"}
               amount={
                 listBalance[5]?.balance
@@ -186,7 +191,15 @@ const MainDashboard = () => {
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            
+            <WalletCard3
+              content={"Leader Commission"}
+              amount={
+                listBalance[4]?.balance
+              }
+              unit={"MCT"}
+              wallet={false}
+              className="flex-1 w-full max-w-xs" // Adjust width for small screens
+            />
           </div>
           <div
             style={{
@@ -201,20 +214,14 @@ const MainDashboard = () => {
             className="flex-wrap" // Allow wrapping on small screens
           >
             
-            <WalletCard3
-              content={"Daily reward"}
-              amount={listBalance[8]?.balance}
-              unit={"MCT"}
-              wallet={false}
-              className="flex-1 w-full max-w-xs" // Adjust width for small screens
-            />
-            <WalletCard5
+            
+            {/* <WalletCard5
               content={"Transfer wallet"}
               amount={listBalance[6]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
-            />
+            /> */}
             <WalletCard4
               content={"Maxout"}
               amount={listBalance[7]?.balance}
