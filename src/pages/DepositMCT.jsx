@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
-import { UserNavbar } from "../components";
-import Modal from "react-modal";
 import styled from "styled-components";
+import { UserNavbar, DepositMCTCard } from "../components";
+import Modal from "react-modal";
+import LockModal from "../components/LockModal";
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -33,7 +34,7 @@ const customStyles = {
   },
 };
 
-const Swap = () => {
+const DepositMCT = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const [walletAddress, setWalletAddress] = useState(
@@ -56,6 +57,7 @@ const Swap = () => {
     setNotificationModalOpen(false); // Close the notification and continue logic
     window.location.href = "/dashboard";
   };
+
   useEffect(() => {
     // Only proceed when notification is closed
     if (isInTree === "true") {
@@ -82,6 +84,7 @@ const Swap = () => {
   function handleOpenModal(open) {
     closeLockModal();
   }
+
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -142,8 +145,85 @@ const Swap = () => {
           </button>
         </div>
       </Modal>
+
+      {/* {isLock === "true" ? (
+        <LockModal
+          isOpen={modalLock}
+          onRequestClose={closeLockModal}
+          contentLabel="Account lock"
+        >
+          <CloseButton
+            onClick={(e) => handleOpenModal(false)}
+            style={{ zIndex: "9999" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20.39 20.39"
+          >
+            <title>X</title>
+            <line
+              x1="19.39"
+              y1="19.39"
+              x2="1"
+              y2="1"
+              fill="none"
+              stroke="#5c3aff"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+            />
+            <line
+              x1="1"
+              y1="19.39"
+              x2="19.39"
+              y2="1"
+              fill="none"
+              stroke="#5c3aff"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+            />
+          </CloseButton>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%", // Ensure the content takes the full height of the modal
+            }}
+          >
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: isSmallScreen ? "30px" : "40px", // Adjust line height based on screen size
+                color: "orangered",
+              }}
+            >
+              Your account is temporarily locked due to abusing a vulnerability
+              for profit, please check your email for further details information about this situation.
+            </p>
+          </div>
+        </LockModal>
+      ) : isInTree === "true" ? (
+        <div className={`bg-primary ${styles.flexStart} bg-image`}>
+          <div className={`${styles.boxWidthDashboard}`}>
+            <DepositMCTCard />
+          </div>
+        </div>
+      ) : (
+        <div className={`bg-primary ${styles.flexStart} bg-image`}>
+          <div className={`${styles.boxWidthDashboard}`}>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Update sponsor"
+            >
+              <Form />
+            </Modal>
+          </div>
+        </div>
+      )} */}
     </div>
   );
 };
 
-export default Swap;
+export default DepositMCT;

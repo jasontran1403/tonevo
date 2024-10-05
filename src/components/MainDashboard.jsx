@@ -2,19 +2,21 @@ import Axios from "axios";
 import { useState, useEffect } from "react";
 import styles from "../style";
 import TaskTable from "../components/table/TaskTable";
-import WalletCard from "./WalletCard";
-import InvestmentCard from "./InvestmentCard";
 import StatusCell from "../components/table/StatusCell";
 import DateCell from "../components/table/DataCell";
 import TransactionTable from "./TransactionTable";
 import { API_ENDPOINT } from "../constants";
 import WalletCard2 from "./WalletCard2";
-import WalletCard3 from "./WalletCard3";
 import WalletCard4 from "./WalletCard4";
 import WalletCard5 from "./WalletCard5";
 import RankCard from "./RankCard";
 import ReflinkCard from "./ReflinkCard";
 import WalletCardUSDT from "./WalletCardUSDT";
+import Direct from "./Direct";
+import Binary from "./Binary";
+import Pop from "./Pop";
+import Leader from "./Leader";
+import DailyReward from "./DailyReward";
 
 const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
@@ -156,14 +158,14 @@ const MainDashboard = () => {
             }}
             className="flex-wrap" // Allow wrapping on small screens
           >
-            <WalletCard3
+            <DailyReward
               content={"Daily reward"}
               amount={listBalance[8]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            <WalletCard3
+            <Direct
               content={"Direct Commission"}
               amount={
                 listBalance[2]?.balance
@@ -172,7 +174,7 @@ const MainDashboard = () => {
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            <WalletCard3
+            <Binary
               content={"Binary Commission"}
               amount={
                 listBalance[3]?.balance
@@ -182,7 +184,7 @@ const MainDashboard = () => {
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
             
-            <WalletCard3
+            <Pop
               content={"Pop Commission"}
               amount={
                 listBalance[5]?.balance
@@ -191,7 +193,7 @@ const MainDashboard = () => {
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            <WalletCard3
+            <Leader
               content={"Leader Commission"}
               amount={
                 listBalance[4]?.balance

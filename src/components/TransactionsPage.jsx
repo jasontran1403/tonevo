@@ -14,7 +14,7 @@ const TABLE_HEAD = [
   "Note",
 ];
 
-const WithdrawCard = () => {
+const TransactionsPage = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -52,4 +52,4 @@ const WithdrawCard = () => {
   );
 };
 
-export default WithdrawCard;
+export default TransactionsPage;

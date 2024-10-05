@@ -2,10 +2,10 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../style";
 import { ToastContainer } from "react-toastify";
-import WithdrawItem from "./WithdrawItem";
 import HashCell from "./table/HashCell";
 import { API_ENDPOINT } from "../constants";
 import WithdrawTable from "./WithdrawTable";
+import WithdrawItemMCT from "./WithdrawItemMCT";
 
 const TABLE_HEAD = [
   "Code",
@@ -16,7 +16,7 @@ const TABLE_HEAD = [
   "Note",
 ];
 
-const WithdrawCard = () => {
+const WithdrawCardMCT = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -48,7 +48,7 @@ const WithdrawCard = () => {
   return (
     <>
       <div className="investment-container">
-        <WithdrawItem />
+        <WithdrawItemMCT />
       </div>
 
       <div className={`${styles.flexCenter}`}>
@@ -58,4 +58,4 @@ const WithdrawCard = () => {
   );
 };
 
-export default WithdrawCard;
+export default WithdrawCardMCT;

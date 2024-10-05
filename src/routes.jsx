@@ -4,11 +4,12 @@ import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
 import Error404 from "./pages/Error404";
 import Investment from "./pages/Investment";
-import Deposit from "./pages/Deposit";
+import DepositUSDT from "./pages/DepositUSDT";
+import DepositMCT from "./pages/DepositMCT";
 import Swap from "./pages/Swap";
 import SwapUsdtMCT from "./pages/SwapUsdtMCT";
 import Transfer from "./pages/Transfer";
-import Withdraw from "./pages/Withdraw";
+import WithdrawUSDT from "./pages/WithdrawUSDT";
 import WithdrawMCT from "./pages/WithdrawMCT";
 import Tree from "./pages/Tree";
 import TableUser from "./pages/TableUser";
@@ -17,6 +18,12 @@ import DisconnectComponent from "./components/DisconnectComponent";
 import CommingSoon from "./pages/ComingSoon";
 import Test from "./pages/Test";
 import Maintance from "./pages/Maintance";
+import DailySwap from "./pages/DailySwap";
+import DirectSwap from "./pages/DirectSwap";
+import BinarySwap from "./pages/BinarySwap";
+import LeaderSwap from "./pages/LeaderSwap";
+import PopSwap from "./pages/PopSwap";
+import SwapMCTUsdt from "./pages/SwapMCTUsdt";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -42,23 +49,67 @@ export default function Router() {
             element: isConnectedToWallet ? <Investment /> : <Navigate to="/" />
         },
         {
-            path: "/withdraw",
-            element: isConnectedToWallet ? <Withdraw /> : <Navigate to="/" />
+            path: "/withdraw-usdt",
+            element: isConnectedToWallet ? <WithdrawUSDT /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-mct",
             element: isConnectedToWallet ? <WithdrawMCT /> : <Navigate to="/" />
         },
         {
-            path: "/deposit",
-            element: isConnectedToWallet ? <Deposit /> : <Navigate to="/" />
+            path: "/deposit-usdt",
+            element: isConnectedToWallet ? <DepositUSDT /> : <Navigate to="/" />
+        },
+        {
+            path: "/deposit-mct",
+            element: isConnectedToWallet ? <DepositMCT /> : <Navigate to="/" />
         },
         {
             path: "/swap-usdt-mct",
             element: isConnectedToWallet ? <SwapUsdtMCT /> : <Navigate to="/" />
         },
         {
-            path: "/swap",
+            path: "/swap-mct-usdt",
+            element: isConnectedToWallet ? <SwapMCTUsdt /> : <Navigate to="/" />
+        },
+        {
+            path: "/swap-daily",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/swap-direct",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/swap-binary",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/swap-leader",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/swap-pop",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-pop",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-daily",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-direct",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-binary",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/withdraw-leader",
             element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
         },
         {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
+import { SwapCard, Footer, UserNavbar } from "../components";
+import Modal from "react-modal";
 import styled from "styled-components";
-import { UserNavbar, DepositCard } from "../components";
 import LockModal from "../components/LockModal";
 
 const CloseButton = styled.svg`
@@ -14,7 +15,28 @@ const CloseButton = styled.svg`
   cursor: pointer;
 `;
 
-const Deposit = () => {
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    width: "70%", // Default width for larger screens
+    maxWidth: "800px",
+    height: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "2rem",
+  },
+  overlay: {
+    zIndex: 1000, // Ensure it stays on top
+    backgroundColor: "rgba(0, 0, 0, 0.75)", // Dark background for better focus
+  },
+};
+
+const LeaderSwap = () => {
+  const isSmallScreen = window.innerWidth <= 768;
+
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -26,11 +48,15 @@ const Deposit = () => {
     localStorage.getItem("access_token")
   );
   const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
+  const [modalIsOpen, setIsOpen] = useState();
   const [isLock] = useState(localStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const isSmallScreen = window.innerWidth <= 768;
 
+  const closeNotificationModal = () => {
+    setNotificationModalOpen(false); // Close the notification and continue logic
+    window.location.href = "/dashboard";
+  };
   useEffect(() => {
     // Only proceed when notification is closed
     if (isInTree === "true") {
@@ -57,7 +83,6 @@ const Deposit = () => {
   function handleOpenModal(open) {
     closeLockModal();
   }
-
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -118,19 +143,21 @@ const Deposit = () => {
               }}
             >
               Your account is temporarily locked due to abusing a vulnerability
-              for profit, please check your email for further details information about this situation.
+              for profit, please check your email for further details
+              information about this situation.
             </p>
           </div>
         </LockModal>
-      ) : isInTree === "true" ? (
-        <div className={`bg-primary ${styles.flexStart} bg-image`}>
-          <div className={`${styles.boxWidthDashboard}`}>
-            <DepositCard />
-          </div>
-        </div>
       ) : (
-        <div className={`bg-primary ${styles.flexStart} bg-image`}>
-          <div className={`${styles.boxWidthDashboard}`}>
+        <></>
+      )}
+      {/* <div className={`bg-primary ${styles.flexStart} bg-image`}>
+        <div className={`${styles.boxWidthDashboard}`}>
+          {isInTree === "true" ? (
+            <>
+              <SwapCard />
+            </>
+          ) : (
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
@@ -139,11 +166,11 @@ const Deposit = () => {
             >
               <Form />
             </Modal>
-          </div>
+          )}
         </div>
-      )}
+      </div> */}
     </div>
   );
 };
 
-export default Deposit;
+export default LeaderSwap;

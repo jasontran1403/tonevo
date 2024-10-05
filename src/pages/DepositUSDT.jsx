@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
-import { SwapCardUsdtMCT, Footer, UserNavbar } from "../components";
-import Modal from "react-modal";
 import styled from "styled-components";
+import { UserNavbar, DepositUSDTCard } from "../components";
 import LockModal from "../components/LockModal";
 
 const CloseButton = styled.svg`
@@ -15,28 +14,7 @@ const CloseButton = styled.svg`
   cursor: pointer;
 `;
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    width: "70%", // Default width for larger screens
-    maxWidth: "800px",
-    height: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    padding: "2rem",
-  },
-  overlay: {
-    zIndex: 1000, // Ensure it stays on top
-    backgroundColor: "rgba(0, 0, 0, 0.75)", // Dark background for better focus
-  },
-};
-
-const SwapUsdtMCT = () => {
-  const isSmallScreen = window.innerWidth <= 768;
-
+const DepositUSDT = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -48,15 +26,11 @@ const SwapUsdtMCT = () => {
     localStorage.getItem("access_token")
   );
   const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
-  const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
-  const [modalIsOpen, setIsOpen] = useState();
   const [isLock] = useState(localStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const isSmallScreen = window.innerWidth <= 768;
 
-  const closeNotificationModal = () => {
-    setNotificationModalOpen(false); // Close the notification and continue logic
-    window.location.href = "/dashboard";
-  };
   useEffect(() => {
     // Only proceed when notification is closed
     if (isInTree === "true") {
@@ -83,6 +57,7 @@ const SwapUsdtMCT = () => {
   function handleOpenModal(open) {
     closeLockModal();
   }
+
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -147,23 +122,23 @@ const SwapUsdtMCT = () => {
             </p>
           </div>
         </LockModal>
+      ) : isInTree === "true" ? (
+        <div className={`bg-primary ${styles.flexStart} bg-image`}>
+          <div className={`${styles.boxWidthDashboard}`}>
+            <DepositUSDTCard />
+          </div>
+        </div>
       ) : (
         <div className={`bg-primary ${styles.flexStart} bg-image`}>
           <div className={`${styles.boxWidthDashboard}`}>
-            {isInTree === "true" ? (
-              <>
-                <SwapCardUsdtMCT />
-              </>
-            ) : (
-              <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Update sponsor"
-              >
-                <Form />
-              </Modal>
-            )}
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Update sponsor"
+            >
+              <Form />
+            </Modal>
           </div>
         </div>
       )}
@@ -171,4 +146,4 @@ const SwapUsdtMCT = () => {
   );
 };
 
-export default SwapUsdtMCT;
+export default DepositUSDT;

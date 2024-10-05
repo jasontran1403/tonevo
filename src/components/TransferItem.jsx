@@ -48,6 +48,7 @@ const TransferItem = ({ swapHistory }) => {
     Axios.request(config)
       .then((response) => {
         setBalances(response.data.balances);
+        setBalance(response.data.balances[1].balance);
       })
       .catch((error) => {
         console.log(error);

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
-import { UserNavbar } from "../components";
+import { Footer, UserNavbar } from "../components";
 import Modal from "react-modal";
 import styled from "styled-components";
+import LockModal from "../components/LockModal";
+import SwapCardMCTUsdt from "../components/SwapCardMCTUsdt";
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -33,7 +35,7 @@ const customStyles = {
   },
 };
 
-const Swap = () => {
+const SwapMCTUsdt = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const [walletAddress, setWalletAddress] = useState(
@@ -90,60 +92,84 @@ const Swap = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={notificationModalOpen}
-        onRequestClose={closeNotificationModal}
-        style={customStyles}
-        contentLabel="Announcement"
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            fontSize: isSmallScreen ? "18px" : "30px", // Adjust font size based on screen size
-            justifyContent: "center",
-            gap: "10px",
-            alignItems: "flex-start", // Align items to the left
-            padding: "5%",
-            lineHeight: isSmallScreen ? "20px" : "50px", // Adjust line height based on screen size
-            height: "100%", // Ensure the content takes the full height of the modal
-          }}
+      {isLock === "true" ? (
+        <LockModal
+          isOpen={modalLock}
+          onRequestClose={closeLockModal}
+          contentLabel="Account lock"
         >
-          <h2 style={{ fontWeight: "bold" }}>Announcement</h2>
-          <p style={{ fontStyle: "italic" }}>
-            We're working so hard, this function will be open as soon as posible
-          </p>
-          <p style={{ fontStyle: "italic" }}>Sincerely,</p>
-          <p>
-            <strong style={{ fontStyle: "italic" }}>The Mapchain Team</strong>
-          </p>
-          <button
-            onClick={closeNotificationModal}
-            style={{
-              marginTop: "20px",
-              padding: "10px 20px", // Adjust padding for top-bottom and left-right
-              backgroundColor: "#01a1b3", // Background color
-              color: "#ffffff", // Text color
-              border: "none", // No border
-              borderRadius: "5px", // Rounded corners
-              fontSize: "18px", // Font size
-              cursor: "pointer", // Pointer cursor on hover
-              transition: "background-color 0.3s ease", // Smooth transition for hover effect
-              textAlign: "center", // Center text in the button
-            }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = "#018b9c")
-            } // Darker on hover
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = "#01a1b3")
-            } // Original color when not hovered
+          <CloseButton
+            onClick={(e) => handleOpenModal(false)}
+            style={{ zIndex: "9999" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20.39 20.39"
           >
-            Close
-          </button>
+            <title>X</title>
+            <line
+              x1="19.39"
+              y1="19.39"
+              x2="1"
+              y2="1"
+              fill="none"
+              stroke="#5c3aff"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+            />
+            <line
+              x1="1"
+              y1="19.39"
+              x2="19.39"
+              y2="1"
+              fill="none"
+              stroke="#5c3aff"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+            />
+          </CloseButton>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%", // Ensure the content takes the full height of the modal
+            }}
+          >
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: isSmallScreen ? "30px" : "40px", // Adjust line height based on screen size
+                color: "orangered",
+              }}
+            >
+              Your account is temporarily locked due to abusing a vulnerability
+              for profit, please check your email for further details information about this situation.
+            </p>
+          </div>
+        </LockModal>
+      ) : (
+        <div className={`bg-primary ${styles.flexStart} bg-image`}>
+          <div className={`${styles.boxWidthDashboard}`}>
+            {isInTree === "true" ? (
+              <>
+                <SwapCardMCTUsdt />
+              </>
+            ) : (
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Update sponsor"
+              >
+                <Form />
+              </Modal>
+            )}
+          </div>
         </div>
-      </Modal>
+      )}
     </div>
   );
 };
 
-export default Swap;
+export default SwapMCTUsdt;

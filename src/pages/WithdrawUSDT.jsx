@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
 import { Footer, UserNavbar } from "../components";
+import WithdrawCardUSDT from "../components/WithdrawCardUSDT";
 import Modal from "react-modal";
-import WithdrawCardMCT from "../components/WithdrawCardMCT";
 const customStyles = {
   content: {
     top: "50%",
@@ -23,7 +23,7 @@ const customStyles = {
   },
 };
 
-const WithdrawMCT = () => {
+const WithdrawUSDT = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const [walletAddress, setWalletAddress] = useState(
@@ -53,7 +53,7 @@ const WithdrawMCT = () => {
         <div className={`${styles.boxWidthDashboard}`}>
           {isInTree === "true" ? (
             <>
-              <WithdrawCardMCT />
+              <WithdrawCardUSDT />
             </>
           ) : (
             <Modal
@@ -71,4 +71,4 @@ const WithdrawMCT = () => {
   );
 };
 
-export default WithdrawMCT;
+export default WithdrawUSDT;
