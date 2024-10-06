@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useRoutes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
+import LandingPage2 from './pages/LandingPage2';
 import Error404 from "./pages/Error404";
 import Investment from "./pages/Investment";
 import DepositUSDT from "./pages/DepositUSDT";
@@ -40,6 +41,10 @@ export default function Router() {
         {
             path: "/",
             element: <LandingPage />
+        },
+        {
+            path: "/clip",
+            element: <LandingPage2 />
         },
         {
             path: "/dashboard",
