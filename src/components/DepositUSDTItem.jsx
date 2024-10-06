@@ -41,7 +41,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
     let data = JSON.stringify({
       walletAddress: walletAddress,
       amount: amount,
-      method: networkSelected,
+      method: 1,
     });
 
     Swal.fire({
