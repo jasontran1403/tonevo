@@ -176,7 +176,11 @@ export const userNavLinks = [
   },
   {
     id: "tree",
-    title: "Tree",
+    title: "Binary Tree",
+  },
+  {
+    id: "direct-tree",
+    title: "Direct Tree",
   },
 ];
 
