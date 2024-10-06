@@ -119,6 +119,26 @@ export default function Router() {
             element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
         },
         {
+            path: "/transfer-direct",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/transfer-binary",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/transfer-leader",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/transfer-pop",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/transfer-daily",
+            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
             path: "/direct-tree",
             element: isConnectedToWallet ? <DirectTree /> : <Navigate to="/" />
         },
