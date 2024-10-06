@@ -24,6 +24,7 @@ import BinarySwap from "./pages/BinarySwap";
 import LeaderSwap from "./pages/LeaderSwap";
 import PopSwap from "./pages/PopSwap";
 import SwapMCTUsdt from "./pages/SwapMCTUsdt";
+import DirectTree from "./pages/DirectTree";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -111,6 +112,10 @@ export default function Router() {
         {
             path: "/withdraw-leader",
             element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+        },
+        {
+            path: "/direct-tree",
+            element: isConnectedToWallet ? <DirectTree /> : <Navigate to="/" />
         },
         {
             path: "/test",
