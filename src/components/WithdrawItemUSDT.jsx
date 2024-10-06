@@ -67,7 +67,7 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
           amount: amount,
           method: 1,
           walletType: networkSelected,
-          type: 8,
+          type: 1,
         });
     
         let config = {

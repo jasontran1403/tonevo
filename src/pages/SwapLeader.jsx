@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
+import { Footer, UserNavbar } from "../components";
+import Modal from "react-modal";
 import styled from "styled-components";
-import { MainDashboard, Footer, UserNavbar } from "../components";
-import TransferCardDirect from "../components/TransferCardDirect";
 import LockModal from "../components/LockModal";
+import SwapCardLeader from "../components/SwapCardLeader";
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -14,7 +15,29 @@ const CloseButton = styled.svg`
   top: 18px;
   cursor: pointer;
 `;
-const TransferDirect = () => {
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    width: "70%", // Default width for larger screens
+    maxWidth: "800px",
+    height: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "2rem",
+  },
+  overlay: {
+    zIndex: 1000, // Ensure it stays on top
+    backgroundColor: "rgba(0, 0, 0, 0.75)", // Dark background for better focus
+  },
+};
+
+const SwapLeader = () => {
+  const isSmallScreen = window.innerWidth <= 768;
+
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -25,12 +48,16 @@ const TransferDirect = () => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
-  const [modalIsOpen, setIsOpen] = useState();
   const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
+  const [modalIsOpen, setIsOpen] = useState();
   const [isLock] = useState(localStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
-  const isSmallScreen = window.innerWidth <= 768;
 
+  const closeNotificationModal = () => {
+    setNotificationModalOpen(false); // Close the notification and continue logic
+    window.location.href = "/dashboard";
+  };
   useEffect(() => {
     // Only proceed when notification is closed
     if (isInTree === "true") {
@@ -57,7 +84,6 @@ const TransferDirect = () => {
   function handleOpenModal(open) {
     closeLockModal();
   }
-
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -65,7 +91,6 @@ const TransferDirect = () => {
           <UserNavbar />
         </div>
       </div>
-      
 
       {isLock === "true" ? (
         <LockModal
@@ -123,23 +148,23 @@ const TransferDirect = () => {
             </p>
           </div>
         </LockModal>
-      ) : isInTree === "true" ? (
-        <div className={`bg-primary ${styles.flexStart} bg-image`}>
-          <div className={`${styles.boxWidthDashboard}`}>
-            <TransferCardDirect />
-          </div>
-        </div>
       ) : (
         <div className={`bg-primary ${styles.flexStart} bg-image`}>
           <div className={`${styles.boxWidthDashboard}`}>
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              style={customStyles}
-              contentLabel="Update sponsor"
-            >
-              <Form />
-            </Modal>
+            {isInTree === "true" ? (
+              <>
+                <SwapCardLeader />
+              </>
+            ) : (
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Update sponsor"
+              >
+                <Form />
+              </Modal>
+            )}
           </div>
         </div>
       )}
@@ -147,4 +172,4 @@ const TransferDirect = () => {
   );
 };
 
-export default TransferDirect;
+export default SwapLeader;

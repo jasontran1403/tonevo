@@ -5,7 +5,7 @@ import Button from "./Button";
 import TransactionStatusCell from "./table/TransactionStatusCell";
 import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
-import TransferItemDirect from "./TransferItemDirect";
+import TransferItemPop from "./TransferItemPop";
 import TransferTable from "./TransferTable";
 import { API_ENDPOINT } from "../constants";
 
@@ -18,7 +18,7 @@ const TABLE_HEAD = [
   "Note"
 ];
 
-const TransferCard = () => {
+const TransferCardPop = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -54,7 +54,7 @@ const TransferCard = () => {
   return (
     <>
       <div className="investment-container">
-        <TransferItemDirect />
+        <TransferItemPop />
       </div>
 
       <div className={`${styles.flexCenter}`}>
@@ -64,4 +64,4 @@ const TransferCard = () => {
   );
 };
 
-export default TransferCard;
+export default TransferCardPop;

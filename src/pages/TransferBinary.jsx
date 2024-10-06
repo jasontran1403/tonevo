@@ -3,7 +3,7 @@ import Axios from "axios";
 import styles from "../style";
 import styled from "styled-components";
 import { MainDashboard, Footer, UserNavbar } from "../components";
-import TransferCardDirect from "../components/TransferCardDirect";
+import TransferCardBinary from "../components/TransferCardBinary";
 import LockModal from "../components/LockModal";
 
 const CloseButton = styled.svg`
@@ -14,7 +14,7 @@ const CloseButton = styled.svg`
   top: 18px;
   cursor: pointer;
 `;
-const TransferDirect = () => {
+const TransferBinary = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -126,7 +126,7 @@ const TransferDirect = () => {
       ) : isInTree === "true" ? (
         <div className={`bg-primary ${styles.flexStart} bg-image`}>
           <div className={`${styles.boxWidthDashboard}`}>
-            <TransferCardDirect />
+            <TransferCardBinary />
           </div>
         </div>
       ) : (
@@ -147,4 +147,4 @@ const TransferDirect = () => {
   );
 };
 
-export default TransferDirect;
+export default TransferBinary;

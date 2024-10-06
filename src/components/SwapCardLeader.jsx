@@ -5,20 +5,13 @@ import Button from "./Button";
 import TransactionStatusCell from "./table/TransactionStatusCell";
 import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
-import TransferItemDirect from "./TransferItemDirect";
-import TransferTable from "./TransferTable";
+import SwapItemLeader from "./SwapItemLeader";
+import DepositTable from "./DepositTable";
 import { API_ENDPOINT } from "../constants";
 
-const TABLE_HEAD = [
-  "Code",
-  "Date",
-  "Amount",
-  "From/To",
-  "Status",
-  "Note"
-];
+const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
-const TransferCard = () => {
+const SwapCardLeader = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -26,13 +19,12 @@ const TransferCard = () => {
     localStorage.getItem("access_token")
   );
 
-
-  const [transferHistory, setTransferHistory] = useState([]);
+  const [swapHistory, setSwapHistory] = useState([]);
 
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/transfer-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -41,27 +33,29 @@ const TransferCard = () => {
 
     Axios.request(config)
       .then((response) => {
-        setTransferHistory(response.data);
+        setSwapHistory(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  
-
-
   return (
     <>
       <div className="investment-container">
-        <TransferItemDirect />
+        <SwapItemLeader />
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <TransferTable TABLE_NAME={"Recent internal transfer"} TABLE_SUBNAME={"These are details about the lastest internal transfer"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={transferHistory} />
+        <DepositTable
+          TABLE_NAME={"Recent swap"}
+          TABLE_SUBNAME={"These are details about the lastest swap"}
+          TABLE_HEAD={TABLE_HEAD}
+          TABLE_ROWS={swapHistory}
+        />
       </div>
     </>
   );
 };
 
-export default TransferCard;
+export default SwapCardLeader;

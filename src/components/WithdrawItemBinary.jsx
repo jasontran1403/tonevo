@@ -8,7 +8,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss';
 import { API_ENDPOINT } from "../constants";
 
-const WithdrawItemMCT = ({ depositHistory }) => {
+const WithdrawItemBinary = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -64,9 +64,9 @@ const WithdrawItemMCT = ({ depositHistory }) => {
           walletAddress: walletAddress,
           toWalletAddress: toWallet,
           amount: amount,
-          method: 2,
+          method: 4,
           walletType: networkSelected,
-          type: 2,
+          type: 4,
         });
     
         let config = {
@@ -211,4 +211,4 @@ const WithdrawItemMCT = ({ depositHistory }) => {
   );
 };
 
-export default WithdrawItemMCT;
+export default WithdrawItemBinary;

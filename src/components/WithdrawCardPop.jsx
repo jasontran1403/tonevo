@@ -1,24 +1,22 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import styles from "../style";
-import Button from "./Button";
-import TransactionStatusCell from "./table/TransactionStatusCell";
-import DateCell from "./table/DataCell";
 import { ToastContainer } from "react-toastify";
-import TransferItemDirect from "./TransferItemDirect";
-import TransferTable from "./TransferTable";
+import HashCell from "./table/HashCell";
 import { API_ENDPOINT } from "../constants";
+import WithdrawTable from "./WithdrawTable";
+import WithdrawItemPop from "./WithdrawItemPop";
 
 const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
-  "From/To",
+  "To",
   "Status",
-  "Note"
+  "Note",
 ];
 
-const TransferCard = () => {
+const WithdrawCardPop = () => {
   const [walletAddress, setWalletAddress] = useState(
     localStorage.getItem("walletAddress")
   );
@@ -26,13 +24,12 @@ const TransferCard = () => {
     localStorage.getItem("access_token")
   );
 
-
-  const [transferHistory, setTransferHistory] = useState([]);
+  const [withdrawHistory, setWithdrawHistory] = useState([]);
 
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/transfer-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -41,27 +38,24 @@ const TransferCard = () => {
 
     Axios.request(config)
       .then((response) => {
-        setTransferHistory(response.data);
+        setWithdrawHistory(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  
-
-
   return (
     <>
       <div className="investment-container">
-        <TransferItemDirect />
+        <WithdrawItemPop />
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <TransferTable TABLE_NAME={"Recent internal transfer"} TABLE_SUBNAME={"These are details about the lastest internal transfer"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={transferHistory} />
+        <WithdrawTable TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
       </div>
     </>
   );
 };
 
-export default TransferCard;
+export default WithdrawCardPop;

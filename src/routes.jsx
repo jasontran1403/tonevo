@@ -26,6 +26,21 @@ import LeaderSwap from "./pages/LeaderSwap";
 import PopSwap from "./pages/PopSwap";
 import SwapMCTUsdt from "./pages/SwapMCTUsdt";
 import DirectTree from "./pages/DirectTree";
+import TransferDirect from "./pages/TransferDirect";
+import TransferBinary from "./pages/TransferBinary";
+import TransferLeader from "./pages/TransferLeader";
+import TransferPop from "./pages/TransferPop";
+import TransferDaily from "./pages/TransferDaily";
+import SwapDaily from "./pages/SwapDaily";
+import SwapDirect from "./pages/SwapDirect";
+import SwapBinary from "./pages/SwapBinary";
+import SwapLeader from "./pages/SwapLeader";
+import SwapPop from "./pages/SwapPop";
+import WithdrawPop from "./pages/WithdrawPop";
+import WithdrawDaily from "./pages/WithdrawDaily";
+import WithdrawDirect from "./pages/WithdrawDirect";
+import WithdrawBinary from "./pages/WithdrawBinary";
+import WithdrawLeader from "./pages/WithdrawLeader";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -80,63 +95,63 @@ export default function Router() {
         },
         {
             path: "/swap-daily",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <SwapDaily /> : <Navigate to="/" />
         },
         {
             path: "/swap-direct",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <SwapDirect /> : <Navigate to="/" />
         },
         {
             path: "/swap-binary",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <SwapBinary /> : <Navigate to="/" />
         },
         {
             path: "/swap-leader",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <SwapLeader /> : <Navigate to="/" />
         },
         {
             path: "/swap-pop",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <SwapPop /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-pop",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <WithdrawPop /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-daily",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <WithdrawDaily /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-direct",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <WithdrawDirect /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-binary",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <WithdrawBinary /> : <Navigate to="/" />
         },
         {
             path: "/withdraw-leader",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <WithdrawLeader /> : <Navigate to="/" />
         },
         {
             path: "/transfer-direct",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <TransferDirect /> : <Navigate to="/" />
         },
         {
             path: "/transfer-binary",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <TransferBinary /> : <Navigate to="/" />
         },
         {
             path: "/transfer-leader",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <TransferLeader /> : <Navigate to="/" />
         },
         {
             path: "/transfer-pop",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <TransferPop /> : <Navigate to="/" />
         },
         {
             path: "/transfer-daily",
-            element: isConnectedToWallet ? <Swap /> : <Navigate to="/" />
+            element: isConnectedToWallet ? <TransferDaily /> : <Navigate to="/" />
         },
         {
             path: "/direct-tree",
