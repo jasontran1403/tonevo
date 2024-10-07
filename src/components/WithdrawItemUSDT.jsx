@@ -196,7 +196,7 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
                 className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="tokenBalance"
                 type="text"
-                placeholder="1% total withdraw amount (min 1$)"
+                placeholder="3% total withdraw amount (min 1$)"
                 readOnly
               />
             </div>
