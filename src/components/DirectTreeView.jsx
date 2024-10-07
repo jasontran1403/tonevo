@@ -11,7 +11,7 @@ const DirectTreeView = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchTreeData("0:6fb7192217983f2108f8a5aba388f7b5de5d7589d19e93e74f32d60111f6e601"); // Fetch the tree data on component mount
+      await fetchTreeData(walletAdress); // Fetch the tree data on component mount
     };
 
     fetchData();
