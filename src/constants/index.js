@@ -1,8 +1,7 @@
 import { people01, people02, people03, facebook, instagram, linkedin, youtube, telegram, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../assets";
 
 // export const API_ENDPOINT = "http://localhost:8888/api/v1/";
-// export const API_ENDPOINT = "https://personally-sunny-basilisk.ngrok-free.app/api/v1/"
-export const API_ENDPOINT = "https://29b3-115-79-196-67.ngrok-free.app/api/v1/";
+export const API_ENDPOINT = " https://8cc2ee0773b8.ngrok.app/api/v1/";
 
 
 export const users = [

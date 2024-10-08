@@ -81,7 +81,7 @@ const Tree = () => {
               }}
             >
               <p>{displayName}</p>
-               {node.userInfo?.rank > 0 ? <p>Vip {node.userInfo?.rank}</p> : <></>}
+               
               <p className="sponsor">
                 Sponsor: {node.userInfo?.rootDisplayName || "N/A"}
               </p>
