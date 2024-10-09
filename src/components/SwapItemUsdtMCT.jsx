@@ -200,7 +200,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
           <h2 className={styles.heading2}>Swap USDT  MCT</h2>
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-white text-sm font-bold mb-2">
                 Swap from
               </label>
               <select
@@ -223,7 +223,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-white text-sm font-bold mb-2">
                 Balance
               </label>
               <input
@@ -235,7 +235,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-white text-sm font-bold mb-2">
                 Amount
               </label>
               <input
@@ -247,7 +247,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-white text-sm font-bold mb-2">
                 Swap to
               </label>
               <select
@@ -263,7 +263,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-white text-sm font-bold mb-2">
                 You get
               </label>
               <input

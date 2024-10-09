@@ -171,7 +171,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
         <div className="shadow-md rounded-lg px-4 py-6 sm:px-8 sm:py-8  mb-4">
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="packageName"
             >
               Network
@@ -191,7 +191,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="tokenBalance"
             >
               Amount

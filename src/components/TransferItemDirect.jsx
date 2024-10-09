@@ -158,7 +158,7 @@ const TransferItemDirect = ({ swapHistory }) => {
           <h2 className={styles.heading2}>Internal Transfer</h2>
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="walletType">
+              <label className="block text-white text-sm font-bold mb-2" htmlFor="walletType">
                 Wallet Type
               </label>
               <select
@@ -176,7 +176,7 @@ const TransferItemDirect = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tokenBalance">
+              <label className="block text-white text-sm font-bold mb-2" htmlFor="tokenBalance">
                 Balance
               </label>
               <input
@@ -189,7 +189,7 @@ const TransferItemDirect = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tokenBalance">
+              <label className="block text-white text-sm font-bold mb-2" htmlFor="tokenBalance">
                 Transfer to
               </label>
               <input
@@ -205,7 +205,7 @@ const TransferItemDirect = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tokenBalance">
+              <label className="block text-white text-sm font-bold mb-2" htmlFor="tokenBalance">
                 Amount
               </label>
               <input
@@ -220,7 +220,7 @@ const TransferItemDirect = ({ swapHistory }) => {
             </div>
 
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tokenBalance">
+              <label className="block text-white text-sm font-bold mb-2" htmlFor="tokenBalance">
                 Fee
               </label>
               <input

@@ -117,7 +117,7 @@ const WithdrawItemBinary = ({ depositHistory }) => {
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-white text-sm font-bold mb-2"
                 htmlFor="packageName"
               >
                 Network
@@ -137,7 +137,7 @@ const WithdrawItemBinary = ({ depositHistory }) => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-white text-sm font-bold mb-2"
                 htmlFor="tokenBalance"
               >
                 Wallet Address
@@ -155,7 +155,7 @@ const WithdrawItemBinary = ({ depositHistory }) => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-white text-sm font-bold mb-2"
                 htmlFor="tokenBalance"
               >
                 Amount
@@ -186,7 +186,7 @@ const WithdrawItemBinary = ({ depositHistory }) => {
             </div>
             <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-white text-sm font-bold mb-2"
                 htmlFor="tokenBalance"
               >
                 Fee

@@ -50,7 +50,7 @@ const UserNavbar = () => {
   };
 
   return (
-    <nav className="w-full flex flex-1 justify-between items-center navbar mt-[20px]">
+    <nav className="w-full flex flex-1 justify-between items-center navbar">
       <a href="/" className="pb-[70px]">
         <img
           src={logo}
@@ -79,7 +79,9 @@ const UserNavbar = () => {
           <button
             onClick={handleDisconnect}
             style={{
-              marginTop: "20px",
+              display: "flex", // Flex for centering
+              alignItems: "center", // Center vertically
+              justifyContent: "center", // Center horizontally
               padding: "10px 20px", // Adjust padding for top-bottom and left-right
               backgroundColor: "#01a1b3", // Background color
               color: "#ffffff", // Text color
@@ -125,7 +127,7 @@ const UserNavbar = () => {
                 key={nav.id}
                 className={`font-poppins font-medium cursor-pointer text-[16px] ${
                   active === nav.title ? "text-white" : "text-dimWhite"
-                } ${index === userNavLinks.length - 1 ? "mb-0" : "mb-4"}`} // Adjust the margin-bottom here
+                } ${index === userNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
               >
                 <a href={`/${nav.id}`}>{nav.title}</a>

@@ -167,7 +167,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
         <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="packageName"
             >
               Staking name
@@ -188,7 +188,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="email"
             >
               Staking price
@@ -203,7 +203,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="phoneNumber"
             >
               Daily reward
@@ -219,7 +219,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="balance"
             >
               Mapchain Balance
@@ -234,7 +234,7 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-white text-sm font-bold mb-2"
               htmlFor="transfer"
             >
               Transfer Balance
