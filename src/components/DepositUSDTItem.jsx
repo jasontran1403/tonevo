@@ -252,7 +252,6 @@ const DepositUSDTItem = ({ depositHistory }) => {
           </div>
         </div>
 
-        <ToastContainer stacked />
       </div>
     </section>
   );
