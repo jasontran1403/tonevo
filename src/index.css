@@ -25,6 +25,18 @@
 .investment-container {
   display: flex;
   justify-content: center;
+  align-items: center; /* Ensures vertical centering if necessary */
+  max-width: 100vw; /* Full viewport width */
+  padding: 20px; /* Add some padding for better spacing */
+  box-sizing: border-box; /* Ensures padding is included in the width/height */
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .investment-container {
+    flex-direction: column; /* Stack content vertically on smaller screens */
+    padding: 10px;
+  }
 }
 
 .bg-image {

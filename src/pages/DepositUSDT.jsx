@@ -4,6 +4,8 @@ import styles from "../style";
 import styled from "styled-components";
 import { UserNavbar, DepositUSDTCard } from "../components";
 import LockModal from "../components/LockModal";
+import { Modal } from "@mui/material";
+import { Form } from "react-router-dom";
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -13,6 +15,25 @@ const CloseButton = styled.svg`
   top: 18px;
   cursor: pointer;
 `;
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    width: "100%", // Default width for larger screens
+    height: "auto",
+    bottom: "auto",
+    colo: "white",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "2rem",
+  },
+  overlay: {
+    zIndex: 1000, // Ensure it stays on top
+    backgroundColor: "rgba(0, 0, 0, 0.75)", // Dark background for better focus
+  },
+};
 
 const DepositUSDT = () => {
   const [walletAddress, setWalletAddress] = useState(

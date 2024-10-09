@@ -6,7 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import 'sweetalert2/src/sweetalert2.scss';
+import "sweetalert2/src/sweetalert2.scss";
+import { Tooltip } from "@mui/material";
 
 const DepositUSDTItem = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -45,16 +46,16 @@ const DepositUSDTItem = ({ depositHistory }) => {
     });
 
     Swal.fire({
-      title: 'Confirm deposit',
+      title: "Confirm deposit",
       text: `Are you sure you want to deposit ${amount}?`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, transfer it!',
-      cancelButtonText: 'No, cancel',
+      confirmButtonText: "Yes, transfer it!",
+      cancelButtonText: "No, cancel",
       reverseButtons: true,
       customClass: {
-        confirmButton: 'custom-confirm-button', // Custom class for confirm button
-        cancelButton: 'custom-cancel-button',   // Custom class for cancel button
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
       },
       buttonsStyling: false,
     }).then((result) => {
@@ -70,7 +71,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
           data: data,
           responseType: "blob",
         };
-    
+
         Axios.request(config)
           .then((response) => {
             // Assuming response.data contains the image URL or base64 string
@@ -89,19 +90,36 @@ const DepositUSDTItem = ({ depositHistory }) => {
     });
   };
 
-  const handleCancelDeposit = () => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(depositWallet).then(
+      () => {
+        toast.success("Wallet address copied to clipboard!", {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      },
+      (err) => {
+        console.error("Could not copy text: ", err);
+        toast.error("Failed to copy wallet address!", {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      }
+    );
+  };
 
+  const handleCancelDeposit = () => {
     Swal.fire({
-      title: 'Confirm cancel deposit',
+      title: "Confirm cancel deposit",
       text: `Are you sure you want to cancel ${amount}?`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, transfer it!',
-      cancelButtonText: 'No, cancel',
+      confirmButtonText: "Yes, transfer it!",
+      cancelButtonText: "No, cancel",
       reverseButtons: true,
       customClass: {
-        confirmButton: 'custom-confirm-button', // Custom class for confirm button
-        cancelButton: 'custom-cancel-button',   // Custom class for cancel button
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
       },
       buttonsStyling: false,
     }).then((result) => {
@@ -111,7 +129,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
           amount: 0,
           method: 0,
         });
-    
+
         let config = {
           method: "post",
           url: `${API_ENDPOINT}management/cancel-deposit`,
@@ -122,7 +140,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
           },
           data: data,
         };
-    
+
         Axios.request(config)
           .then((response) => {
             if (response.data === "ok") {
@@ -139,96 +157,104 @@ const DepositUSDTItem = ({ depositHistory }) => {
           });
       }
     });
-    
   };
 
   return (
-    <div className={`investment-container $`}>
-      <section
-        className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} investment-card sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow`}
+    <section
+      className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-black-gradient-2 rounded-[20px] box-shadow `}
+    >
+      <div
+        className="flex-1 flex flex-col"
+        style={{ overflow: "hidden", width: "90svw" }}
       >
-        <div className="flex-1 flex flex-col">
-          <h2 className={styles.heading2}>Deposit</h2>
-          <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="packageName"
-              >
-                Network
-              </label>
-              <select
-                className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="packageName"
-                value={networkSelected}
-                onChange={(e) => setNetworkSelected(e.target.value)}
-              >
-                {listNetwork.map((network) => (
-                  <option key={network.id} value={network.id}>
-                    {network.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="tokenBalance"
-              >
-                Amount
-              </label>
-              <input
-                className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="tokenBalance"
-                type="text" // Use "text" to fully control input validation
-                value={amount}
-                min="0.1"
-                onChange={(e) => {
-                  const value = e.target.value;
+        <h2 className={styles.heading2}>Deposit</h2>
+        <div className="shadow-md rounded-lg px-4 py-6 sm:px-8 sm:py-8  mb-4">
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="packageName"
+            >
+              Network
+            </label>
+            <select
+              className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="packageName"
+              value={networkSelected}
+              onChange={(e) => setNetworkSelected(e.target.value)}
+            >
+              {listNetwork.map((network) => (
+                <option key={network.id} value={network.id}>
+                  {network.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="tokenBalance"
+            >
+              Amount
+            </label>
+            <input
+              className="bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="tokenBalance"
+              type="text"
+              value={amount}
+              min="10"
+              onChange={(e) => {
+                const value = e.target.value;
 
-                  // Regex to allow only numbers and decimals
-                  const regex = /^[0-9]*\.?[0-9]*$/;
+                const regex = /^[0-9]*\.?[0-9]*$/;
 
-                  // Check if the input value matches the regex (valid number format)
-                  if (regex.test(value)) {
-                    const numericValue = parseFloat(value);
-                    if (!isNaN(numericValue) && numericValue > 0) {
-                      setAmount(value); // Keep the valid input
-                    } else {
-                      setAmount(""); // Reset if invalid
-                    }
+                if (regex.test(value)) {
+                  const numericValue = parseFloat(value);
+                  if (!isNaN(numericValue) && numericValue > 0) {
+                    setAmount(value);
+                  } else {
+                    setAmount("");
                   }
-                }}
-              />
-            </div>
-
-            <div className="mb-6">
-              {qrImage && (
-                <img
-                  src={qrImage}
-                  alt="QR Code"
-                  className="w-[300px] h-auto" // Adjust styling as needed
-                />
-              )}
-            </div>
-            <div className="mb-6" style={{ color: "white", fontSize: "20px" }}>
-              {qrImage && (
-                <p>Wallet addess: {depositWallet}</p>
-              )}
-            </div>
-            <div className="flex items-center justify-between">
-              {qrImage.length === 0 ? (
-                <Button handleClick={handleCreateDeposit} content={"Deposit"} />
-              ) : (
-                <Button handleClick={handleCancelDeposit} content={"Cancel"} />
-              )}
-            </div>
+                }
+              }}
+            />
           </div>
 
-          <ToastContainer stacked />
+          {qrImage && (
+            <div className="mb-6 flex flex-col justify-center">
+              <img
+                src={qrImage}
+                alt="QR Code"
+                className="max-w-full sm:max-w-sm" // Ensure image scales responsively
+              />
+              <Tooltip title={depositWallet} arrow>
+                <input
+                  style={{
+                    cursor: "pointer",
+                    width: "100%", // Full width
+                    whiteSpace: "nowrap", // Prevents wrapping
+                    overflow: "hidden", // Hides overflow
+                    textOverflow: "ellipsis", // Ellipsis for overflow content
+                  }}
+                  onClick={handleCopy}
+                  value={depositWallet}
+                  readOnly
+                />
+              </Tooltip>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between">
+            {qrImage.length === 0 ? (
+              <Button handleClick={handleCreateDeposit} content={"Deposit"} />
+            ) : (
+              <Button handleClick={handleCancelDeposit} content={"Cancel"} />
+            )}
+          </div>
         </div>
-      </section>
-    </div>
+
+        <ToastContainer stacked />
+      </div>
+    </section>
   );
 };
 
