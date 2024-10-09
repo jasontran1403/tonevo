@@ -11,6 +11,7 @@ const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
+  "Fee",
   "To",
   "Status",
   "Note",
