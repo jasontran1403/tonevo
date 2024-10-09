@@ -203,8 +203,6 @@ const WithdrawItemDaily = ({ depositHistory }) => {
               <Button handleClick={handleWithdraw} content={"Withdraw"} />
             </div>
           </div>
-
-          <ToastContainer stacked />
         </div>
       </section>
     </div>

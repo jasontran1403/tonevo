@@ -29,7 +29,7 @@ const WithdrawCardDirect = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}/3`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -52,7 +52,7 @@ const WithdrawCardDirect = () => {
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <WithdrawTable TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
+        <WithdrawTable TYPE={3} TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
       </div>
     </>
   );

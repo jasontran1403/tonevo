@@ -11,6 +11,7 @@ const TABLE_HEAD = [
   "Code",
   "Date",
   "Amount",
+  "Fee",
   "To",
   "Status",
   "Note",
@@ -29,7 +30,7 @@ const WithdrawCardLeader = () => {
   useEffect(() => {
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}`,
+      url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}/5`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
@@ -52,7 +53,7 @@ const WithdrawCardLeader = () => {
       </div>
 
       <div className={`${styles.flexCenter}`}>
-        <WithdrawTable TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
+        <WithdrawTable TYPE={5} TABLE_NAME={"Recent withdraw"} TABLE_SUBNAME={"These are details about the lastest withdraw"} TABLE_HEAD={TABLE_HEAD} TABLE_ROWS={withdrawHistory} />
       </div>
     </>
   );

@@ -18,7 +18,13 @@ import {
 } from "@material-tailwind/react";
 import { API_ENDPOINT } from "../constants";
 
-const WithdrawTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
+const WithdrawTable = ({
+  TABLE_NAME,
+  TABLE_SUBNAME,
+  TABLE_HEAD,
+  TABLE_ROWS,
+  TYPE,
+}) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("access_token")
   );
@@ -38,12 +44,12 @@ const WithdrawTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
 
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}management/cancel/${depositCode}`,
+      url: `${API_ENDPOINT}management/cancel-withdraw/${depositCode}/${TYPE}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
         "ngrok-skip-browser-warning": "69420",
-      }
+      },
     };
 
     Axios.request(config)
@@ -115,11 +121,10 @@ const WithdrawTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
 
   const formatNumber = (numberString) => {
     // Format the number with commas
-    const formattedNumber = new Intl.NumberFormat('en-US').format(numberString);
-  
+    const formattedNumber = new Intl.NumberFormat("en-US").format(numberString);
+
     return formattedNumber;
   };
-  
 
   return (
     <Card className="h-full w-full flex flex-col">
@@ -172,66 +177,68 @@ const WithdrawTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
             </tr>
           </thead>
           <tbody className="min-h-[20rem]">
-  {currentRows.map(
-    (
-      {
-        code,
-        amount,
-        currency,
-        date,
-        toWallet,
-        status,
-        hash
-      },
-      index
-    ) => {
-      const isLast = index === currentRows.length - 1;
-      const classes = isLast
-        ? "p-4"
-        : "p-4 border-b border-blue-gray-50";
+            {currentRows.map(
+              (
+                { code, amount, currency, fee, date, toWallet, status, hash },
+                index
+              ) => {
+                const isLast = index === currentRows.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-      return (
-        <tr key={code}>
-          <td className={classes}>
-            <div className="flex items-center gap-3">
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
-              >
-                {code}
-              </Typography>
-            </div>
-          </td>
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatDate(date)}
-            </Typography>
-          </td>
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatNumber(amount)} {currency}
-            </Typography>
-          </td>
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {toWallet}
-            </Typography>
-          </td>
-          <td className={classes}>
-                      <div className="w-max">
+                return (
+                  <tr key={code}>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          {code}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatDate(date)}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatNumber(amount)} {currency}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatNumber(fee)} {currency}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {toWallet}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex items-center space-x-2">
+                        {/* Status Chip */}
                         <Chip
                           size="sm"
                           variant="ghost"
@@ -243,43 +250,48 @@ const WithdrawTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) =>
                               ? "amber"
                               : "red"
                           }
-                          onClick={
-                            status === "pending"
-                              ? () => handleCancelPending(code)
-                              : undefined
-                          }
                           className={
                             status === "pending" ? "cursor-pointer" : ""
                           }
                         />
+
+                        {/* Cancel Button (only visible if status is "pending") */}
+                        {status === "pending" && (
+                          <button
+                            onClick={() => handleCancelPending(code)}
+                            className="px-2 py-1 text-sm font-medium text-white bg-red-500 rounded hover:bg-red-600"
+                          >
+                            Cancel
+                          </button>
+                        )}
                       </div>
                     </td>
-          <td className={classes}>
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal capitalize"
-                >
-                  {hash}
-                </Typography>
-              </div>
-            </div>
-          </td>
-          {/* <td className={classes}>
+
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal capitalize"
+                          >
+                            {hash}
+                          </Typography>
+                        </div>
+                      </div>
+                    </td>
+                    {/* <td className={classes}>
             <Tooltip content="Edit User">
               <IconButton variant="text">
                 <PencilIcon className="h-4 w-4" />
               </IconButton>
             </Tooltip>
           </td> */}
-        </tr>
-      );
-    }
-  )}
-</tbody>
-
+                  </tr>
+                );
+              }
+            )}
+          </tbody>
         </table>
       </CardBody>
       <CardFooter className="flex items-center justify-center border-t border-blue-gray-50 p-4">
