@@ -220,7 +220,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
           </div>
 
           {qrImage && (
-            <div className="mb-6 flex flex-col justify-center">
+            <div className="mb-6 flex flex-col justify-center gap-5">
               <img
                 src={qrImage}
                 alt="QR Code"
@@ -233,7 +233,6 @@ const DepositUSDTItem = ({ depositHistory }) => {
                     width: "100%", // Full width
                     whiteSpace: "nowrap", // Prevents wrapping
                     overflow: "hidden", // Hides overflow
-                    textOverflow: "ellipsis", // Ellipsis for overflow content
                   }}
                   onClick={handleCopy}
                   value={depositWallet}
