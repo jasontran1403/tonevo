@@ -8,6 +8,7 @@ import { API_ENDPOINT } from "../constants";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { Tooltip } from "@mui/material";
+import CopyIcon from '@mui/icons-material/FileCopy';
 
 const DepositUSDTItem = ({ depositHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
@@ -226,19 +227,28 @@ const DepositUSDTItem = ({ depositHistory }) => {
                 alt="QR Code"
                 className="max-w-full sm:max-w-sm" // Ensure image scales responsively
               />
-              <Tooltip title={depositWallet} arrow>
-                <input
-                  style={{
-                    cursor: "pointer",
-                    width: "100%", // Full width
-                    whiteSpace: "nowrap", // Prevents wrapping
-                    overflow: "hidden", // Hides overflow
-                  }}
+              <div className="flex items-center">
+                <Tooltip title={depositWallet} arrow>
+                  <input
+                    style={{
+                      cursor: "pointer",
+                      width: "100%", // Full width
+                      whiteSpace: "nowrap", // Prevents wrapping
+                      overflow: "hidden", // Hides overflow
+                    }}
+                    onClick={handleCopy}
+                    value={depositWallet}
+                    readOnly
+                  />
+                </Tooltip>
+                <button
                   onClick={handleCopy}
-                  value={depositWallet}
-                  readOnly
-                />
-              </Tooltip>
+                  className="ml-2 p-1 rounded hover:bg-gray-200"
+                  aria-label="Copy wallet address"
+                >
+                  <CopyIcon style={{ color: "white" }}/>
+                </button>
+              </div>
             </div>
           )}
 
@@ -250,7 +260,6 @@ const DepositUSDTItem = ({ depositHistory }) => {
             )}
           </div>
         </div>
-
       </div>
     </section>
   );
