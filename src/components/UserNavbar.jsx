@@ -28,7 +28,6 @@ const UserNavbar = () => {
   };
 
   const handleDisconnect = async () => {
-    console.log("ok");
     if (tonConnectUI) {
       try {
         await tonConnectUI.disconnect();

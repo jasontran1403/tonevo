@@ -113,7 +113,7 @@ function App() {
     return () => {
       clearTimeout(timeout);
     };
-  }, [connect]);
+  }, [connect, id]);
 
   return <Router />;
 }
