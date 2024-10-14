@@ -43,6 +43,8 @@ export default function Router() {
         );
     });
 
+    const isAdmin = window.location.href.includes("/admin");
+
     const routes = useRoutes([
         {
             path: "/",
@@ -162,116 +164,112 @@ export default function Router() {
         },
         // here
         {
-            path: "/admin/dashboard",
-            element: isConnectedToWallet ? <Dashboard /> : <Navigate to="/" />
+            path: "/admin/dashboard/:id",
+            element: isAdmin ? <Dashboard /> : <Navigate to="/" />
         },
         {
-            path: "/admin/staking",
-            element: isConnectedToWallet ? <Investment /> : <Navigate to="/" />
+            path: "/admin/staking/:id",
+            element: isAdmin ? <Investment /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-usdt",
-            element: isConnectedToWallet ? <WithdrawUSDT /> : <Navigate to="/" />
+            path: "/admin/withdraw-usdt/:id",
+            element: isAdmin ? <WithdrawUSDT /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-mct",
-            element: isConnectedToWallet ? <WithdrawMCT /> : <Navigate to="/" />
+            path: "/admin/withdraw-mct/:id",
+            element: isAdmin ? <WithdrawMCT /> : <Navigate to="/" />
         },
         {
-            path: "/admin/deposit-usdt",
-            element: isConnectedToWallet ? <DepositUSDT /> : <Navigate to="/" />
+            path: "/admin/deposit-usdt/:id",
+            element: isAdmin ? <DepositUSDT /> : <Navigate to="/" />
         },
         {
-            path: "/admin/deposit-mct",
-            element: isConnectedToWallet ? <DepositMCT /> : <Navigate to="/" />
+            path: "/admin/deposit-mct/:id",
+            element: isAdmin ? <DepositMCT /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-usdt-mct",
-            element: isConnectedToWallet ? <SwapUsdtMCT /> : <Navigate to="/" />
+            path: "/admin/swap-usdt-mct/:id",
+            element: isAdmin ? <SwapUsdtMCT /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-mct-usdt",
-            element: isConnectedToWallet ? <SwapMCTUsdt /> : <Navigate to="/" />
+            path: "/admin/swap-mct-usdt/:id",
+            element: isAdmin ? <SwapMCTUsdt /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-daily",
-            element: isConnectedToWallet ? <SwapDaily /> : <Navigate to="/" />
+            path: "/admin/swap-daily/:id",
+            element: isAdmin ? <SwapDaily /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-direct",
-            element: isConnectedToWallet ? <SwapDirect /> : <Navigate to="/" />
+            path: "/admin/swap-direct/:id",
+            element: isAdmin ? <SwapDirect /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-binary",
-            element: isConnectedToWallet ? <SwapBinary /> : <Navigate to="/" />
+            path: "/admin/swap-binary/:id",
+            element: isAdmin ? <SwapBinary /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-leader",
-            element: isConnectedToWallet ? <SwapLeader /> : <Navigate to="/" />
+            path: "/admin/swap-leader/:id",
+            element: isAdmin ? <SwapLeader /> : <Navigate to="/" />
         },
         {
-            path: "/admin/swap-pop",
-            element: isConnectedToWallet ? <SwapPop /> : <Navigate to="/" />
+            path: "/admin/swap-pop/:id",
+            element: isAdmin ? <SwapPop /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-pop",
-            element: isConnectedToWallet ? <WithdrawPop /> : <Navigate to="/" />
+            path: "/admin/withdraw-pop/:id",
+            element: isAdmin ? <WithdrawPop /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-daily",
-            element: isConnectedToWallet ? <WithdrawDaily /> : <Navigate to="/" />
+            path: "/admin/withdraw-daily/:id",
+            element: isAdmin ? <WithdrawDaily /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-direct",
-            element: isConnectedToWallet ? <WithdrawDirect /> : <Navigate to="/" />
+            path: "/admin/withdraw-direct/:id",
+            element: isAdmin ? <WithdrawDirect /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-binary",
-            element: isConnectedToWallet ? <WithdrawBinary /> : <Navigate to="/" />
+            path: "/admin/withdraw-binary/:id",
+            element: isAdmin ? <WithdrawBinary /> : <Navigate to="/" />
         },
         {
-            path: "/admin/withdraw-leader",
-            element: isConnectedToWallet ? <WithdrawLeader /> : <Navigate to="/" />
+            path: "/admin/withdraw-leader/:id",
+            element: isAdmin ? <WithdrawLeader /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer-direct",
-            element: isConnectedToWallet ? <TransferDirect /> : <Navigate to="/" />
+            path: "/admin/transfer-direct/:id",
+            element: isAdmin ? <TransferDirect /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer-binary",
-            element: isConnectedToWallet ? <TransferBinary /> : <Navigate to="/" />
+            path: "/admin/transfer-binary/:id",
+            element: isAdmin ? <TransferBinary /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer-leader",
-            element: isConnectedToWallet ? <TransferLeader /> : <Navigate to="/" />
+            path: "/admin/transfer-leader/:id",
+            element: isAdmin ? <TransferLeader /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer-pop",
-            element: isConnectedToWallet ? <TransferPop /> : <Navigate to="/" />
+            path: "/admin/transfer-pop/:id",
+            element: isAdmin ? <TransferPop /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer-daily",
-            element: isConnectedToWallet ? <TransferDaily /> : <Navigate to="/" />
+            path: "/admin/transfer-daily/:id",
+            element: isAdmin ? <TransferDaily /> : <Navigate to="/" />
         },
         {
-            path: "/admin/direct-tree",
-            element: isConnectedToWallet ? <DirectTree /> : <Navigate to="/" />
+            path: "/admin/direct-tree/:id",
+            element: isAdmin ? <DirectTree /> : <Navigate to="/" />
         },
         {
-            path: "/test",
-            element: <Test />
+            path: "/admin/transfer/:id",
+            element: isAdmin ? <Transfer /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transfer",
-            element: isConnectedToWallet ? <Transfer /> : <Navigate to="/" />
+            path: "/admin/transactions/:id",
+            element: isAdmin ? <Transactions /> : <Navigate to="/" />
         },
         {
-            path: "/admin/transactions",
-            element: isConnectedToWallet ? <Transactions /> : <Navigate to="/" />
-        },
-        {
-            path: "/admin/tree",
-            element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
+            path: "/admin/tree/:id",
+            element: isAdmin ? <Tree /> : <Navigate to="/" />
         },
         // end
         {

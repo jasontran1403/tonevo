@@ -2,6 +2,7 @@ import styles from "../style";
 
 const WalletCard3 = ({ content, amount, unit, rank, wallet }) => {
   const isAdmin = window.location.href.includes('/admin');
+  const id = location.pathname.split('/admin/dashboard/')[1];
 
   const formatNumber = (numberString) => {
     // Format the number with commas
@@ -24,13 +25,13 @@ const WalletCard3 = ({ content, amount, unit, rank, wallet }) => {
           
           <div className="flex mt-4 md:mt-6">
             <a
-              href={isAdmin ? "/admin/withdraw-mct" : "/withdraw-mct"}
+              href={isAdmin ? "/admin/withdraw-mct/"+id : "/withdraw-mct"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Withdraw
             </a>
             <a
-              href={isAdmin ? "/admin/swap" : "/swap"}
+              href={isAdmin ? "/admin/swap/"+id : "/swap"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Swap
