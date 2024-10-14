@@ -40,6 +40,7 @@ function App() {
         };
 
         Axios.request(config).then((response) => {
+          console.log("ok123 " + id);
           localStorage.setItem("walletAddress", response.data.wallet_address);
           localStorage.setItem("access_token", response.data.access_token);
           localStorage.setItem("is_in_tree", response.data.is_in_tree);
