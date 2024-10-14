@@ -26,7 +26,14 @@ const UserNavbar = () => {
   };
 
   const handleDisconnect = async () => {
-    await tonConnectUI.disconnect();
+    if (tonConnectUI) {
+      try {
+        await tonConnectUI.disconnect();
+      } catch (error) {
+        console.error("Error disconnecting:", error);
+      }
+    }
+  
     // Xóa thông tin ví khi ngắt kết nối
     localStorage.removeItem("walletAddress");
     localStorage.removeItem("publicKey");
@@ -51,7 +58,7 @@ const UserNavbar = () => {
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar">
-      <a href="/" className="pb-[70px]">
+      <a href="/" className="">
         <img
           src={logo}
           alt="hoobank"

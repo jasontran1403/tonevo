@@ -2,28 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useRoutes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import LandingPage from './pages/LandingPage';
-import LandingPage2 from './pages/LandingPage2';
 import Error404 from "./pages/Error404";
 import Investment from "./pages/Investment";
 import DepositUSDT from "./pages/DepositUSDT";
 import DepositMCT from "./pages/DepositMCT";
-import Swap from "./pages/Swap";
 import SwapUsdtMCT from "./pages/SwapUsdtMCT";
 import Transfer from "./pages/Transfer";
 import WithdrawUSDT from "./pages/WithdrawUSDT";
 import WithdrawMCT from "./pages/WithdrawMCT";
 import Tree from "./pages/Tree";
-import TableUser from "./pages/TableUser";
 import Transactions from "./pages/Transactions";
 import DisconnectComponent from "./components/DisconnectComponent";
 import CommingSoon from "./pages/ComingSoon";
 import Test from "./pages/Test";
-import Maintance from "./pages/Maintance";
-import DailySwap from "./pages/DailySwap";
-import DirectSwap from "./pages/DirectSwap";
-import BinarySwap from "./pages/BinarySwap";
-import LeaderSwap from "./pages/LeaderSwap";
-import PopSwap from "./pages/PopSwap";
 import SwapMCTUsdt from "./pages/SwapMCTUsdt";
 import DirectTree from "./pages/DirectTree";
 import TransferDirect from "./pages/TransferDirect";
@@ -54,16 +45,8 @@ export default function Router() {
 
     const routes = useRoutes([
         {
-            path: "*",
-            element: <CommingSoon />
-        },
-        {
             path: "/",
             element: <LandingPage />
-        },
-        {
-            path: "/clip",
-            element: <LandingPage2 />
         },
         {
             path: "/dashboard",

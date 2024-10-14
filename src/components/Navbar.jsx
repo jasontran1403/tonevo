@@ -45,7 +45,7 @@ const Navbar = ({ handleOpenModal }) => {
 
   return (
     <nav className="w-full flex flex-1 justify-between items-center navbar gap-0 mt-[20px]">
-      <a href="/" className="pb-[70px]">
+      <a href="/" className="">
         <img
           src={logo}
           alt="hoobank"
@@ -75,8 +75,7 @@ const Navbar = ({ handleOpenModal }) => {
           <button
             onClick={handleDisconnect}
             style={{
-              marginTop: "20px",
-              padding: "10px 20px", // Adjust padding for top-bottom and left-right
+              padding: "5px 20px", // Adjust padding for top-bottom and left-right
               backgroundColor: "#01a1b3", // Background color
               color: "#ffffff", // Text color
               border: "none", // No border

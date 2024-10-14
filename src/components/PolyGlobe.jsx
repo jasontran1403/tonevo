@@ -808,7 +808,7 @@ const PolyGlobe = ({ handleOpenModal, animate, rorateSpeed }) => {
         globeEl.current.controls().autoRotate = true;
         globeEl.current.controls().autoRotateSpeed = rorateSpeed;
 
-        const altitude = window.innerWidth <= 768 ? 4 : 3;
+        const altitude = window.innerWidth <= 768 ? 5.5 : 3;
         globeEl.current.pointOfView({ lat: 0, lng: 0, altitude });
       } else {
         to = setTimeout(check, 1000);
