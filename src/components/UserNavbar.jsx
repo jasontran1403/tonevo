@@ -12,9 +12,8 @@ const UserNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tonConnectUI] = useTonConnectUI();
   const [wallet] = useState(localStorage.getItem("walletAddress"));
-  const isAdmin = window.location.href.includes('/admin');
-  const id = location.pathname.split('/admin/dashboard/')[1];
-
+  const isAdmin = window.location.href.includes("/admin");
+  const id = location.pathname.split("/admin/dashboard/")[1];
 
   const openModal = () => {
     setIsOpen(true);
@@ -29,6 +28,7 @@ const UserNavbar = () => {
   };
 
   const handleDisconnect = async () => {
+    console.log("ok");
     if (tonConnectUI) {
       try {
         await tonConnectUI.disconnect();
@@ -36,7 +36,7 @@ const UserNavbar = () => {
         console.error("Error disconnecting:", error);
       }
     }
-  
+
     // Xóa thông tin ví khi ngắt kết nối
     localStorage.removeItem("walletAddress");
     localStorage.removeItem("publicKey");
@@ -80,7 +80,11 @@ const UserNavbar = () => {
               handleOpenModal(true, index);
             }}
           >
-            {isAdmin ? <a href={`/admin/${nav.id}/${id}`}>{nav.title}</a> : <a href={`/${nav.id}`}>{nav.title}</a>}
+            {isAdmin ? (
+              <a href={`/admin/${nav.id}/${id}`}>{nav.title}</a>
+            ) : (
+              <a href={`/${nav.id}`}>{nav.title}</a>
+            )}
           </li>
         ))}
       </ul>
@@ -140,7 +144,11 @@ const UserNavbar = () => {
                 } ${index === userNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
               >
-                {isAdmin ? <a href={`/admin/${nav.id}/${id}`}>{nav.title}</a> : <a href={`/${nav.id}`}>{nav.title}</a>}
+                {isAdmin ? (
+                  <a href={`/admin/${nav.id}/${id}`}>{nav.title}</a>
+                ) : (
+                  <a href={`/${nav.id}`}>{nav.title}</a>
+                )}
               </li>
             ))}
           </ul>
