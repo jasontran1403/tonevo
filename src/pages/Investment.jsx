@@ -38,29 +38,6 @@ const Investment = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   useEffect(() => {
-    let data = JSON.stringify({
-      walletAddress: walletAddress,
-      publicKey: publicKey,
-      walletStateInit: walletStateInit,
-    });
-
-    let config = {
-      method: "post",
-      url: `${API_ENDPOINT}auth/authenticate`,
-      headers: {
-        "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "69420",
-      },
-      data: data,
-    };
-
-    Axios.request(config).then((response) => {
-      localStorage.setItem("access_token", response.data.access_token);
-      setAccessToken(response.data.access_token);
-    });
-  }, []);
-
-  useEffect(() => {
     // Only proceed when notification is closed
     if (isInTree === "true") {
       setIsOpen(false);

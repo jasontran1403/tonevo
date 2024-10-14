@@ -12,6 +12,7 @@ const UserNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tonConnectUI] = useTonConnectUI();
   const [wallet] = useState(localStorage.getItem("walletAddress"));
+  const isAdmin = window.location.href.includes('/admin');
 
   const openModal = () => {
     setIsOpen(true);
@@ -77,7 +78,7 @@ const UserNavbar = () => {
               handleOpenModal(true, index);
             }}
           >
-            <a href={`/${nav.id}`}>{nav.title}</a>
+            {isAdmin ? <a href={`/admin/${nav.id}`}>{nav.title}</a> : <a href={`/${nav.id}`}>{nav.title}</a>}
           </li>
         ))}
       </ul>
@@ -137,7 +138,7 @@ const UserNavbar = () => {
                 } ${index === userNavLinks.length - 1 ? "mb-0" : "mb-4"}`}
                 onClick={() => setActive(nav.title)}
               >
-                <a href={`/${nav.id}`}>{nav.title}</a>
+                {isAdmin ? <a href={`/admin/${nav.id}`}>{nav.title}</a> : <a href={`/${nav.id}`}>{nav.title}</a>}
               </li>
             ))}
           </ul>

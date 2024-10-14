@@ -17,6 +17,7 @@ function App() {
   const wallet = useTonWallet();
   const connect = useTonConnectUI();
   const [lastStatus, setLastStatus] = useState();
+  const isAdmin = window.location.href.includes('/admin');
 
   useEffect(() => {
     var timeout;
@@ -27,31 +28,34 @@ function App() {
       localStorage.setItem("walletAddress", wallet.account.address);
       localStorage.setItem("publicKey", wallet.account.publicKey);
       localStorage.setItem("walletStateInit", wallet.account.walletStateInit);
+      localStorage.setItem("managerment", "admin");
       setLastStatus(true);
-      timeout = setTimeout(() => {
-        let data = JSON.stringify({
-          walletAddress: wallet.account.address,
-          publicKey: wallet.account.publicKey,
-          walletStateInit: wallet.account.walletStateInit,
-        });
-
-        let config = {
-          method: "post",
-          url: `${API_ENDPOINT}auth/authenticate`,
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-          },
-          data: data,
-        };
-
-        Axios.request(config).then((response) => {
-          localStorage.setItem("access_token", response.data.access_token);
-          localStorage.setItem("is_in_tree", response.data.is_in_tree);
-          localStorage.setItem("is_lock", response.data.is_lock);
-          localStorage.setItem("bep20", response.data.bep20);
-        });
-      }, 500);
+      if (!isAdmin) {
+        timeout = setTimeout(() => {
+          let data = JSON.stringify({
+            walletAddress: wallet.account.address,
+            publicKey: wallet.account.publicKey,
+            walletStateInit: wallet.account.walletStateInit,
+          });
+  
+          let config = {
+            method: "post",
+            url: `${API_ENDPOINT}auth/authenticate`,
+            headers: {
+              "Content-Type": "application/json",
+              "ngrok-skip-browser-warning": "69420",
+            },
+            data: data,
+          };
+  
+          Axios.request(config).then((response) => {
+            localStorage.setItem("access_token", response.data.access_token);
+            localStorage.setItem("is_in_tree", response.data.is_in_tree);
+            localStorage.setItem("is_lock", response.data.is_lock);
+            localStorage.setItem("bep20", response.data.bep20);
+          });
+        }, 500);
+      }
     } else {
       // Xóa thông tin ví khi ngắt kết nối
       localStorage.removeItem("walletAddress");

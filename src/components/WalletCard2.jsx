@@ -1,4 +1,6 @@
 const WalletCard2 = ({ content, amount, unit, rank, wallet }) => {
+  const isAdmin = window.location.href.includes('/admin');
+
   const formatNumber = (numberString) => {
     // Format the number with commas
     const formattedNumber = new Intl.NumberFormat("en-US").format(numberString);
@@ -22,25 +24,25 @@ const WalletCard2 = ({ content, amount, unit, rank, wallet }) => {
         {rank ?? (
           <div className="flex justify-center mt-4 md:mt-6">
             <a
-              href="/deposit-mct"
+              href={isAdmin ? "/admin/deposit-mct" : "/deposit-mct"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Deposit
             </a>
             <a
-              href="/withdraw-mct"
+              href={isAdmin ? "/admin/withdraw-mct" : "/withdraw-mct"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Withdraw
             </a>
             <a
-              href="/transfer"
+              href={isAdmin ? "/admin/transfer" : "/transfer"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Transfer
             </a>
             <a
-              href="/swap-mct-usdt"
+              href={isAdmin ? "/admin/swap-mct-usdt" : "/swap-mct-usdt"}
               className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Swap
