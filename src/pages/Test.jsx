@@ -89,8 +89,8 @@ const Test = () => {
               <p className="sponsor">Sales: {node.userInfo?.sales || 0}</p>
               <p className="sponsor">Team sales left: {node.userInfo?.teamSalesLeft || 0}</p>
               <p className="sponsor">Team sales right: {node.userInfo?.teamSalesRight || 0}</p>
-              <p className="sponsor">Cumulative sales (left): {node.userInfo?.teamSalesLeftLeft || 0}</p>
-              <p className="sponsor">Cumulative sales (right): {node.userInfo?.teamSalesRightLeft || 0}</p>
+              <p className="sponsor">Binary left matching: {node.userInfo?.teamSalesLeftLeft || 0}</p>
+              <p className="sponsor">Binary right matching: {node.userInfo?.teamSalesRightLeft || 0}</p>
             </a>
           ) : (
             <a>
