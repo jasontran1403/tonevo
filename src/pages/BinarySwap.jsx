@@ -84,7 +84,7 @@ const BinarySwap = () => {
     closeLockModal();
   }
   return (
-    <div className="bg-primary w-full h-full">
+    <div className="w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
         <div className={`${styles.boxWidth}`}>
           <UserNavbar />

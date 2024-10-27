@@ -170,6 +170,10 @@ export const userNavLinks = [
     title: "Transaction",
   },
   {
+    id: "mapchain-chart",
+    title: "Mapchain chart",
+  },
+  {
     id: "mapchain-swap",
     title: "Mapchain Swap",
   },

@@ -32,6 +32,7 @@ import WithdrawDaily from "./pages/WithdrawDaily";
 import WithdrawDirect from "./pages/WithdrawDirect";
 import WithdrawBinary from "./pages/WithdrawBinary";
 import WithdrawLeader from "./pages/WithdrawLeader";
+import MapchainChart from "./pages/MapchainChart";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -161,6 +162,10 @@ export default function Router() {
         {
             path: "/tree",
             element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
+        },
+        {
+            path: "/mapchain-chart",
+            element: <MapchainChart />
         },
         // here
         {

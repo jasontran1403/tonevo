@@ -21,6 +21,8 @@ const DisconnectComponent = () => {
         localStorage.removeItem("access_token");
         localStorage.removeItem("is_in_tree");
         localStorage.removeItem("is_lock");
+        localStorage.removeItem("ton");
+        localStorage.removeItem("bep20");
 
         connector.disconnect;
 

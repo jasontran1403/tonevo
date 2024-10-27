@@ -80,6 +80,7 @@ function App() {
             localStorage.setItem("is_in_tree", response.data.is_in_tree);
             localStorage.setItem("is_lock", response.data.is_lock);
             localStorage.setItem("bep20", response.data.bep20);
+            localStorage.setItem("ton", response.data.ton);
           });
         }, 500);
       } else {
@@ -89,6 +90,8 @@ function App() {
         localStorage.removeItem("walletStateInit");
         localStorage.removeItem("is_in_tree");
         localStorage.removeItem("is_lock");
+        localStorage.removeItem("ton");
+        localStorage.removeItem("bep20");
 
         let config = {
           method: "get",

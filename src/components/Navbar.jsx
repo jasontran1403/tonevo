@@ -28,6 +28,8 @@ const Navbar = ({ handleOpenModal }) => {
     localStorage.removeItem("is_in_tree");
     localStorage.removeItem("is_lock");
     localStorage.removeItem("bep20");
+    localStorage.removeItem("ton");
+
     let config = {
       method: "get",
       url: `${API_ENDPOINT}auth/logout/${localStorage.getItem("access_token")}`,

@@ -23,7 +23,7 @@ const DepositItem = ({ depositHistory }) => {
 
   const [amount, setAmount] = useState(0);
   const [qrImage, setQrImage] = useState("");
-  const [depositWallet] = useState(localStorage.getItem("bep20"));
+  const [depositWallet] = useState(localStorage.getItem("ton"));
 
   const handleSelectPackage = (packageId) => {
     const selectedPackage = listPackages.find(
@@ -224,8 +224,6 @@ const DepositItem = ({ depositHistory }) => {
               )}
             </div>
           </div>
-
-          <ToastContainer stacked />
         </div>
       </section>
     </div>
