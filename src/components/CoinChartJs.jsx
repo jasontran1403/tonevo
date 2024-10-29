@@ -80,16 +80,7 @@ const CoinChartJs = ({ coin }) => {
 
   const borderColor = useColorModeValue("#2a8fd3", "#2a8fd3");
   return (
-    <Box
-      m="2%"
-      gap="5"
-      style={{
-        marginTop: "100px",
-        paddingBottom: "20px",
-        width: "96svw",
-        backgroundColor: "white",
-      }}
-    >
+    <Box m="2%" gap="5" className="mct-chart">
       {!historicData || !flag ? (
         <Flex justify="center" align="center">
           <CircularProgress
@@ -134,18 +125,31 @@ const CoinChartJs = ({ coin }) => {
               datasets: [
                 {
                   data: historicData.map((coin) => coin[1]),
-                  label: `Price ( Past ${days} Days ) in USD`,
                   borderColor: borderColor,
+                  fill: true,
                 },
               ],
             }}
             options={{
               elements: {
                 point: {
-                  radius: 1,
+                  radius: 3,
+                },
+              },
+              plugins: {
+                tooltip: {
+                  enabled: true,
+                  mode: 'nearest',
+                  intersect: true, // Đặt false để hiển thị tooltip khi hover gần dấu chấm
+                  callbacks: {
+                    label: function (tooltipItem) {
+                      return `Price: $${tooltipItem.dataset.data[tooltipItem.dataIndex]}`;
+                    },
+                  },
                 },
               },
             }}
+            
           />
         </>
       )}

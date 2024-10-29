@@ -147,6 +147,10 @@ export const connectedNavLinks = [
     title: "Swap",
   },
   {
+    id: "chart",
+    title: "Chart",
+  },
+  {
     id: "dashboard",
     title: "Dashsboard",
   },
@@ -168,10 +172,6 @@ export const userNavLinks = [
   {
     id: "transactions",
     title: "Transaction",
-  },
-  {
-    id: "mapchain-chart",
-    title: "Mapchain chart",
   },
   {
     id: "mapchain-swap",

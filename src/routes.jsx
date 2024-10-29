@@ -33,6 +33,7 @@ import WithdrawDirect from "./pages/WithdrawDirect";
 import WithdrawBinary from "./pages/WithdrawBinary";
 import WithdrawLeader from "./pages/WithdrawLeader";
 import MapchainChart from "./pages/MapchainChart";
+import MapchainChart2 from "./pages/MapchainChart2";
 
 export default function Router() {
     // Initialize with the value from localStorage
@@ -50,6 +51,10 @@ export default function Router() {
         {
             path: "/",
             element: <LandingPage />
+        },
+        {
+            path: "/chart",
+            element: <MapchainChart2 />
         },
         {
             path: "/dashboard",
@@ -162,10 +167,6 @@ export default function Router() {
         {
             path: "/tree",
             element: isConnectedToWallet ? <Tree /> : <Navigate to="/" />
-        },
-        {
-            path: "/mapchain-chart",
-            element: <MapchainChart />
         },
         // here
         {

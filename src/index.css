@@ -32,10 +32,27 @@
   overflow: hidden;
 }
 
+.test {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mct-chart {
+  margin-top: 150px !important;
+  width: 80svw;
+  background-color: white;
+  display: inline-block;
+  margin: 0 auto;
+}
+
 @media (max-width: 768px) {
   .investment-container {
     flex-direction: column; /* Stack content vertically on smaller screens */
     padding: 10px;
+  }
+
+  .mct-chart {
+    width: 95svw;
   }
 }
 

@@ -29,7 +29,7 @@ const RankCard = ({ content, rank }) => {
   };
 
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full max-w-lg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       
         
         {/* Use the rank value to select the appropriate image */}

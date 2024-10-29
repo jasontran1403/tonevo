@@ -64,7 +64,7 @@ const Navbar = ({ handleOpenModal }) => {
             } ${index === connectedNavLinks.length - 1 ? "mr-0" : "mr-10"}`}
             onClick={() => handleMenuItemClick(nav.title, index)} // Use the new handler
           >
-            {nav.id === "dashboard" || nav.id === "mapchain-swap" ? (
+            {nav.id === "dashboard" || nav.id === "mapchain-swap" || nav.id === "chart" ? (
               <a href={`/${nav.id}`}>{nav.title}</a>
             ) : (
               <a href={`#${nav.id}`}>{nav.title}</a>
@@ -125,7 +125,7 @@ const Navbar = ({ handleOpenModal }) => {
                 } ${index === connectedNavLinks.length - 1 ? "mb-0" : "mb-4"}`} // Adjust the margin-bottom here
                 onClick={() => handleMenuItemClick(nav.title, index)} // Use the new handler
               >
-                {nav.id === "dashboard" || nav.id === "mapchain-swap" ? (
+                {nav.id === "dashboard" || nav.id === "mapchain-swap" || nav.id === "chart" ? (
                   <a href={`/${nav.id}`}>{nav.title}</a>
                 ) : (
                   <a href={`#${nav.id}`}>{nav.title}</a>
