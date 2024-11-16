@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from "../style";
 import styled from "styled-components";
+import Modal from "react-modal";
+import Form from "../components/Form";
 
 import {
   MainDashboard,
@@ -11,6 +13,24 @@ import {
 } from "../components";
 import { API_ENDPOINT } from "../constants";
 import LockModal from "../components/LockModal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    width: window.innerWidth < 768 ? "100svw" : "70svw", // Dynamic width based on screen size
+    height: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)",
+    padding: "0px!important",
+  },
+  overlay: {
+    zIndex: 1000,
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+  },
+};
+
 
 const CloseButton = styled.svg`
   width: 20px;

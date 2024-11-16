@@ -59,7 +59,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (!notificationModalOpen) {
+    if (notificationModalOpen) {
       // Only proceed when notification is closed
       if (isInTree === "true") {
         setIsOpen(false);
@@ -98,9 +98,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Notification Modal 
+      {/* Notification Modal */}
       <Modal
-        isOpen={notificationModalOpen}
+        isOpen={false}
         onRequestClose={closeNotificationModal}
         style={customStyles}
         contentLabel="Announcement"
@@ -127,7 +127,7 @@ const Dashboard = () => {
           />
         </div>
       </Modal>
-      */}
+      
 
       {/* Lock Modal */}
       {isLock === "true" ? (
