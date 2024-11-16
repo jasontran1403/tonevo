@@ -98,7 +98,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Notification Modal */}
+      {/* Notification Modal 
       <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
@@ -127,6 +127,7 @@ const Dashboard = () => {
           />
         </div>
       </Modal>
+      */}
 
       {/* Lock Modal */}
       {isLock === "true" ? (
