@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Axios from "axios";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,6 +17,7 @@ import {
   Input,
 } from "@material-tailwind/react";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const WithdrawTable = ({
   TABLE_NAME,
@@ -26,14 +27,23 @@ const WithdrawTable = ({
   TYPE,
 }) => {
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
 
   const handleCancelPending = (depositCode) => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     if (
       depositCode === undefined ||
       depositCode === null ||
@@ -47,7 +57,7 @@ const WithdrawTable = ({
       url: `${API_ENDPOINT}management/cancel-withdraw/${depositCode}/${TYPE}`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };
@@ -68,7 +78,10 @@ const WithdrawTable = ({
         }
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
       });
   };
 

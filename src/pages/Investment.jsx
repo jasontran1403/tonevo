@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import styles from "../style";
 import styled from "styled-components";
@@ -40,20 +40,23 @@ const CloseButton = styled.svg`
   top: 18px;
   cursor: pointer;
 `;
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const Investment = () => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
   const [accessToken, setAccessToken] = useState();
 
   const [modalIsOpen, setIsOpen] = useState();
-  const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
-  const [isLock] = useState(localStorage.getItem("is_lock"));
+  const [isInTree, setIsInTree] = useState(sessionStorage.getItem("is_in_tree"));
+  const [isLock] = useState(sessionStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
   const isSmallScreen = window.innerWidth <= 768;
 

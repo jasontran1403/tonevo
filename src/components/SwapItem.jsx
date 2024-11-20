@@ -12,10 +12,10 @@ const SwapItem = ({ swapHistory }) => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);

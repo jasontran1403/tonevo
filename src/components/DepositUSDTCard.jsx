@@ -21,10 +21,10 @@ const TABLE_HEAD = [
 
 const DepositMCTCard = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [depositHistory, setDepositHistory] = useState([]);
@@ -34,7 +34,7 @@ const DepositMCTCard = () => {
       method: "get",
       url: `${API_ENDPOINT}management/deposit-history/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };

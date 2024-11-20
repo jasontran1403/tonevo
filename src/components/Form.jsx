@@ -12,7 +12,7 @@ const Form = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [accessToken] = useState(localStorage.getItem("access_token"));
+  const [accessToken] = useState(sessionStorage.getItem("access_token"));
   
   const [showSponsorError, setShowSponsorError] = useState(true);
   const [showDisplayNameError, setShowDisplayNameError] = useState(true);
@@ -52,7 +52,7 @@ const Form = () => {
       if (result.isConfirmed) {
         setButtonDisabled(true);
         let data = JSON.stringify({
-          walletAddress: localStorage.getItem("walletAddress"),
+          walletAddress: sessionStorage.getItem("walletAddress"),
           code: sponsorCode,
           email: email,
           phoneNumber: phoneNumber,
@@ -75,7 +75,7 @@ const Form = () => {
             if (response.data === "ok") {
               setButtonDisabled(true);
 
-              localStorage.setItem("is_in_tree", "true");
+              sessionStorage.setItem("is_in_tree", "true");
               toast.success("Referral user updated successfully!", {
                 position: "top-center",
                 onClose: () => window.location.reload(),

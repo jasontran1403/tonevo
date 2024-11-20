@@ -20,10 +20,10 @@ const TABLE_HEAD = [
 
 const TransferCardBinary = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
 
@@ -34,7 +34,7 @@ const TransferCardBinary = () => {
       method: "get",
       url: `${API_ENDPOINT}management/transfer-history/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };

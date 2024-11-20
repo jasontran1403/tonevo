@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const DirectTreeView = () => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [expandedNodes, setExpandedNodes] = useState({});
   const [treeData, setTreeData] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state
-  const [walletAddress] = useState(localStorage.getItem("walletAddress")); // Fetching from local storage
-  const [access_token] = useState(localStorage.getItem("access_token")); // Fetching from local storage
+  const [walletAddress] = useState(sessionStorage.getItem("walletAddress")); // Fetching from local storage
+  const [access_token] = useState(sessionStorage.getItem("access_token")); // Fetching from local storage
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +21,21 @@ const DirectTreeView = () => {
   }, []);
 
   const fetchTreeData = async (address) => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     setLoading(true); // Set loading to true when starting to fetch
     let config = {
       method: "get",
       url: `${API_ENDPOINT}auth/direct-tree/${address}`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: access_token,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };
@@ -34,6 +45,10 @@ const DirectTreeView = () => {
       setTreeData(response.data);
     } catch (error) {
       console.log(error);
+      toast.error("Please try again later", {
+        position: "top-right",
+        autoClose: 1500,
+      });
     } finally {
       setLoading(false); // Set loading to false when the fetch is complete
     }

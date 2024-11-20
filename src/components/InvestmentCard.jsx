@@ -18,10 +18,10 @@ const TABLE_HEAD = [
 
 const InvestmentCard = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [packages, setPackages] = useState();
   const [balance, setBalance] = useState();
@@ -32,7 +32,7 @@ const InvestmentCard = () => {
       method: "get",
       url: `${API_ENDPOINT}management/packages/${walletAddress}`,
       headers: {
-        Authorization: accessToken,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };

@@ -13,10 +13,10 @@ const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
 const SwapCardUSDT = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [swapHistory, setSwapHistory] = useState([]);
@@ -26,7 +26,7 @@ const SwapCardUSDT = () => {
       method: "get",
       url: `${API_ENDPOINT}management/swap-history/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };

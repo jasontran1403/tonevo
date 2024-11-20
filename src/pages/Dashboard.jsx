@@ -36,20 +36,20 @@ const customStyles = {
 
 const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
   const [isOpen, toggle] = useState(false);
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
 
-  const [isInTree] = useState(localStorage.getItem("is_in_tree"));
-  const [isLock] = useState(localStorage.getItem("is_lock"));
+  const [isInTree] = useState(sessionStorage.getItem("is_in_tree"));
+  const [isLock] = useState(sessionStorage.getItem("is_lock"));
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalLock, setModalLock] = useState(false);

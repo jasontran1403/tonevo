@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import "../assets/css/TreeView.css";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Tree = () => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
@@ -33,8 +38,9 @@ const Tree = () => {
       method: "post",
       url: `${API_ENDPOINT}management/userMapDown5Level`,
       headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "Content-Type": "application/json",
-        Authorization: accessToken,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };
@@ -45,7 +51,10 @@ const Tree = () => {
         setUserRoot(response.data.root.userInfo);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
       });
   };
 

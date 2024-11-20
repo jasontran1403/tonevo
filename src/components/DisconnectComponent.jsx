@@ -14,15 +14,15 @@ const DisconnectComponent = () => {
     const connector = new TonConnect();
 
     const handleDisconnect = () => {
-        // Clear localStorage or any state management related to wallet connection
-        localStorage.removeItem("walletAddress");
-        localStorage.removeItem("publicKey");
-        localStorage.removeItem("walletStateInit");
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("is_in_tree");
-        localStorage.removeItem("is_lock");
-        localStorage.removeItem("ton");
-        localStorage.removeItem("bep20");
+        // Clear sessionStorage or any state management related to wallet connection
+        sessionStorage.removeItem("walletAddress");
+        sessionStorage.removeItem("publicKey");
+        sessionStorage.removeItem("walletStateInit");
+        sessionStorage.removeItem("access_token");
+        sessionStorage.removeItem("is_in_tree");
+        sessionStorage.removeItem("is_lock");
+        sessionStorage.removeItem("ton");
+        sessionStorage.removeItem("bep20");
 
         connector.disconnect;
 

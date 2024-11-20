@@ -17,10 +17,10 @@ const TABLE_HEAD = [
 
 const TransactionsCard = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [transferHistory, setTransferHistory] = useState([]);

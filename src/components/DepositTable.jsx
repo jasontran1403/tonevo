@@ -27,7 +27,7 @@ const DepositTable = ({
   TABLE_ROWS,
 }) => {
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [searchTerm, setSearchTerm] = useState("");

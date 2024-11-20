@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,13 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss';
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const DepositItem = ({ depositHistory }) => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [networkSelected, setNetworkSelected] = useState("");
 
@@ -23,7 +26,7 @@ const DepositItem = ({ depositHistory }) => {
 
   const [amount, setAmount] = useState(0);
   const [qrImage, setQrImage] = useState("");
-  const [depositWallet] = useState(localStorage.getItem("ton"));
+  const [depositWallet] = useState(sessionStorage.getItem("ton"));
 
   const handleSelectPackage = (packageId) => {
     const selectedPackage = listPackages.find(
@@ -35,6 +38,14 @@ const DepositItem = ({ depositHistory }) => {
   };
 
   const handleCreateDeposit = () => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     if (amount <= 0) {
       return;
     }
@@ -49,8 +60,8 @@ const DepositItem = ({ depositHistory }) => {
       text: `Are you sure you want to deposit ${amount}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, transfer it!',
-      cancelButtonText: 'No, cancel',
+      confirmButtonText: 'Yes, confirm it!',
+      cancelButtonText: 'No, cancel order',
       reverseButtons: true,
       customClass: {
         confirmButton: 'custom-confirm-button', // Custom class for confirm button
@@ -64,7 +75,7 @@ const DepositItem = ({ depositHistory }) => {
           url: `${API_ENDPOINT}management/generate-qr`,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -83,7 +94,10 @@ const DepositItem = ({ depositHistory }) => {
             });
           })
           .catch((error) => {
-            console.log(error);
+            toast.error("Please try again later", {
+              position: "top-right",
+              autoClose: 1500,
+            });
           });
       }
     });

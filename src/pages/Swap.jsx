@@ -37,19 +37,19 @@ const Swap = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
-  const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [isInTree, setIsInTree] = useState(sessionStorage.getItem("is_in_tree"));
   const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
   const [modalIsOpen, setIsOpen] = useState();
-  const [isLock] = useState(localStorage.getItem("is_lock"));
+  const [isLock] = useState(sessionStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
 
   const closeNotificationModal = () => {

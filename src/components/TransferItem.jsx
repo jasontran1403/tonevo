@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss';
 import styles from "../style";
@@ -7,11 +7,14 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const TransferItem = ({ swapHistory }) => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [walletAddress, setWalletAddress] = useState(localStorage.getItem("walletAddress"));
-  const [accessToken, setAccessToken] = useState(localStorage.getItem("access_token"));
+  const [walletAddress, setWalletAddress] = useState(sessionStorage.getItem("walletAddress"));
+  const [accessToken, setAccessToken] = useState(sessionStorage.getItem("access_token"));
   const [to, setTo] = useState("");
   const [balance, setBalance] = useState(0);
   const [amount, setAmount] = useState(0);
@@ -56,6 +59,14 @@ const TransferItem = ({ swapHistory }) => {
   }, []);
 
   const handleCreateDeposit = () => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     if (buttonDisabled) return;
     if (amount <= 0) {
       toast.error("Swap amount must > 0!", {
@@ -105,7 +116,7 @@ const TransferItem = ({ swapHistory }) => {
           url: `${API_ENDPOINT}management/transfer-balance`,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -135,7 +146,10 @@ const TransferItem = ({ swapHistory }) => {
           .catch((error) => {
             setButtonDisabled(false);
 
-            console.log(error);
+            toast.error("Please try again later", {
+              position: "top-right",
+              autoClose: 1500,
+            });
           });
       }
     });

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import styles from "../style";
 import { API_ENDPOINT } from "../constants";
 import TransactionsTable from "./TransactionsTable";
@@ -13,18 +13,29 @@ const TABLE_HEAD = [
   "Status",
   "Note",
 ];
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const TransactionsPage = () => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [withdrawHistory, setWithdrawHistory] = useState([]);
 
   useEffect(() => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     let config = {
       method: "get",
       url: `${API_ENDPOINT}management/all-transactions/${walletAddress}`,
@@ -39,7 +50,10 @@ const TransactionsPage = () => {
         setWithdrawHistory(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
       });
   }, []);
 

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "../style";
 import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,13 +7,17 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import 'sweetalert2/src/sweetalert2.scss';
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
+
 
 const WithdrawItemDirect = ({ depositHistory }) => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [networkSelected, setNetworkSelected] = useState("");
 
@@ -30,6 +34,13 @@ const WithdrawItemDirect = ({ depositHistory }) => {
   const [balance, setBalance] = useState(100000000);
 
   const handleWithdraw = () => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
     if (toWallet === "") {
       toast.error("Wallet address must not be null", {
         position: "top-right",
@@ -50,8 +61,8 @@ const WithdrawItemDirect = ({ depositHistory }) => {
       text: `Are you sure you want to withdraw ${amount} to ${toWallet}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, transfer it!',
-      cancelButtonText: 'No, cancel',
+      confirmButtonText: 'Yes, confirm it!',
+      cancelButtonText: 'No, cancel order',
       reverseButtons: true,
       customClass: {
         confirmButton: 'custom-confirm-button', // Custom class for confirm button
@@ -76,7 +87,7 @@ const WithdrawItemDirect = ({ depositHistory }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              `Bearer ${accessToken}`,
+              `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -99,7 +110,10 @@ const WithdrawItemDirect = ({ depositHistory }) => {
             }
           })
           .catch((error) => {
-            console.log(error);
+            toast.error("Please try again later", {
+              position: "top-right",
+              autoClose: 1500,
+            });
           });
       }
     });

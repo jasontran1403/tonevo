@@ -11,7 +11,7 @@ const Navbar = ({ handleOpenModal }) => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const [tonConnectUI] = useTonConnectUI();
-  const [wallet] = useState(localStorage.getItem("walletAddress"));
+  const [wallet] = useState(sessionStorage.getItem("walletAddress"));
 
   const handleMenuItemClick = (title, index) => {
     setActive(title);
@@ -22,17 +22,17 @@ const Navbar = ({ handleOpenModal }) => {
   const handleDisconnect = async () => {
     await tonConnectUI.disconnect();
     // Xóa thông tin ví khi ngắt kết nối
-    localStorage.removeItem("walletAddress");
-    localStorage.removeItem("publicKey");
-    localStorage.removeItem("walletStateInit");
-    localStorage.removeItem("is_in_tree");
-    localStorage.removeItem("is_lock");
-    localStorage.removeItem("bep20");
-    localStorage.removeItem("ton");
+    sessionStorage.removeItem("walletAddress");
+    sessionStorage.removeItem("publicKey");
+    sessionStorage.removeItem("walletStateInit");
+    sessionStorage.removeItem("is_in_tree");
+    sessionStorage.removeItem("is_lock");
+    sessionStorage.removeItem("bep20");
+    sessionStorage.removeItem("ton");
 
     let config = {
       method: "get",
-      url: `${API_ENDPOINT}auth/logout/${localStorage.getItem("access_token")}`,
+      url: `${API_ENDPOINT}auth/logout/${sessionStorage.getItem("access_token")}`,
       headers: {
         "ngrok-skip-browser-warning": "69420",
       },

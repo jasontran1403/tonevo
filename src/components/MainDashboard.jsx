@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "../style";
 import TaskTable from "../components/table/TaskTable";
 import StatusCell from "../components/table/StatusCell";
@@ -17,6 +17,10 @@ import Binary from "./Binary";
 import Pop from "./Pop";
 import Leader from "./Leader";
 import DailyReward from "./DailyReward";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
@@ -61,11 +65,13 @@ const columns = [
 ];
 
 const MainDashboard = () => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [rank, setRank] = useState(0);
   const [listBalance, setListBalance] = useState([]);
@@ -78,7 +84,7 @@ const MainDashboard = () => {
       method: "get",
       url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };
@@ -92,7 +98,10 @@ const MainDashboard = () => {
         setRightRefCode(response.data.rightRefCode);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
       });
   }, []);
 

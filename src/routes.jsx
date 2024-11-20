@@ -36,12 +36,12 @@ import MapchainChart from "./pages/MapchainChart";
 import MapchainChart2 from "./pages/MapchainChart2";
 
 export default function Router() {
-    // Initialize with the value from localStorage
+    // Initialize with the value from sessionStorage
     const [isConnectedToWallet, setIsConnectedToWallet] = useState(() => {
         return (
-            localStorage.getItem("walletAddress") &&
-            localStorage.getItem("publicKey") &&
-            localStorage.getItem("walletStateInit")
+            sessionStorage.getItem("walletAddress") &&
+            sessionStorage.getItem("publicKey") &&
+            sessionStorage.getItem("walletStateInit")
         );
     });
 

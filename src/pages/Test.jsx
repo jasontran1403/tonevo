@@ -5,14 +5,14 @@ import { API_ENDPOINT } from "../constants";
 
 const Test = () => {
     const [walletAddress, setWalletAddress] = useState(
-        localStorage.getItem("walletAddress")
+        sessionStorage.getItem("walletAddress")
       );
-      const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+      const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
       const [walletStateInit, setWalletStateInit] = useState(
-        localStorage.getItem("walletStateInit")
+        sessionStorage.getItem("walletStateInit")
       );
       const [accessToken, setAccessToken] = useState(
-        localStorage.getItem("access_token")
+        sessionStorage.getItem("access_token")
       );
 
   const [prevWallets, setPrevWallets] = useState([]); // Stack to hold previous wallet addresses
@@ -34,7 +34,8 @@ const Test = () => {
       url: `${API_ENDPOINT}management/userMapDown5Level`,
       headers: {
         "Content-Type": "application/json",
-        Authorization: accessToken,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        "ngrok-skip-browser-warning": "69420",
       },
       data: data,
     };

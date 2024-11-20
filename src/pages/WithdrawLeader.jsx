@@ -27,14 +27,14 @@ const WithdrawLeader = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
-  const [accessToken, setAccessToken] = useState(localStorage.getItem("access_token"));
-  const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
+  const [accessToken, setAccessToken] = useState(sessionStorage.getItem("access_token"));
+  const [isInTree, setIsInTree] = useState(sessionStorage.getItem("is_in_tree"));
   const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
 
   const closeNotificationModal = () => {

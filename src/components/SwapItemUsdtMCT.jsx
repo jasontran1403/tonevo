@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "../style";
 import Button from "./Button";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -7,16 +7,21 @@ import "sweetalert2/src/sweetalert2.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const SwapItemUsdtMCT = ({ swapHistory }) => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
 
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
+
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
+
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
   const [balance, setBalance] = useState(0);
@@ -38,7 +43,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
       method: "get",
       url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };
@@ -80,8 +85,14 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
   };
 
   const handleCreateDeposit = () => {
-    console.log("ok");
-    if (buttonDisabled) return;
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+    if (buttonDisabled || sessionStorage.getItem("access_token") === "") return;
     const swapType = getSwapType(fromSelected, toSelected);
     if (!swapType) return;
 
@@ -94,12 +105,12 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
     }
 
     Swal.fire({
-      title: "Confirm Transfer",
+      title: "Confirm swap",
       text: `Are you sure you want to swap?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, transfer it!",
-      cancelButtonText: "No, cancel",
+      confirmButtonText: 'Yes, confirm it!',
+      cancelButtonText: 'No, cancel order',
       reverseButtons: true,
       customClass: {
         confirmButton: "custom-confirm-button", // Custom class for confirm button
@@ -117,10 +128,11 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
 
         let config = {
           method: "post",
+          maxBodyLength: Infinity,
           url: `${API_ENDPOINT}management/swap`,
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -147,7 +159,11 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
           })
           .catch((error) => {
             setButtonDisabled(false);
-            console.log(error);
+            toast.error("Please try again later!", {
+              position: "top-right",
+              autoClose: 1500,
+            });
+            console.log(config);
           });
       }
     });
@@ -156,12 +172,12 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
   const handleChangeAmount = (amountToSwap) => {
     const value = amountToSwap;
     const regex = /^[0-9]*\.?[0-9]*$/;
-  
+
     if (regex.test(value)) {
       const numericValue = parseFloat(value);
       if (!isNaN(numericValue) && numericValue > 0) {
         setAmount(value);
-  
+
         // Check if price is valid before dividing
         if (price > 0) {
           if (fromSelected === 1 && toSelected === 2) {
@@ -189,7 +205,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
       setAmount(""); // Clear input if non-numeric characters are entered
     }
   };
-  
+
 
   return (
     <div className={`investment-container`}>
@@ -213,12 +229,12 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
                     setBalance(listBalance[index].balance)
                   } else {
                     setBalance(listBalance[8].balance)
-                    };
+                  };
                 }}
               >
                 <option key={listSwap[0].id} value={listSwap[0].id}>
-                    {listSwap[0].name}
-                  </option>
+                  {listSwap[0].name}
+                </option>
               </select>
             </div>
 
@@ -257,8 +273,8 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
                 disabled={isToWalletDisabled}
               >
                 <option key={listSwap[1].id} value={listSwap[1].id}>
-                    {listSwap[1].name}
-                  </option>
+                  {listSwap[1].name}
+                </option>
               </select>
             </div>
 

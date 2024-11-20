@@ -19,10 +19,10 @@ const TABLE_HEAD = [
 
 const WithdrawCardBinary = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
 
   const [withdrawHistory, setWithdrawHistory] = useState([]);
@@ -32,7 +32,7 @@ const WithdrawCardBinary = () => {
       method: "get",
       url: `${API_ENDPOINT}management/withdraw-history/${walletAddress}/4`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };

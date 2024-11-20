@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "../style";
 import Button from "./Button";
 import Swal from "sweetalert2/dist/sweetalert2.js";
@@ -7,15 +7,18 @@ import "sweetalert2/src/sweetalert2.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
+import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
 const SwapItemDirect = ({ swapHistory }) => {
+  const { multiTabDetect } = useContext(MultiTabDetectContext);
+
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
@@ -38,7 +41,7 @@ const SwapItemDirect = ({ swapHistory }) => {
       method: "get",
       url: `${API_ENDPOINT}management/balance/${walletAddress}`,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
     };
@@ -60,6 +63,14 @@ const SwapItemDirect = ({ swapHistory }) => {
   }, [fromSelected]);
 
   const handleCreateDeposit = () => {
+    if (multiTabDetect) {
+      toast.error("Multiple instances detected, please close all others window and reload the page!", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     if (buttonDisabled) return;
 
     if (amount <= 0 || amount > balance) {
@@ -71,12 +82,12 @@ const SwapItemDirect = ({ swapHistory }) => {
     }
 
     Swal.fire({
-      title: "Confirm Transfer",
+      title: "Confirm swap",
       text: `Are you sure you want to swap?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, transfer it!",
-      cancelButtonText: "No, cancel",
+      confirmButtonText: 'Yes, confirm it!',
+      cancelButtonText: 'No, cancel order',
       reverseButtons: true,
       customClass: {
         confirmButton: "custom-confirm-button", // Custom class for confirm button
@@ -97,7 +108,7 @@ const SwapItemDirect = ({ swapHistory }) => {
           url: `${API_ENDPOINT}management/swap`,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -124,7 +135,10 @@ const SwapItemDirect = ({ swapHistory }) => {
           })
           .catch((error) => {
             setButtonDisabled(false);
-            console.log(error);
+            toast.error("Please try again later", {
+              position: "top-right",
+              autoClose: 1500,
+            });
           });
       }
     });

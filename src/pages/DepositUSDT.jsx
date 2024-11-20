@@ -37,17 +37,17 @@ const customStyles = {
 
 const DepositUSDT = () => {
   const [walletAddress, setWalletAddress] = useState(
-    localStorage.getItem("walletAddress")
+    sessionStorage.getItem("walletAddress")
   );
-  const [publicKey, setPublicKey] = useState(localStorage.getItem("publicKey"));
+  const [publicKey, setPublicKey] = useState(sessionStorage.getItem("publicKey"));
   const [walletStateInit, setWalletStateInit] = useState(
-    localStorage.getItem("walletStateInit")
+    sessionStorage.getItem("walletStateInit")
   );
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token")
+    sessionStorage.getItem("access_token")
   );
-  const [isInTree, setIsInTree] = useState(localStorage.getItem("is_in_tree"));
-  const [isLock] = useState(localStorage.getItem("is_lock"));
+  const [isInTree, setIsInTree] = useState(sessionStorage.getItem("is_in_tree"));
+  const [isLock] = useState(sessionStorage.getItem("is_lock"));
   const [modalLock, setModalLock] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const isSmallScreen = window.innerWidth <= 768;
