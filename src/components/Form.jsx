@@ -64,7 +64,7 @@ const Form = () => {
           url: `${API_ENDPOINT}management/updateRef`,
           headers: {
             "Content-Type": "application/json",
-            Authorization: accessToken,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
@@ -90,7 +90,10 @@ const Form = () => {
           })
           .catch((error) => {
             setButtonDisabled(false);
-            console.log(error);
+            toast.error("Please try again later", {
+              position: "top-center",
+              autoClose: 1500
+            });
           });
       }
     });
