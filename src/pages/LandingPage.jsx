@@ -73,9 +73,7 @@ const LandingPage = () => {
 
   return (
     <div className="bg-primary w-full overflow-hidden">
-      <div
-        className={`${styles.paddingX} ${styles.flexCenterNav} w-full absolute z-10 navbar`}
-      >
+      <div className={`${styles.paddingX} ${styles.flexCenterNav} w-full absolute z-10 navbar`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar handleOpenModal={handleOpenModal} />
         </div>
@@ -652,52 +650,52 @@ const LandingPage = () => {
                     style={{ height: "calc(100vh - 100px)" }} // Adjust height if needed
                   >
                     <SwiperSlide>
-                      <div class="history-tl-container pt-[100px]">
-                        <ul class="tl">
+                      <div className="history-tl-container pt-[100px]">
+                        <ul className="tl">
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">2021</div>
-                            <div class="item-title">
+                            <div className="timestamp">2021</div>
+                            <div className="item-title">
                               Research GRAM model and The Open Network platform
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">2022</div>
-                            <div class="item-title">
+                            <div className="timestamp">2022</div>
+                            <div className="item-title">
                               Build NFT agency platform and Validator database
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">01/2024</div>
-                            <div class="item-title">
+                            <div className="timestamp">01/2024</div>
+                            <div className="item-title">
                               Launch Tab-To-Earn Game with NFT integration
                               Develop Validator database
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">10/2024</div>
-                            <div class="item-title">
+                            <div className="timestamp">10/2024</div>
+                            <div className="item-title">
                               Official token launch (MCT) and 3.0 website
                               release
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">10/2024</div>
-                            <div class="item-title">
+                            <div className="timestamp">10/2024</div>
+                            <div className="item-title">
                               Official token launch (MCT) and 3.0 website
                               release
                             </div>
@@ -706,50 +704,50 @@ const LandingPage = () => {
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div class="history-tl-container pt-[100px]">
-                        <ul class="tl">
+                      <div className="history-tl-container pt-[100px]">
+                        <ul className="tl">
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">11/2024</div>
-                            <div class="item-title">
+                            <div className="timestamp">11/2024</div>
+                            <div className="item-title">
                               Grand Opening and launch MapChain-Swap exchange
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">12/2024</div>
-                            <div class="item-title">
+                            <div className="timestamp">12/2024</div>
+                            <div className="item-title">
                               Release multi-platform MapChain-Wallet
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">03/2025</div>
-                            <div class="item-title">
+                            <div className="timestamp">03/2025</div>
+                            <div className="item-title">
                               Launch decentralized social network 3.0
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">06/2025</div>
-                            <div class="item-title">
+                            <div className="timestamp">06/2025</div>
+                            <div className="item-title">
                               Complete private blockchain network
                             </div>
                           </li>
                           <li
-                            class="tl-item"
+                            className="tl-item"
                             ng-repeat="item in retailer_history"
                           >
-                            <div class="timestamp">2026</div>
-                            <div class="item-title">
+                            <div className="timestamp">2026</div>
+                            <div className="item-title">
                               Focus on user community building Establish
                               investment fund Launch Launchpool and LaunchPad on
                               CEX partners

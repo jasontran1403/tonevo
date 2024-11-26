@@ -21,7 +21,7 @@ import TransferDirect from "./pages/TransferDirect";
 import TransferBinary from "./pages/TransferBinary";
 import TransferLeader from "./pages/TransferLeader";
 import TransferPop from "./pages/TransferPop";
-import TransferDaily from "./pages/TransferDaily";
+import TransferDaily from "./pages/TransferDaily";"/"
 import SwapDaily from "./pages/SwapDaily";
 import SwapDirect from "./pages/SwapDirect";
 import SwapBinary from "./pages/SwapBinary";
@@ -32,8 +32,8 @@ import WithdrawDaily from "./pages/WithdrawDaily";
 import WithdrawDirect from "./pages/WithdrawDirect";
 import WithdrawBinary from "./pages/WithdrawBinary";
 import WithdrawLeader from "./pages/WithdrawLeader";
-import MapchainChart from "./pages/MapchainChart";
 import MapchainChart2 from "./pages/MapchainChart2";
+import ExternalSwap from "./pages/ExternalSwap";
 
 export default function Router() {
     // Initialize with the value from sessionStorage
@@ -55,6 +55,10 @@ export default function Router() {
         {
             path: "/chart",
             element: <MapchainChart2 />
+        },
+        {
+            path: "/mapchain-swap",
+            element: isConnectedToWallet ? <ExternalSwap /> : <Navigate to="/" />
         },
         {
             path: "/dashboard",
@@ -282,10 +286,10 @@ export default function Router() {
             path: "/disconnect",
             element: <DisconnectComponent />
         },
-        {
-            path: "/mapchain-swap",
-            element: <CommingSoon />
-        },
+        // {
+        //     path: "/mapchain-swap",
+        //     element: <CommingSoon />
+        // },
         {
             path: '/404',
             element: <Error404 />
