@@ -14,11 +14,12 @@ import DepositField from "./DepositField";
 import WithdrawField from "./WithdrawField";
 import DepositSwap from "./DepositSwap";
 import WithdrawSwap from "./WithdrawSwap";
+import RatioSwap from "./RatioSwap";
 
 const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
 const TABLE_HEAD_DEPOSIT = ["Date", "Token name", "Amount", "Status"];
 const TABLE_HEAD_WITHDRAW = ["Date", "Token name", "Address receive", "Amount", "Status"];
-
+const TABLE_HEAD_RATIO = ["Detail", "Date"];
 
 
 const ExternalSwapCard = () => {
@@ -246,6 +247,24 @@ const ExternalSwapCard = () => {
     }
   }
 
+  const [ratios, setRatios] = useState([]);
+
+  useEffect(() => {
+    let config = {
+      method: 'get',
+      url: `${API_ENDPOINT}management/get-all-ratio`,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        "ngrok-skip-browser-warning": "69420",
+      }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      setRatios(response.data);
+    });
+  }, []);
+
   const [qrCode, setQrCode] = useState(undefined);
   const [wallet, setWallet] = useState(undefined);
   const [qrInfo, setQrInfo] = useState(false);
@@ -354,6 +373,15 @@ const ExternalSwapCard = () => {
               <button className="button-64" role="button" onClick={handleSwap}><span className="text">Swap</span></button>
             </div>
             <div className="transaction-container">
+              <RatioSwap
+                className="w-full flex justify-center items-center ml-[20px]"
+                TABLE_NAME={""}
+                TABLE_SUBNAME={""}
+                TABLE_HEAD={TABLE_HEAD_RATIO}
+                TABLE_ROWS={ratios}
+              />
+            </div>
+            <div className="transaction-container">
               <TransactionSwap
                 className="w-full flex justify-center items-center ml-[20px]"
                 TABLE_NAME={""}
@@ -362,6 +390,7 @@ const ExternalSwapCard = () => {
                 TABLE_ROWS={transactions}
               />
             </div>
+            
           </div> : currentTab === 2 ?
             <div className="swapContent">
               <div className="swapHeader">

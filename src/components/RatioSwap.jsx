@@ -15,14 +15,14 @@ import {
     Input,
 } from "@material-tailwind/react";
 
-const DepositSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
+const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 4;
 
     // Filter rows based on search term
     const filteredRows = TABLE_ROWS.filter((row) =>
-        row.tokenName.toLowerCase().includes(searchTerm.toLowerCase())
+        row.tokenNameSource.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Total pages
@@ -143,10 +143,10 @@ const DepositSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                         {currentRows.map(
                             (
                                 {
-                                    tokenName,
-                                    amount,
-                                    status,
-                                    date
+                                    tokenNameSource,
+                                    tokenNameDestination,
+                                    ratio,
+                                    latestUpdate
                                 },
                                 index
                             ) => {
@@ -156,14 +156,14 @@ const DepositSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                                     : "p-4 border-b border-blue-gray-50";
 
                                 return (
-                                    <tr key={date}>
+                                    <tr key={latestUpdate}>
                                         <td className={classes}>
                                             <Typography
                                                 variant="small"
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                {formatDate(date)}
+                                                1 {tokenNameSource} ~ {formatCrypto(ratio)} {tokenNameDestination}
                                             </Typography>
                                         </td>
 
@@ -174,31 +174,7 @@ const DepositSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                                                     color="blue-gray"
                                                     className="font-bold"
                                                 >
-                                                    {tokenName}
-                                                </Typography>
-                                            </div>
-                                        </td>
-
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-bold"
-                                                >
-                                                    {amount}
-                                                </Typography>
-                                            </div>
-                                        </td>
-
-                                        <td className={classes}>
-                                            <div className="w-max">
-                                                <Typography
-                                                    variant="small"
-                                                    color={status === 0 ? "yellow" : "green"}
-                                                    className="font-normal"
-                                                >
-                                                    {status === 0 ? "Pending" : "Success"}
+                                                    {formatDate(latestUpdate)}
                                                 </Typography>
                                             </div>
                                         </td>
@@ -210,33 +186,8 @@ const DepositSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
 
                 </table>
             </CardBody>
-            <CardFooter className="flex items-center justify-center border-t border-blue-gray-50 p-4">
-                <div className="flex items-center gap-2">
-                    <Button
-                        variant="outlined"
-                        size="sm"
-                        onClick={handlePreviousPage}
-                        disabled={currentPage === 1}
-                    >
-                        Previous
-                    </Button>
-
-                    <Typography variant="small" color="blue-gray">
-                        Page {currentPage} of {totalPages}
-                    </Typography>
-
-                    <Button
-                        variant="outlined"
-                        size="sm"
-                        onClick={handleNextPage}
-                        disabled={currentPage === totalPages}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </CardFooter>
         </Card>
     );
 };
 
-export default DepositSwap;
+export default RatioSwap;
