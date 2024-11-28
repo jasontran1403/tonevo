@@ -12,8 +12,14 @@ import TransactionSwap from "./TransactionSwap";
 import TransactionTable from "./TransactionTable";
 import DepositField from "./DepositField";
 import WithdrawField from "./WithdrawField";
+import DepositSwap from "./DepositSwap";
+import WithdrawSwap from "./WithdrawSwap";
 
 const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
+const TABLE_HEAD_DEPOSIT = ["Date", "Token name", "Amount", "Status"];
+const TABLE_HEAD_WITHDRAW = ["Date", "Token name", "Address receive", "Amount", "Status"];
+
+
 
 const ExternalSwapCard = () => {
   const { multiTabDetect } = useContext(MultiTabDetectContext);
@@ -24,6 +30,8 @@ const ExternalSwapCard = () => {
   const [inputAmount, setInputAmount] = useState(0);
   const [outputAmount, setoutputAmount] = useState(0);
   const [transactions, setTransactions] = useState([]);
+  const [depositSwap, setDepositSwap] = useState([]);
+  const [withdrawSwap, setWithdrawSwap] = useState([]);
   const [loading, setLoading] = useState(undefined);
   const [ratio, setRatio] = useState(undefined);
   const [wethContract, setWethContract] = useState(undefined);
@@ -206,6 +214,36 @@ const ExternalSwapCard = () => {
 
   const handleSwitchTab = (e) => {
     setCurrentTab(e);
+
+    if (e === 2) {
+      let config = {
+        method: 'get',
+        url: `${API_ENDPOINT}management/deposit-swap/${sessionStorage.getItem("walletAddress")}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "ngrok-skip-browser-warning": "69420",
+        }
+      };
+  
+      axios.request(config)
+        .then((response) => {
+          setDepositSwap(response.data);
+        });
+    } else if (e === 3) {
+      let config = {
+        method: 'get',
+        url: `${API_ENDPOINT}management/withdraw-swap/${sessionStorage.getItem("walletAddress")}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "ngrok-skip-browser-warning": "69420",
+        }
+      };
+  
+      axios.request(config)
+        .then((response) => {
+          setWithdrawSwap(response.data);
+        });
+    }
   }
 
   const [qrCode, setQrCode] = useState(undefined);
@@ -320,7 +358,7 @@ const ExternalSwapCard = () => {
                 className="w-full flex justify-center items-center ml-[20px]"
                 TABLE_NAME={""}
                 TABLE_SUBNAME={""}
-                TABLE_HEAD={TABLE_HEAD}
+                TABLE_HEAD={TABLE_HEAD_DEPOSIT}
                 TABLE_ROWS={transactions}
               />
             </div>
@@ -342,12 +380,12 @@ const ExternalSwapCard = () => {
               </div>
 
               <div className="transaction-container">
-                <TransactionSwap
+                <DepositSwap
                   className="w-full flex justify-center items-center ml-[20px]"
                   TABLE_NAME={""}
                   TABLE_SUBNAME={""}
-                  TABLE_HEAD={TABLE_HEAD}
-                  TABLE_ROWS={transactions}
+                  TABLE_HEAD={TABLE_HEAD_DEPOSIT}
+                  TABLE_ROWS={depositSwap}
                 />
               </div>
             </div> :
@@ -371,12 +409,12 @@ const ExternalSwapCard = () => {
               </div>
 
               <div className="transaction-container">
-                <TransactionSwap
+                <WithdrawSwap
                   className="w-full flex justify-center items-center ml-[20px]"
                   TABLE_NAME={""}
                   TABLE_SUBNAME={""}
-                  TABLE_HEAD={TABLE_HEAD}
-                  TABLE_ROWS={transactions}
+                  TABLE_HEAD={TABLE_HEAD_WITHDRAW}
+                  TABLE_ROWS={withdrawSwap}
                 />
               </div>
             </div>}
