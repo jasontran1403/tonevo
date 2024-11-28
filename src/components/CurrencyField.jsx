@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { CashStack } from "react-bootstrap-icons";
 const pairs = [
     // { id: 1, name: "BTCUSDT", symbol: "BTC" },
     { id: 2, name: "BNBUSDT", symbol: "BNB" },
@@ -11,6 +11,19 @@ const pairs = [
 
 const CurrencyField = (probs) => {
     const [selectedSymbol, setSelectedSymbol] = useState("");
+    const [amount, setAmount] = useState(0);
+
+    useEffect(() => {
+        if (probs.converted === true) {
+            if (isNaN(probs.balance)) {
+                setAmount(9999999);
+            } else {
+                setAmount(probs.balance);
+            }
+        } else {
+            setAmount(probs.sourceAmount);
+        }
+    }, [probs.sourceAmount]);
 
     // Cập nhật giá trị mặc định dựa trên probs.converted khi component được render hoặc khi probs.converted thay đổi
     useEffect(() => {
@@ -26,18 +39,17 @@ const CurrencyField = (probs) => {
         probs.handleChangeType("destination", "BNB"); // Gọi hàm xử lý từ props
     }, []);
 
-    const getPrice = (value) => {
-        if (probs.failed) {
-            probs.getSwapPrice(0);
-        } else {
-            probs.getSwapPrice(value);
-        }
-    };
+    const handleAmountChange = (value) => {
+        setAmount(value);
+        probs.getSwapPrice(value);
+    }
 
     const handleChange = (field, value) => {
+        setAmount(0);
         setSelectedSymbol(value); // Cập nhật state local
         probs.handleChangeType(field, value); // Gọi hàm xử lý từ props
     };
+
 
     return (
         <div className="row currencyInput">
@@ -50,23 +62,37 @@ const CurrencyField = (probs) => {
                     <>
                         <input
                             className="currencyInputField"
-                            placeholder="0"
-                            value={probs.value}
-                            readOnly={probs.converted}
-                            onBlur={(e) =>
-                                probs.field === "input"
-                                    ? getPrice(e.target.value)
-                                    : null
-                            }
+                            type="text" // Dùng type="text" thay vì "number" để kiểm soát chi tiết hơn
+                            placeholder={amount === "" ? "0" : ""} // Xóa số 0 khi người dùng nhập vào
+                            value={probs.converted === true ? probs.balance : amount}
+                            readOnly={probs.converted || probs.failed}
+                            onChange={(e) => {
+                                let value = e.target.value;
+
+                                // Thay thế các ký tự không phải số hoặc dấu chấm
+                                value = value.replace(/[^0-9.]/g, '');
+
+                                // Nếu đã có dấu chấm rồi thì không cho thêm dấu chấm khác
+                                const decimalCount = (value.match(/\./g) || []).length;
+                                if (decimalCount > 1) {
+                                    value = value.slice(0, -1); // Xóa dấu chấm dư thừa
+                                }
+
+                                handleAmountChange(value);
+                            }}
                         />
+
+
+
+
                         <select
                             value={selectedSymbol} // Giá trị hiện tại
-                            onChange={(e) =>
+                            onChange={(e) => {
                                 handleChange(
                                     probs.converted ? "destination" : "source",
                                     e.target.value
-                                )
-                            }
+                                );
+                            }}
                             name="symbols"
                             id="symbol-select"
                         >
@@ -82,10 +108,27 @@ const CurrencyField = (probs) => {
 
             {probs.converted === false && <div className="cold-md-6 tokenContainer">
                 <div className="balanceContainer">
-                    <span className="balanceAmount">
+                    {probs.converted === false ?
+                        <button
+                            style={{ cursor: "pointer", color: "rgb(14, 190, 221)" }}
+                            onClick={() => {
+                                if (probs.failed === false) {
+                                    probs.handleMax();
+                                    setAmount(probs.balance);
+                                }
+                            }}>
+                            MAX
+                        </button>
+                        : null}
+                    <span className="balanceAmount" style={{ color: "rgb(14, 190, 221)" }}>
                         Balance: {probs.balance}
                     </span>
-                    {probs.converted === false ? <button>Max</button> : null}
+                    {probs.converted === false ?
+                        <CashStack
+                            style={{ cursor: "pointer", color: "rgb(14, 190, 221)" }}
+                            onClick={() => probs.handleSwitchTab(2)} />
+                        : null
+                    }
                 </div>
             </div>}
         </div>

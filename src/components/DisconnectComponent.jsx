@@ -23,6 +23,7 @@ const DisconnectComponent = () => {
         sessionStorage.removeItem("is_lock");
         sessionStorage.removeItem("ton");
         sessionStorage.removeItem("bep20");
+        sessionStorage.removeItem("xrp");
 
         connector.disconnect;
 

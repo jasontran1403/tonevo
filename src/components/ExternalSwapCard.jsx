@@ -10,6 +10,8 @@ import BeatLoader from "react-spinners/BeatLoader";
 import CurrencyPrice from "./CurrencyPrice";
 import TransactionSwap from "./TransactionSwap";
 import TransactionTable from "./TransactionTable";
+import DepositField from "./DepositField";
+import WithdrawField from "./WithdrawField";
 
 const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
 
@@ -32,9 +34,11 @@ const ExternalSwapCard = () => {
   const [sourceBalance, setSourceBalance] = useState(0);
   const [destination, setDestination] = useState("BNBUSDT");
   const [sourceAmount, setSourceAmount] = useState(0);
-  const [destinationAmount, setDestinationAmount] = useState(undefined);
+  const [destinationAmount, setDestinationAmount] = useState(0);
   const [from, setFrom] = useState("MCT");
   const [to, setTo] = useState("BNB");
+  const [failed, setFailed] = useState(false);
+  const [currentTab, setCurrentTab] = useState(1);
 
   const handleSwap = () => {
     if (multiTabDetect) {
@@ -115,12 +119,19 @@ const ExternalSwapCard = () => {
       });
   }
 
-  const getSwapPrice = (inputAmount) => {
-    setLoading(true);
-    setSourceAmount(inputAmount);
+  let timeout;
 
-    setDestinationAmount(inputAmount * ratio);
-    setLoading(false);
+  const getSwapPrice = (inputAmount) => {
+    if (timeout) {
+      clearTimeout(timeout); // Hủy bỏ timeout trước đó nếu người dùng vẫn đang nhập
+    }
+
+    timeout = setTimeout(() => {
+      setLoading(true);
+      setSourceAmount(inputAmount);
+      setDestinationAmount(inputAmount * ratio);
+      setLoading(false);
+    }, 300); // Cập nhật sau 1 giây
   };
 
   useEffect(() => {
@@ -152,6 +163,12 @@ const ExternalSwapCard = () => {
     axios.request(config)
       .then((response) => {
         setRatio(response.data);
+        if (response.data <= 0) {
+          setFailed(true);
+        } else {
+          // setDestinationAmount(sourceAmount * ratio);
+          setFailed(false);
+        }
       });
   }
 
@@ -182,63 +199,187 @@ const ExternalSwapCard = () => {
     setDestinationAmount(0);
   };
 
+  const handleMax = () => {
+    setSourceAmount(sourceBalance);
+    setDestinationAmount(sourceBalance * ratio);
+  };
+
+  const handleSwitchTab = (e) => {
+    setCurrentTab(e);
+  }
+
+  const [qrCode, setQrCode] = useState(undefined);
+  const [wallet, setWallet] = useState(undefined);
+  const [qrInfo, setQrInfo] = useState(false);
+
+  let timeOutQr;
+  const handleChangeDepositType = (e) => {
+    setLoading(true);
+
+    if (timeOutQr) {
+      clearTimeout(timeOutQr)
+    }
+
+    timeOutQr = setTimeout(() => {
+      let walletAdderss = "";
+      let method = 0;
+      if (e === "BNB") {
+        method = 3;
+        walletAdderss = sessionStorage.getItem("bep20");
+      } else if (e === "MCT" || e === "TON") {
+        walletAdderss = sessionStorage.getItem("ton");
+        if (e === "MCT") {
+          method = 2;
+        } else if (e === "TON") {
+          method = 4;
+        }
+      } else if (e === "XRP") {
+        method = 5;
+        walletAdderss = sessionStorage.getItem("xrp");
+      }
+
+      setWallet(walletAdderss);
+
+      let data = JSON.stringify({
+        walletAddress: walletAdderss = sessionStorage.getItem("walletAddress"),
+        amount: 0,
+        method: method,
+      });
+
+      let config = {
+        method: "post",
+        url: `${API_ENDPOINT}management/generate-qr`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "ngrok-skip-browser-warning": "69420",
+        },
+        data: data,
+        responseType: "blob",
+      };
+
+      axios.request(config)
+        .then((response) => {
+          // Assuming response.data contains the image URL or base64 string
+          const qrCodeBlob = response.data;
+          const qrCodeUrl = URL.createObjectURL(qrCodeBlob);
+          setQrCode(qrCodeUrl);
+        })
+        .catch((error) => {
+          toast.error("Please try again later", {
+            position: "top-right",
+            autoClose: 1500,
+          });
+        });
+      setQrInfo(true);
+    }, 1200);
+
+    setLoading(false);
+  };
+
   return (
     <div className="appBody">
       <div className="swapContainer">
-        <div className="swapContent">
-          <div className="swapHeader">
-            <span className="swapText">Swap</span>
-            <span className="gearContainer">
-              <GearFill onClick={() => setShowModal(true)} />
-            </span>
-            {showModal && (
-              <ConfigModal
-                onClose={() => setShowModal(false)}
-                setDeadlineMinutes={setDeadlineMinutes}
-                deadlineMinutes={deadlineMinutes}
-                setSlippageAmount={setSlippageAmount}
-                slippageAmount={slippageAmount}
+        {currentTab === 1 ?
+          <div className="swapContent">
+            <div className="swapHeader">
+              <span className="swapText">MAPCHAIN SWAP</span>
+            </div>
+            <div className="swapBody">
+              <CurrencyField
+                field="input"
+                converted={false}
+                sourceAmount={sourceAmount}
+                handleChangeType={handleChangeType}
+                tokenName="BNB"
+                handleMax={handleMax}
+                getSwapPrice={getSwapPrice}
+                signer={signer}
+                balance={sourceBalance}
+                failed={failed}
+                handleSwitchTab={handleSwitchTab}
               />
-            )}
-          </div>
-          <div className="swapBody">
-            <CurrencyField
-              field="input"
-              converted={false}
-              sourceAmount={sourceAmount}
-              handleChangeType={handleChangeType}
-              tokenName="BNB"
-              getSwapPrice={getSwapPrice}
-              signer={signer}
-              balance={sourceBalance}
-            />
 
-            <CurrencyField
-              field="input"
-              tokenName="MCT"
-              converted={true}
-              handleChangeType={handleChangeType}
-              value={destinationAmount}
-              signer={signer}
-              balance={0.0}
-              spinner={BeatLoader}
-              loading={loading}
-            />
-            <CurrencyPrice ratio={ratio} from={from} to={to} />
-          </div>
-          <div className="swapFooter">
-            <button className="button-64" role="button" onClick={handleSwap}><span className="text">Swap</span></button>
-          </div>
-          <div className="transaction-container">
-            <TransactionSwap
-              className="w-full flex justify-center items-center ml-[20px]"
-              TABLE_NAME={""}
-              TABLE_SUBNAME={""}
-              TABLE_HEAD={TABLE_HEAD}
-              TABLE_ROWS={transactions}
-            />
-          </div>
-        </div>
+              <CurrencyField
+                field="input"
+                tokenName="MCT"
+                converted={true}
+                handleChangeType={handleChangeType}
+                signer={signer}
+                balance={destinationAmount}
+                spinner={BeatLoader}
+                loading={loading}
+              />
+              <CurrencyPrice ratio={ratio} from={from} to={to} />
+            </div>
+            <div className="swapFooter">
+              <button className="button-64" role="button" onClick={handleSwap}><span className="text">Swap</span></button>
+            </div>
+            <div className="transaction-container">
+              <TransactionSwap
+                className="w-full flex justify-center items-center ml-[20px]"
+                TABLE_NAME={""}
+                TABLE_SUBNAME={""}
+                TABLE_HEAD={TABLE_HEAD}
+                TABLE_ROWS={transactions}
+              />
+            </div>
+          </div> : currentTab === 2 ?
+            <div className="swapContent">
+              <div className="swapHeader">
+                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(1)}>SWAP</span>
+                <span className="swapText">DEPOSIT</span>
+                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(3)}>WITHDRAW</span>
+              </div>
+              <div className="swapBody">
+                <DepositField
+                  field="input"
+                  handleChangeDepositType={handleChangeDepositType}
+                  qrInfo={qrInfo}
+                  qrCode={qrCode}
+                  wallet={wallet}
+                />
+              </div>
+
+              <div className="transaction-container">
+                <TransactionSwap
+                  className="w-full flex justify-center items-center ml-[20px]"
+                  TABLE_NAME={""}
+                  TABLE_SUBNAME={""}
+                  TABLE_HEAD={TABLE_HEAD}
+                  TABLE_ROWS={transactions}
+                />
+              </div>
+            </div> :
+            <div className="swapContent">
+              <div className="swapHeader">
+                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(1)}>SWAP</span>
+                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(2)}>DEPOSIT</span>
+                <span className="swapText" >WITHDRAW</span>
+              </div>
+              <div className="swapBody">
+                <WithdrawField
+                  field="input"
+                  converted={false}
+                  tokenName="BNB"
+                  sourceAmount={sourceAmount}
+                  handleChangeType={handleChangeType}
+                  handleMax={handleMax}
+                  getSwapPrice={getSwapPrice}
+                  balance={sourceBalance}
+                />
+              </div>
+
+              <div className="transaction-container">
+                <TransactionSwap
+                  className="w-full flex justify-center items-center ml-[20px]"
+                  TABLE_NAME={""}
+                  TABLE_SUBNAME={""}
+                  TABLE_HEAD={TABLE_HEAD}
+                  TABLE_ROWS={transactions}
+                />
+              </div>
+            </div>}
       </div>
     </div>
   );

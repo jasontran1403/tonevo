@@ -50,6 +50,7 @@ function App() {
           sessionStorage.setItem("is_in_tree", response.data.is_in_tree);
           sessionStorage.setItem("is_lock", response.data.is_lock);
           sessionStorage.setItem("bep20", response.data.bep20);
+          sessionStorage.setItem("xrp", response.data.xrp);
         });
       }, 500);
     } else {
@@ -84,6 +85,7 @@ function App() {
             sessionStorage.setItem("is_in_tree", response.data.is_in_tree);
             sessionStorage.setItem("is_lock", response.data.is_lock);
             sessionStorage.setItem("bep20", response.data.bep20);
+            sessionStorage.setItem("xrp", response.data.xrp);
             sessionStorage.setItem("ton", response.data.ton);
           });
         }, 500);
@@ -106,6 +108,7 @@ function App() {
     sessionStorage.removeItem("is_lock");
     sessionStorage.removeItem("ton");
     sessionStorage.removeItem("bep20");
+    sessionStorage.removeItem("xrp");
 
     let config = {
       method: "get",

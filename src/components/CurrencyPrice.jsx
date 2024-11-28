@@ -33,7 +33,7 @@ const CurrencyPrice = probs => {
         <div className="row currencyInput">
             <div className="cold-md-6 tokenContainer">
                 <div className="balanceContainer">
-                    {probs.ratio > 0 ? <span style={{ fontStyle: "italic" }}>Rate: 1{probs.from} ~ {probs.ratio}{probs.to}</span> : <span style={{ fontStyle: "italic", color: "red" }}>Server error</span>}
+                    {probs.ratio > 0 ? <span style={{ fontStyle: "italic" }}>Rate: 1{probs.from} ~ {probs.ratio}{probs.to}</span> : probs.ratio === -2 ? <span style={{ fontStyle: "italic", color: "red" }}>Invalid swap pairs</span> : <span style={{ fontStyle: "italic", color: "red" }}>Server error</span>}
                 </div>
             </div>
         </div>

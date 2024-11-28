@@ -44,6 +44,7 @@ const UserNavbar = () => {
     sessionStorage.removeItem("is_lock");
     sessionStorage.removeItem("bep20");
     sessionStorage.removeItem("ton");
+    sessionStorage.removeItem("xrp");
 
     let config = {
       method: "get",

@@ -30,6 +30,8 @@
 
 .currencyInputField {
   color: grey;
+  padding-left: 20px;
+  padding-right: 40px;
 }
 
 .appNav {
@@ -66,6 +68,21 @@
   margin-right: 10px;
 }
 
+.deposit-info {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+}
+
+.wallet-info {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .connectButton:hover {
   border-color: rgb(213, 0, 102) !important;
 }
@@ -75,7 +92,9 @@
 }
 
 .swapHeader {
-  text-align: left;
+  text-align: center;
+  display: flex;
+  gap: 30px;
   padding: 4px 20px 0px 20px;
 }
 
@@ -169,6 +188,13 @@
   width: 100%;
   border: none;
 }
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none!important;
+    margin: 0;
+}
+
 .tokenContainer {
   text-align: right;
 }
@@ -178,11 +204,16 @@
   color: #000;
 }
 .balanceContainer {
-  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content:end;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
 }
 .balanceAmount {
-  width: 100%;
-  font-size: 16px;
+  width: auto;
   display: inline;
   color: #000;
 }
@@ -285,9 +316,9 @@
 .swapHeader {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
-  font-size: 24px;
+  font-size: 36px;
 }
 
 .sweet-loading {
@@ -324,6 +355,15 @@
   overflow: hidden;
 }
 
+.depositContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  align-content: center;
+}
+
 .test {
   margin: 0 auto;
   text-align: center;
@@ -351,11 +391,20 @@
     padding: 10px;
   }
 
+  .wallet-info input {
+    padding-right: 20px;
+  }
+
   .mct-chart {
     width: 95svw;
   }
 
-  
+  .appBody {
+    height: auto;
+    width: 100svw;
+    overflow: scroll;
+    margin-top: 100px;
+  }
 }
 
 .bg-image {
