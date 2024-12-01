@@ -100,7 +100,7 @@ const Dashboard = () => {
 
       {/* Notification Modal */}
       <Modal
-        isOpen={false}
+        isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
         style={customStyles}
         contentLabel="Announcement"

@@ -15,7 +15,7 @@ import { useTonConnectUI } from "@tonconnect/ui-react"; // or any specific hook 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MultiTabDetectProvider } from "./components/MultiTabDetectContext";
-import PuffLoader  from "react-spinners/PuffLoader ";
+import PuffLoader from "react-spinners/PuffLoader";
 
 function App() {
   const wallet = useTonWallet();
