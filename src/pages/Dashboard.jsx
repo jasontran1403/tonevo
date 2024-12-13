@@ -53,6 +53,7 @@ const Dashboard = () => {
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalLock, setModalLock] = useState(false);
+  const [specialNoti, setSpecialNoti] = useState(false);
 
   function handleOpenModal(open) {
     closeLockModal();
@@ -87,7 +88,14 @@ const Dashboard = () => {
   const isSmallScreen = window.innerWidth <= 768;
 
   const closeNotificationModal = () => {
+    if (sessionStorage.getItem("walletAddress") === "0:49847e3d9f5b8986565025d52b30c939d5610771a489952ebb89d148587b7ea2") {
+      setSpecialNoti(true);
+    }
     setNotificationModalOpen(false); // Close the notification and continue logic
+  };
+
+  const closeSpecialNotificationModal = () => {
+    setSpecialNoti(false);; // Close the notification and continue logic
   };
 
   return (
@@ -127,7 +135,56 @@ const Dashboard = () => {
           />
         </div>
       </Modal>
-      
+
+      {specialNoti && <Modal
+        isOpen={specialNoti}
+        onRequestClose={closeSpecialNotificationModal}
+        style={customStyles}
+        contentLabel="Announcement"
+      >
+        <div
+          onClick={closeSpecialNotificationModal}
+          style={{
+            height: "100%", // Ensure the container takes full height of the modal
+            width: "100%",
+            display: "flex",
+            justifyContent: "center", // Center the image horizontally
+            alignItems: "center", // Center the image vertically
+            cursor: "pointer",
+            padding: "20px",
+          }}
+        >
+          <div style={{
+            height: "100%", // Ensure the container takes full height of the modal
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start", // Center the image horizontally
+            alignItems: "flex-start", // Center the image vertically
+            padding: "10px",
+            backgroundColor: "transparent"
+          }}>
+            <h2>Dear user Phucnguyen2,</h2>
+            <p>We have recorded a deposit of 344.96 from you. However, due to a blockchain signal error on your side, we have recorded the balance as three times the normal amount.</p>
+
+            <p>Currently, we have removed the excess balance. However, you have already executed an investment package of 3000 MCT, which has generated commission payments for the system.</p>
+
+            <p>Therefore, we request that you deposit the missing MCT amount or the equivalent in USDT.</p>
+
+            <p>Details below :</p>
+            <p>Deposit of $344.96 swapped to 1971.2 MCT (correct).</p>
+            <p>You participated with 1000 MCT</p>
+            <p>You participated with 3000 MCT (missing 3000 - 971.2 = 2028.8 MCT).</p>
+
+            <p>You need to supplement 2028.8 MCT, which is approximately $355.04 (at the current rate of 1 MCT = 0.175 USDT).</p>
+
+            <p>While we process this, we will temporarily suspend certain features of your account to ensure the safety of the system.</p>
+
+            <p>Best Regards,</p>
+            <h2>Mapchain Team</h2>
+          </div>
+        </div>
+      </Modal>}
 
       {/* Lock Modal */}
       {isLock === "true" ? (
