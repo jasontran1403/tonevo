@@ -90,7 +90,7 @@ const UserNavbar = () => {
           </li>
         ))}
       </ul>
-      <div className="flex justify-end items-center">
+      <div className="flex justify-end items-center pt-[20px] pb-[20px]">
         {wallet?.length > 0 ? (
           <button
             onClick={handleDisconnect}

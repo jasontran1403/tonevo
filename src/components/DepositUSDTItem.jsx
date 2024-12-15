@@ -10,6 +10,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import { Tooltip } from "@mui/material";
 import CopyIcon from '@mui/icons-material/FileCopy';
 import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
+import CountdownTimer from "./CountdownTimer";
 
 const DepositUSDTItem = ({ depositHistory }) => {
   const { multiTabDetect } = useContext(MultiTabDetectContext);
@@ -234,13 +235,13 @@ const DepositUSDTItem = ({ depositHistory }) => {
           </div>
 
           {qrImage && (
-            <div className="mb-6 flex flex-col justify-center gap-5">
+            <div className="mb-6 flex flex-col justify-center items-center gap-5">
               <img
                 src={qrImage}
                 alt="QR Code"
                 className="max-w-full sm:max-w-sm" // Ensure image scales responsively
               />
-              <div className="flex items-center">
+              <div className="flex items-center w-[60svw] sm:w-[90svw] justify-center">
                 <Tooltip title={depositWallet} arrow>
                   <input
                     style={{
@@ -259,13 +260,17 @@ const DepositUSDTItem = ({ depositHistory }) => {
                   className="ml-2 p-1 rounded hover:bg-gray-200"
                   aria-label="Copy wallet address"
                 >
-                  <CopyIcon style={{ color: "white" }}/>
+                  <CopyIcon style={{ color: "white" }} />
                 </button>
+              </div>
+
+              <div className="clock">
+                <CountdownTimer initialTime={360} />
               </div>
             </div>
           )}
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center w-full">
             {qrImage.length === 0 ? (
               <Button handleClick={handleCreateDeposit} content={"Deposit"} />
             ) : (

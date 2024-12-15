@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CashStack } from "react-bootstrap-icons";
+
 const pairs = [
     // { id: 1, name: "BTCUSDT", symbol: "BTC" },
     { id: 2, name: "BNBUSDT", symbol: "BNB" },
@@ -7,10 +8,11 @@ const pairs = [
     // { id: 4, name: "SOLUSDT", symbol: "SOL" },
     { id: 5, name: "XRPUSDT", symbol: "XRP" },
     { id: 6, name: "MCTUSDT", symbol: "MCT" },
+    { id: 7, name: "ETHUSDT", symbol: "ETH" },
 ];
 
 const CurrencyField = (probs) => {
-    const [selectedSymbol, setSelectedSymbol] = useState("");
+
     const [amount, setAmount] = useState(0);
 
     useEffect(() => {
@@ -25,6 +27,7 @@ const CurrencyField = (probs) => {
         }
     }, [probs.sourceAmount]);
 
+    const [selectedSymbol, setSelectedSymbol] = useState("");
     // Cập nhật giá trị mặc định dựa trên probs.converted khi component được render hoặc khi probs.converted thay đổi
     useEffect(() => {
         if (probs.converted) {
@@ -82,9 +85,6 @@ const CurrencyField = (probs) => {
                             }}
                         />
 
-
-
-
                         <select
                             value={selectedSymbol} // Giá trị hiện tại
                             onChange={(e) => {
@@ -96,11 +96,19 @@ const CurrencyField = (probs) => {
                             name="symbols"
                             id="symbol-select"
                         >
-                            {pairs.map((pair) => (
-                                <option key={pair.id} value={pair.symbol}>
-                                    {pair.symbol}
-                                </option>
-                            ))}
+                            {pairs
+                                .filter((pair) => {
+                                    if (probs.type === "source") {
+                                        return pair.name === "MCTUSDT"; // Chỉ giữ lại MCTUSDT
+                                    } else {
+                                        return pair.name !== "MCTUSDT"; // Loại bỏ MCTUSDT
+                                    }
+                                })
+                                .map((pair) => (
+                                    <option key={pair.id} value={pair.symbol}>
+                                        {pair.symbol}
+                                    </option>
+                                ))}
                         </select>
                     </>
                 )}

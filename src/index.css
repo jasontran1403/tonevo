@@ -203,15 +203,39 @@ input[type="number"]::-webkit-outer-spin-button {
   display: block;
   color: #000;
 }
+
 .balanceContainer {
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
-  justify-content:end;
+  justify-content: flex-end;
   align-items: center;
   gap: 20px;
+ 
   font-size: 20px;
 }
+
+/* Thêm vào file CSS của bạn */
+.blinking-text {
+  animation: blink .5s infinite;
+  color: red;
+  font-weight: bolder;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+
+  }
+  50% {
+    opacity: 0;
+
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .balanceAmount {
   width: auto;
   display: inline;
@@ -304,7 +328,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .swapContent {
-  width: 20svw;
+  width: 40svw;
   height: auto;
   padding-bottom: 50px;
   background-color: whitesmoke;

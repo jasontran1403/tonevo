@@ -19,7 +19,7 @@ import RatioSwap from "./RatioSwap";
 const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
 const TABLE_HEAD_DEPOSIT = ["Date", "Token name", "Amount", "Status"];
 const TABLE_HEAD_WITHDRAW = ["Date", "Token name", "Address receive", "Amount", "Status"];
-const TABLE_HEAD_RATIO = ["Detail", "Date"];
+const TABLE_HEAD_RATIO = ["Exchange Rate", "Time Updated"];
 
 
 const ExternalSwapCard = () => {
@@ -140,7 +140,7 @@ const ExternalSwapCard = () => {
       setSourceAmount(inputAmount);
       setDestinationAmount(inputAmount * ratio);
       setLoading(false);
-    }, 300); // Cập nhật sau 1 giây
+    }, 300);
   };
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const ExternalSwapCard = () => {
   useEffect(() => {
     const timeInterval = setInterval(() => {
       fetchPrice();
-    }, 3000);
+    }, 15000);
 
     return () => {
       clearInterval(timeInterval);
@@ -334,6 +334,10 @@ const ExternalSwapCard = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    handleChangeDepositType("MCT");
+  }, []);
+
   return (
     <div className="appBody">
       <div className="swapContainer">
@@ -346,6 +350,7 @@ const ExternalSwapCard = () => {
               <CurrencyField
                 field="input"
                 converted={false}
+                type="source"
                 sourceAmount={sourceAmount}
                 handleChangeType={handleChangeType}
                 tokenName="BNB"
@@ -359,6 +364,7 @@ const ExternalSwapCard = () => {
 
               <CurrencyField
                 field="input"
+                type="destination"
                 tokenName="MCT"
                 converted={true}
                 handleChangeType={handleChangeType}
@@ -381,7 +387,7 @@ const ExternalSwapCard = () => {
                 TABLE_ROWS={ratios}
               />
             </div>
-            <div className="transaction-container">
+            {/* <div className="transaction-container">
               <TransactionSwap
                 className="w-full flex justify-center items-center ml-[20px]"
                 TABLE_NAME={""}
@@ -389,7 +395,7 @@ const ExternalSwapCard = () => {
                 TABLE_HEAD={TABLE_HEAD_DEPOSIT}
                 TABLE_ROWS={transactions}
               />
-            </div>
+            </div> */}
             
           </div> : currentTab === 2 ?
             <div className="swapContent">

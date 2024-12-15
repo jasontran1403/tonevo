@@ -120,7 +120,7 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                 </div>
             </CardHeader> */}
             <CardBody className="flex-1 overflow-x-auto px-0">
-                <table className="w-full min-w-max table-auto text-left">
+                <table className="w-[100%] mx-auto min-w-max table-auto text-center">
                     <thead>
                         <tr>
                             {TABLE_HEAD.map((head) => (
@@ -152,7 +152,7 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                             ) => {
                                 const isLast = index === currentRows.length - 1;
                                 const classes = isLast
-                                    ? "p-4"
+                                    ? "p-4 border-b border-blue-gray-50"
                                     : "p-4 border-b border-blue-gray-50";
 
                                 return (
@@ -167,7 +167,7 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                                             </Typography>
                                         </td>
 
-                                        <td className={classes}>
+                                        <td className="w-full h-full flex justify-center p-4 items-center border-b border-blue-gray-50">
                                             <div className="flex items-center gap-3">
                                                 <Typography
                                                     variant="small"

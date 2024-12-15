@@ -10,10 +10,10 @@ import axios from "axios";
 
 const pairs = [
     // { id: 1, name: "BTCUSDT", symbol: "BTC" },
-    { id: 2, name: "BNBUSDT", symbol: "BNB" },
-    { id: 3, name: "TONUSDT", symbol: "TON" },
+    // { id: 2, name: "BNBUSDT", symbol: "BNB" },
+    // { id: 3, name: "TONUSDT", symbol: "TON" },
     // { id: 4, name: "SOLUSDT", symbol: "SOL" },
-    { id: 5, name: "XRPUSDT", symbol: "XRP" },
+    // { id: 5, name: "XRPUSDT", symbol: "XRP" },
     { id: 6, name: "MCTUSDT", symbol: "MCT" },
 ];
 
