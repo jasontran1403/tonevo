@@ -52,6 +52,13 @@
   display: inline-block;
 }
 
+.form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .buttonContainerTop {
   margin-left: 175px;
 }

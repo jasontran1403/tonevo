@@ -5,7 +5,7 @@ import Button from "./Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import 'sweetalert2/src/sweetalert2.scss';
+import "sweetalert2/src/sweetalert2.scss";
 import { API_ENDPOINT } from "../constants";
 import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
@@ -28,17 +28,42 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
     setNetworkSelected(listNetwork[0].id);
   }, []);
 
-
   const [amount, setAmount] = useState(0);
   const [toWallet, setToWallet] = useState("");
   const [balance, setBalance] = useState(100);
 
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}management/get-wallet-withdraw/${sessionStorage.getItem("walletAddress")}/1`,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios
+      .request(config)
+      .then((response) => {
+        setToWallet(response.data);
+      })
+      .catch((error) => {
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      });
+  }, []);
+
   const handleWithdraw = () => {
     if (multiTabDetect) {
-      toast.error("Multiple instances detected, please close all others window and reload the page!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error(
+        "Multiple instances detected, please close all others window and reload the page!",
+        {
+          position: "top-right",
+          autoClose: 1500,
+        }
+      );
       return;
     }
 
@@ -58,16 +83,16 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
     }
 
     Swal.fire({
-      title: 'Confirm withdraw',
+      title: "Confirm withdraw",
       text: `Are you sure you want to withdraw ${amount} to ${toWallet}?`,
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, confirm it!',
-      cancelButtonText: 'No, cancel order',
+      confirmButtonText: "Yes, confirm it!",
+      cancelButtonText: "No, cancel order",
       reverseButtons: true,
       customClass: {
-        confirmButton: 'custom-confirm-button', // Custom class for confirm button
-        cancelButton: 'custom-cancel-button',   // Custom class for cancel button
+        confirmButton: "custom-confirm-button", // Custom class for confirm button
+        cancelButton: "custom-cancel-button", // Custom class for cancel button
       },
       buttonsStyling: false,
     }).then((result) => {
@@ -80,22 +105,20 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
           walletType: networkSelected,
           type: 1,
         });
-    
+
         let config = {
           method: "post",
           maxBodyLength: Infinity,
           url: `${API_ENDPOINT}management/withdraw`,
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              `Bearer ${sessionStorage.getItem("access_token")}`,
+            Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
             "ngrok-skip-browser-warning": "69420",
           },
           data: data,
         };
-    
-        Axios
-          .request(config)
+
+        Axios.request(config)
           .then((response) => {
             if (response.data === "ok") {
               toast.success("Create withdraw order success!", {
@@ -118,8 +141,6 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
           });
       }
     });
-
-    
   };
 
   return (
@@ -158,14 +179,13 @@ const WithdrawItemUSDT = ({ depositHistory }) => {
                 Wallet Address
               </label>
               <input
-                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="bg-gray-300 shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="tokenBalance"
                 type="text"
-                placeholder="Wallet address that recevive that withdraw order amount"
+                placeholder="No wallet address has been set"
                 value={toWallet}
-                onChange={(e) => {
-                  setToWallet(e.target.value);
-                }}
+                disabled
+                readOnly
               />
             </div>
             <div className="mb-6">

@@ -33,6 +33,29 @@ const WithdrawItemLeader = ({ depositHistory }) => {
   const [toWallet, setToWallet] = useState("");
   const [balance, setBalance] = useState(100000000);
 
+  useEffect(() => {
+    let config = {
+      method: "get",
+      url: `${API_ENDPOINT}management/get-wallet-withdraw/${sessionStorage.getItem("walletAddress")}/2`,
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+        "ngrok-skip-browser-warning": "69420",
+      },
+    };
+
+    Axios
+      .request(config)
+      .then((response) => {
+        setToWallet(response.data);
+      })
+      .catch((error) => {
+        toast.error("Please try again later", {
+          position: "top-right",
+          autoClose: 1500,
+        });
+      });
+  }, []);
+  
   const handleWithdraw = () => {
     if (multiTabDetect) {
       toast.error("Multiple instances detected, please close all others window and reload the page!", {
@@ -157,14 +180,13 @@ const WithdrawItemLeader = ({ depositHistory }) => {
                 Wallet Address
               </label>
               <input
-                className="bg-white shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                className="bg-gray-300 shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="tokenBalance"
                 type="text"
-                placeholder="Wallet address that recevive that withdraw order amount"
+                placeholder="No TON wallet address has been set"
                 value={toWallet}
-                onChange={(e) => {
-                  setToWallet(e.target.value);
-                }}
+                readOnly
+                disabled
               />
             </div>
             <div className="mb-6">
