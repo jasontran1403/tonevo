@@ -9,6 +9,7 @@ const pairs = [
     { id: 5, name: "XRPUSDT", symbol: "XRP" },
     { id: 6, name: "MCTUSDT", symbol: "MCT" },
     { id: 7, name: "ETHUSDT", symbol: "ETH" },
+    { id: 8, name: "KASUSDT", symbol: "KAS" },
 ];
 
 const CurrencyField = (probs) => {

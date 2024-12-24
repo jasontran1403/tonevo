@@ -434,7 +434,7 @@ const ExternalSwapCard = () => {
                 <WithdrawField
                   field="input"
                   converted={false}
-                  tokenName="BNB"
+                  tokenName="MCT"
                   sourceAmount={sourceAmount}
                   handleChangeType={handleChangeType}
                   handleMax={handleMax}

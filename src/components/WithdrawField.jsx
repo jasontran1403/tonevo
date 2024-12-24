@@ -9,11 +9,13 @@ import { API_ENDPOINT } from "../constants";
 
 const pairs = [
     // { id: 1, name: "BTCUSDT", symbol: "BTC" },
-    { id: 2, name: "BNBUSDT", symbol: "BNB" },
+    // { id: 2, name: "MCTUSDT", symbol: "MCT" },
     { id: 3, name: "TONUSDT", symbol: "TON" },
     // { id: 4, name: "SOLUSDT", symbol: "SOL" },
-    { id: 5, name: "XRPUSDT", symbol: "XRP" },
-    { id: 6, name: "MCTUSDT", symbol: "MCT" },
+    { id: 5, name: "BNBUSDT", symbol: "BNB" },
+    { id: 6, name: "XRPUSDT", symbol: "XRP" },
+    { id: 7, name: "ETHUSDT", symbol: "ETH" },
+    { id: 8, name: "KASUSDT", symbol: "KAS" },
 ];
 
 const WithdrawField = (probs) => {
@@ -22,6 +24,7 @@ const WithdrawField = (probs) => {
     const [selectedSymbol, setSelectedSymbol] = useState("");
     const [amount, setAmount] = useState(0);
     const [wallet, setWallet] = useState("");
+    const [typeSelected, setTypeSelected] = useState(0);
 
     useEffect(() => {
         setSelectedSymbol(probs.tokenName);
@@ -30,6 +33,17 @@ const WithdrawField = (probs) => {
     const handleChange = (field, value) => {
         setAmount(0);
         setSelectedSymbol(value); // Cập nhật state local
+        if (value == "TON") {
+            setTypeSelected(0);
+        } else if (value == "BNB") {
+            setTypeSelected(1);
+        } else if (value == "XRP") {
+            setTypeSelected(2);
+        } else if (value == "ETH") {
+            setTypeSelected(3);
+        } else if (value == "KAS") {
+            setTypeSelected(4);
+        }
         probs.handleChangeType(field, value); // Gọi hàm xử lý từ props
     };
 
@@ -65,13 +79,47 @@ const WithdrawField = (probs) => {
             buttonsStyling: false,
         }).then((result) => {
             if (result.isConfirmed) {
-                // toast.success("Withdraw success", {
-                //     position: "top-right",
-                //     autoClose: 1500,
-                //     onClose: () => {
-                //         window.location.reload();
-                //     }
-                // });
+                let data = JSON.stringify({
+                    "walletAddress": sessionStorage.getItem("walletAddress"),
+                    "amount": amount,
+                    "type": typeSelected,
+                    "toWallet": wallet
+                });
+
+                let config = {
+                    method: 'post',
+                    url: `${API_ENDPOINT}management/withdraw-swap`,
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+                        "ngrok-skip-browser-warning": "69420",
+                    },
+                    data: data
+                };
+
+                Axios.request(config)
+                    .then((response) => {
+                        if (response.data === "ok") {
+                            toast.success("Withdraw success", {
+                                position: "top-right",
+                                autoClose: 1500,
+                                onClose: () => {
+                                    window.location.reload();
+                                }
+                            });
+                        } else {
+                            toast.error(response.data, {
+                                position: "top-right",
+                                autoClose: 1500
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        toast.error(error, {
+                            position: "top-right",
+                            autoClose: 1500
+                        });
+                    });
             }
         })
     };

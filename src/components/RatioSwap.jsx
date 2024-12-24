@@ -18,7 +18,7 @@ import {
 const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = 4;
+    const rowsPerPage = 5;
 
     // Filter rows based on search term
     const filteredRows = TABLE_ROWS.filter((row) =>
