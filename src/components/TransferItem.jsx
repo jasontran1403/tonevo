@@ -21,7 +21,7 @@ const TransferItem = ({ swapHistory }) => {
   const [fee, setFee] = useState(0);
   const [listWalletType] = useState([
     { id: 1, name: "Mapchain Wallet" },
-    { id: 2, name: "Transfer Wallet" },
+    // { id: 2, name: "Transfer Wallet" },
   ]);
   const [balances, setBalances] = useState([]);
   const [amountSwap, setAmountSwap] = useState(0);
