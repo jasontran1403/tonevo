@@ -117,7 +117,6 @@ const ExternalSwapCard = () => {
         "ngrok-skip-browser-warning": "69420",
       }
     };
-
     axios.request(config)
       .then((response) => {
         setSourceBalance(response.data);

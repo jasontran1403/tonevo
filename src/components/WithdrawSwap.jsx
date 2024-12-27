@@ -48,6 +48,13 @@ const WithdrawSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => 
         }
     };
 
+    const shortenString = (input) => {
+        if (input.length <= 9) {
+            return input; // Return the original string if it's too short to shorten
+        }
+        return `${input.slice(0, 4)}...${input.slice(-5)}`;
+    }
+
     const formatDate = (dateString) => {
         // Create a new Date object
         const date = new Date(dateString);
@@ -69,23 +76,30 @@ const WithdrawSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => 
 
     const formatNumber = (numberString) => {
         // Format the number with commas
-        const formattedNumber = new Intl.NumberFormat('en-US').format(numberString);
+        const number = parseFloat(numberString);
 
+        if (isNaN(number)) return "Invalid number"; // Xử lý trường hợp không phải số
+
+        // Format the number with commas and 10 decimal places
+        const formattedNumber = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(number);
         return formattedNumber;
     };
 
     const formatCrypto = (numberString) => {
         // Parse input as a float
         const number = parseFloat(numberString);
-    
+
         if (isNaN(number)) return "Invalid number"; // Xử lý trường hợp không phải số
-    
+
         // Format the number with commas and 10 decimal places
         const formattedNumber = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 10,
             maximumFractionDigits: 10,
         }).format(number);
-    
+
         return formattedNumber;
     };
 
@@ -161,6 +175,16 @@ const WithdrawSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => 
                                 return (
                                     <tr key={date}>
                                         <td className={classes}>
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal"
+                                            >
+                                                {formatDate(date)}
+                                            </Typography>
+                                        </td>
+
+                                        <td className={classes}>
                                             <div className="flex items-center gap-3">
                                                 <Typography
                                                     variant="small"
@@ -179,7 +203,7 @@ const WithdrawSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => 
                                                     color="blue-gray"
                                                     className="font-bold"
                                                 >
-                                                    {toWallet}
+                                                    {shortenString(toWallet)}
                                                 </Typography>
                                             </div>
                                         </td>
@@ -191,23 +215,15 @@ const WithdrawSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => 
                                                     color="blue-gray"
                                                     className="font-bold"
                                                 >
-                                                    {formatCrypto(amount)}
+                                                    {formatNumber(amount)}
                                                     <br />
-                                                    {formatCrypto(fee)}
+                                                    {formatNumber(fee)}
                                                 </Typography>
                                             </div>
                                         </td>
 
-                                        
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {formatDate(date)}
-                                            </Typography>
-                                        </td>
+
+
 
                                         <td className={classes}>
                                             <div className="w-max">

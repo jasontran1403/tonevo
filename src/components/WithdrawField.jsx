@@ -9,7 +9,7 @@ import { API_ENDPOINT } from "../constants";
 
 const pairs = [
     // { id: 1, name: "BTCUSDT", symbol: "BTC" },
-    // { id: 2, name: "MCTUSDT", symbol: "MCT" },
+    { id: 2, name: "MCTUSDT", symbol: "MCT" },
     { id: 3, name: "TONUSDT", symbol: "TON" },
     // { id: 4, name: "SOLUSDT", symbol: "SOL" },
     { id: 5, name: "BNBUSDT", symbol: "BNB" },
@@ -58,6 +58,14 @@ const WithdrawField = (probs) => {
 
         if (selectedSymbol === "" || selectedSymbol === undefined || amount === "" || parseFloat(amount) <= 0 || wallet === "" || wallet === undefined) {
             toast.error("Withdraw information must not be null", {
+                position: "top-right",
+                autoClose: 1500,
+            });
+            return;
+        }
+
+        if (selectedSymbol === "MCT") {
+            toast.error("MCT cannot withdraw here, please try later!", {
                 position: "top-right",
                 autoClose: 1500,
             });
@@ -160,11 +168,16 @@ const WithdrawField = (probs) => {
                             id="symbol-select"
                         >
                             {pairs.map((pair) => (
-                                <option key={pair.id} value={pair.symbol}>
+                                <option
+                                    key={pair.id}
+                                    value={pair.symbol}
+                                    disabled={pair.symbol === "MCT"} // Disable nếu symbol là MCT
+                                >
                                     {pair.symbol}
                                 </option>
                             ))}
                         </select>
+
                     </>
                 )}
             </div>
