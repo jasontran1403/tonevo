@@ -19,8 +19,7 @@ import RatioSwap from "./RatioSwap";
 const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
 const TABLE_HEAD_DEPOSIT = ["Date", "Token name", "Amount", "Status"];
 const TABLE_HEAD_WITHDRAW = ["Date", "Token name", "Address receive", "Amount", "Status"];
-const TABLE_HEAD_RATIO = ["Exchange Rate", "Time Updated"];
-
+const TABLE_HEAD_RATIO = ["Balance", "Exchange Rate"];
 
 const ExternalSwapCard = () => {
   const { multiTabDetect } = useContext(MultiTabDetectContext);
@@ -225,7 +224,7 @@ const ExternalSwapCard = () => {
           "ngrok-skip-browser-warning": "69420",
         }
       };
-  
+
       axios.request(config)
         .then((response) => {
           setDepositSwap(response.data);
@@ -239,7 +238,7 @@ const ExternalSwapCard = () => {
           "ngrok-skip-browser-warning": "69420",
         }
       };
-  
+
       axios.request(config)
         .then((response) => {
           setWithdrawSwap(response.data);
@@ -248,22 +247,37 @@ const ExternalSwapCard = () => {
   }
 
   const [ratios, setRatios] = useState([]);
+  const [fetching, setFetching] = useState(false);
+  const [latestUpdate, setLatestUpdate] = useState(0);
 
   useEffect(() => {
-    let config = {
-      method: 'get',
-      url: `${API_ENDPOINT}management/get-all-ratio`,
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        "ngrok-skip-browser-warning": "69420",
-      }
-    };
-    
-    axios.request(config)
-    .then((response) => {
-      setRatios(response.data);
-    });
+    fetchListBalance(0);
   }, []);
+
+  const fetchListBalance = (timeoutInput) => {
+    setFetching(true);
+
+    setTimeout(() => {
+        let config = {
+            method: 'get',
+            url: `${API_ENDPOINT}management/get-all-ratio`,
+            headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+                "ngrok-skip-browser-warning": "69420",
+            }
+        };
+
+        axios.request(config)
+            .then((response) => {
+                setRatios(response.data);
+                setLatestUpdate(response.data[0].latestUpdate);
+            })
+            .finally(() => {
+                setFetching(false);
+            });
+    }, timeoutInput);
+};
+
 
   const [qrCode, setQrCode] = useState(undefined);
   const [wallet, setWallet] = useState(undefined);
@@ -385,18 +399,12 @@ const ExternalSwapCard = () => {
                 TABLE_SUBNAME={""}
                 TABLE_HEAD={TABLE_HEAD_RATIO}
                 TABLE_ROWS={ratios}
+                handleUpdate={fetchListBalance}
+                isLoading={fetching}
+                latestUpdate={latestUpdate}
               />
             </div>
-            {/* <div className="transaction-container">
-              <TransactionSwap
-                className="w-full flex justify-center items-center ml-[20px]"
-                TABLE_NAME={""}
-                TABLE_SUBNAME={""}
-                TABLE_HEAD={TABLE_HEAD_DEPOSIT}
-                TABLE_ROWS={transactions}
-              />
-            </div> */}
-            
+
           </div> : currentTab === 2 ?
             <div className="swapContent">
               <div className="swapHeader">

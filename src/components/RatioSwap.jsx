@@ -14,8 +14,9 @@ import {
     Tooltip,
     Input,
 } from "@material-tailwind/react";
+import { Spinner } from "@material-tailwind/react";
 
-const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
+const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS, handleUpdate, isLoading, latestUpdate }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 5;
@@ -77,61 +78,45 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
     const formatCrypto = (numberString) => {
         // Parse input as a float
         const number = parseFloat(numberString);
-    
+
         if (isNaN(number)) return "Invalid number"; // Xử lý trường hợp không phải số
-    
+
         // Format the number with commas and 10 decimal places
         const formattedNumber = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 10,
             maximumFractionDigits: 10,
         }).format(number);
-    
+
         return formattedNumber;
     };
 
     return (
-        <Card className="h-full w-full flex flex-col">
-            {/* <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-                    <div>
-                        <Typography variant="h5" color="blue-gray">
-                            {TABLE_NAME}
-                        </Typography>
-                        <Typography color="gray" className="mt-1 font-normal">
-                            {TABLE_SUBNAME}
-                        </Typography>
+        <Card className="h-full w-full min-h-[23rem] flex flex-col">
+            <CardBody className="flex-1 overflow-x-auto px-0 relative">
+                {isLoading && (
+                    <div className="absolute inset-0 flex justify-center items-center bg-white/50 z-10">
+                        <Spinner />
                     </div>
-                    <div className="flex w-full shrink-0 gap-2 mr-3 md:w-max">
-                        <div className="w-full md:w-72 relative">
-                            <Input
-                                placeholder="Search by code"
-                                className="pl-4 ml-20 w-3/4 pr-10 rounded"
-                                value={searchTerm}
-                                onChange={(e) => {
-                                    setSearchTerm(e.target.value);
-                                    setCurrentPage(1); // Reset to page 1 on search
-                                }}
-                            />
-                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </CardHeader> */}
-            <CardBody className="flex-1 overflow-x-auto px-0">
-                <table className="w-[100%] mx-auto min-w-max table-auto text-center">
+                )}
+                {!isLoading && (<table className="w-[100%] mx-auto min-w-max table-auto text-center">
                     <thead>
                         <tr>
-                            {TABLE_HEAD.map((head) => (
+                            {TABLE_HEAD.map((head, index) => (
                                 <th
                                     key={head}
-                                    className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                                    className={`${index === 0
+                                        ? "text-left"
+                                        : index === TABLE_HEAD.length - 1
+                                            ? "text-right"
+                                            : "text-right"
+                                        } border-y border-blue-gray-100 bg-blue-gray-50/50 p-4`}
+
                                 >
                                     <Typography
                                         variant="small"
                                         color="blue-gray"
-                                        className="font-normal leading-none opacity-70"
+                                        className={`font-normal leading-none opacity-70
+                                            `}
                                     >
                                         {head}
                                     </Typography>
@@ -139,14 +124,17 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                             ))}
                         </tr>
                     </thead>
-                    <tbody className="min-h-[20rem]">
+                    <tbody
+                        className={`min-h-[20rem] ${isLoading ? "min-h-[20rem] flex items-center justify-center" : ""
+                            }`}
+                    >
                         {currentRows.map(
                             (
                                 {
                                     tokenNameSource,
                                     tokenNameDestination,
                                     ratio,
-                                    latestUpdate
+                                    balance
                                 },
                                 index
                             ) => {
@@ -156,38 +144,61 @@ const RatioSwap = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
                                     : "p-4 border-b border-blue-gray-50";
 
                                 return (
-                                    <tr key={latestUpdate}>
-                                        <td className={classes}>
+                                    <tr key={index || `${latestUpdate}-${index}`}>
+                                        <td className="text-left p-4 border-b border-blue-gray-50">
                                             <Typography
                                                 variant="small"
                                                 color="blue-gray"
                                                 className="font-normal"
                                             >
-                                                1 {tokenNameSource} ~ {formatCrypto(ratio)} {tokenNameDestination}
+                                                {balance}
                                             </Typography>
                                         </td>
 
-                                        <td className="w-full h-full flex justify-center p-4 items-center border-b border-blue-gray-50">
-                                            <div className="flex items-center gap-3">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-bold"
-                                                >
-                                                    {formatDate(latestUpdate)}
-                                                </Typography>
-                                            </div>
+                                        <td className={`text-right p-4 border-b border-blue-gray-50`}>
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="font-normal"
+                                            >
+                                                1 {tokenNameSource} ~ {formatCrypto(ratio)}{" "}
+                                                {tokenNameDestination}
+                                            </Typography>
                                         </td>
+
+                                        {/* <td className={classes}>
+                                            
+                                        </td> */}
                                     </tr>
                                 );
                             }
                         )}
                     </tbody>
-
-                </table>
+                    <tfoot>
+                        <tr>
+                            <td colSpan={3} className="p-4">
+                                <div className="flex items-center justify-center">
+                                    <Typography
+                                        variant="small"
+                                        color="blue-gray"
+                                        className={`font-bold ${isLoading ? "cursor-progress" : "cursor-pointer"}`}
+                                        onClick={
+                                            !isLoading
+                                                ? () => handleUpdate(600)
+                                                : undefined
+                                        }
+                                    >
+                                        Time updated {formatDate(latestUpdate)}
+                                    </Typography>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>)}
             </CardBody>
         </Card>
     );
+
 };
 
 export default RatioSwap;
