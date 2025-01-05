@@ -74,6 +74,18 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
     return formattedNumber;
   };
   
+  const formatNumberTypeTwo = (numberString) => {
+    // Parse the input to ensure it's a number
+    const number = parseFloat(numberString);
+
+    // Format the number with commas and two decimal places
+    const formattedNumber = new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(number);
+
+    return formattedNumber;
+};
 
   return (
     <Card className="h-full w-full flex flex-col">
@@ -182,7 +194,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
               color="blue-gray"
               className="font-normal"
             >
-              {formatNumber(capital)} MCT
+              {formatNumberTypeTwo(capital)} MCT
             </Typography>
           </td>
 
@@ -192,7 +204,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
               color="blue-gray"
               className="font-normal"
             >
-              {formatNumber(maxout)}
+              {formatNumberTypeTwo(maxout)} / {formatNumberTypeTwo(capital*3)}
             </Typography>
           </td>
 
