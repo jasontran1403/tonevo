@@ -133,6 +133,7 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
         date,
         daily,
         capital,
+        maxout,
         status
       },
       index
@@ -182,6 +183,16 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
               className="font-normal"
             >
               {formatNumber(capital)} MCT
+            </Typography>
+          </td>
+
+          <td className={classes}>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {formatNumber(maxout)}
             </Typography>
           </td>
 

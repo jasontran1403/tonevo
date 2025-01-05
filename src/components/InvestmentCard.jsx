@@ -13,6 +13,7 @@ const TABLE_HEAD = [
   "Date",
   "Daily Reward",
   "Capital",
+  "Maxout",
   "Status",
 ];
 
