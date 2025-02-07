@@ -16,9 +16,22 @@ import DepositSwap from "./DepositSwap";
 import WithdrawSwap from "./WithdrawSwap";
 import RatioSwap from "./RatioSwap";
 
-const TABLE_HEAD = ["Source", "Destination", "Amount", "Receive", "Time", "Status"];
+const TABLE_HEAD = [
+  "Source",
+  "Destination",
+  "Amount",
+  "Receive",
+  "Time",
+  "Status",
+];
 const TABLE_HEAD_DEPOSIT = ["Date", "Token name", "Amount", "Status"];
-const TABLE_HEAD_WITHDRAW = ["Date", "Token name", "Address receive", "Amount", "Status"];
+const TABLE_HEAD_WITHDRAW = [
+  "Date",
+  "Token name",
+  "Address receive",
+  "Amount",
+  "Status",
+];
 const TABLE_HEAD_RATIO = ["Balance", "Exchange Rate"];
 
 const ExternalSwapCard = () => {
@@ -50,20 +63,30 @@ const ExternalSwapCard = () => {
 
   const handleSwap = () => {
     if (multiTabDetect) {
-      toast.error("Multiple instances detected, please close all others window and reload the page!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error(
+        "Multiple instances detected, please close all others window and reload the page!",
+        {
+          position: "top-right",
+          autoClose: 1500,
+        }
+      );
       return;
     }
 
-    if (source === "" || destination === "" || sourceAmount <= 0 || isNaN(sourceAmount) === true || isNaN(destinationAmount) === true) return;
+    if (
+      source === "" ||
+      destination === "" ||
+      sourceAmount <= 0 ||
+      isNaN(sourceAmount) === true ||
+      isNaN(destinationAmount) === true
+    )
+      return;
 
     let data = JSON.stringify({
-      "walletAddress": sessionStorage.getItem("walletAddress"),
-      "amount": sourceAmount,
-      "tokenSource": source,
-      "tokenDestination": destination
+      walletAddress: sessionStorage.getItem("walletAddress"),
+      amount: sourceAmount,
+      tokenSource: source,
+      tokenDestination: destination,
     });
 
     let config = {
@@ -74,10 +97,11 @@ const ExternalSwapCard = () => {
         Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
       },
-      data: data
+      data: data,
     };
 
-    axios.request(config)
+    axios
+      .request(config)
       .then((response) => {
         if (response.data === "Swap order created success.") {
           toast.success(response.data, {
@@ -85,7 +109,7 @@ const ExternalSwapCard = () => {
             autoClose: 1500,
             onClose: () => {
               window.location.reload();
-            }
+            },
           });
         } else {
           toast.error(response.data, {
@@ -100,31 +124,38 @@ const ExternalSwapCard = () => {
           autoClose: 1500,
         });
       });
-  }
+  };
 
   useEffect(() => {
-    fetchBalance();
+    const timeout = setTimeout(() => {
+      fetchBalance();
+    }, 1000); // Trì hoãn 1 giây
+
+    return () => clearTimeout(timeout);
   }, [source]);
 
   const fetchBalance = () => {
     if (source === undefined) return;
 
     let config = {
-      method: 'get',
-      url: `${API_ENDPOINT}management/get-source-balance/${source}/${sessionStorage.getItem("walletAddress")}`,
+      method: "get",
+      url: `${API_ENDPOINT}management/get-source-balance/${source}/${sessionStorage.getItem(
+        "walletAddress"
+      )}`,
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
-      }
+      },
     };
-    axios.request(config)
+    axios
+      .request(config)
       .then((response) => {
         setSourceBalance(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   let timeout;
 
@@ -142,46 +173,54 @@ const ExternalSwapCard = () => {
   };
 
   useEffect(() => {
-    let config = {
-      method: 'get',
-      url: `${API_ENDPOINT}management/transactions-swap/${sessionStorage.getItem("walletAddress")}`,
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-        "ngrok-skip-browser-warning": "69420",
-      }
-    };
+    const timeout = setTimeout(() => {
+      let config = {
+        method: "get",
+        url: `${API_ENDPOINT}management/transactions-swap/${sessionStorage.getItem(
+          "walletAddress"
+        )}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "ngrok-skip-browser-warning": "69420",
+        },
+      };
 
-    axios.request(config)
-      .then((response) => {
+      axios.request(config).then((response) => {
         setTransactions(response.data.data);
       });
+    }, 1000); // Trì hoãn 1 giây
+
+    return () => clearTimeout(timeout); // Dọn dẹp timeout khi component unmount
   }, []);
 
   const fetchPrice = () => {
     let config = {
-      method: 'get',
+      method: "get",
       url: `${API_ENDPOINT}management/get-ratio/${source}/${destination}`,
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
         "ngrok-skip-browser-warning": "69420",
-      }
+      },
     };
 
-    axios.request(config)
-      .then((response) => {
-        setRatio(response.data);
-        if (response.data <= 0) {
-          setFailed(true);
-        } else {
-          // setDestinationAmount(sourceAmount * ratio);
-          setFailed(false);
-        }
-      });
-  }
+    axios.request(config).then((response) => {
+      setRatio(response.data);
+      if (response.data <= 0) {
+        setFailed(true);
+      } else {
+        // setDestinationAmount(sourceAmount * ratio);
+        setFailed(false);
+      }
+    });
+  };
 
   useEffect(() => {
-    fetchPrice();
-  }, [source, destination])
+    const timeout = setTimeout(() => {
+      fetchPrice();
+    }, 1000); // Trì hoãn 1 giây
+
+    return () => clearTimeout(timeout); // Dọn dẹp timeout khi dependencies thay đổi hoặc component unmount
+  }, [source, destination]);
 
   useEffect(() => {
     const timeInterval = setInterval(() => {
@@ -190,11 +229,11 @@ const ExternalSwapCard = () => {
 
     return () => {
       clearInterval(timeInterval);
-    }
+    };
   }, [source, destination]);
 
   const handleChangeType = (type, e) => {
-    let tokenName = `${e}USDT`
+    let tokenName = `${e}USDT`;
     if (type === "source") {
       setFrom(e);
       setSource(tokenName);
@@ -216,67 +255,73 @@ const ExternalSwapCard = () => {
 
     if (e === 2) {
       let config = {
-        method: 'get',
-        url: `${API_ENDPOINT}management/deposit-swap/${sessionStorage.getItem("walletAddress")}`,
+        method: "get",
+        url: `${API_ENDPOINT}management/deposit-swap/${sessionStorage.getItem(
+          "walletAddress"
+        )}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
           "ngrok-skip-browser-warning": "69420",
-        }
+        },
       };
 
-      axios.request(config)
-        .then((response) => {
-          setDepositSwap(response.data);
-        });
+      axios.request(config).then((response) => {
+        setDepositSwap(response.data);
+      });
     } else if (e === 3) {
       let config = {
-        method: 'get',
-        url: `${API_ENDPOINT}management/withdraw-swap/${sessionStorage.getItem("walletAddress")}`,
+        method: "get",
+        url: `${API_ENDPOINT}management/withdraw-swap/${sessionStorage.getItem(
+          "walletAddress"
+        )}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
           "ngrok-skip-browser-warning": "69420",
-        }
+        },
       };
 
-      axios.request(config)
-        .then((response) => {
-          setWithdrawSwap(response.data);
-        });
+      axios.request(config).then((response) => {
+        setWithdrawSwap(response.data);
+      });
     }
-  }
+  };
 
   const [ratios, setRatios] = useState([]);
   const [fetching, setFetching] = useState(false);
   const [latestUpdate, setLatestUpdate] = useState(0);
 
   useEffect(() => {
-    fetchListBalance(0);
+    const timeout = setTimeout(() => {
+      fetchListBalance(0);
+    }, 1000); // Trì hoãn 1 giây
+  
+    return () => clearTimeout(timeout);
   }, []);
 
   const fetchListBalance = (timeoutInput) => {
     setFetching(true);
 
     setTimeout(() => {
-        let config = {
-            method: 'get',
-            url: `${API_ENDPOINT}management/get-all-ratio`,
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
-                "ngrok-skip-browser-warning": "69420",
-            }
-        };
+      let config = {
+        method: "get",
+        url: `${API_ENDPOINT}management/get-all-ratio`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access_token")}`,
+          "ngrok-skip-browser-warning": "69420",
+        },
+      };
 
-        axios.request(config)
-            .then((response) => {
-                setRatios(response.data);
-                setLatestUpdate(response.data[0].latestUpdate);
-            })
-            .finally(() => {
-                setFetching(false);
-            });
+      axios
+        .request(config)
+        .then((response) => {
+          setRatios(response.data);
+          setLatestUpdate(response.data[0].latestUpdate);
+        })
+        .finally(() => {
+          setFetching(false);
+        });
     }, timeoutInput);
-};
-
+  };
 
   const [qrCode, setQrCode] = useState(undefined);
   const [wallet, setWallet] = useState(undefined);
@@ -287,7 +332,7 @@ const ExternalSwapCard = () => {
     setLoading(true);
 
     if (timeOutQr) {
-      clearTimeout(timeOutQr)
+      clearTimeout(timeOutQr);
     }
 
     timeOutQr = setTimeout(() => {
@@ -311,7 +356,8 @@ const ExternalSwapCard = () => {
       setWallet(walletAdderss);
 
       let data = JSON.stringify({
-        walletAddress: walletAdderss = sessionStorage.getItem("walletAddress"),
+        walletAddress: (walletAdderss =
+          sessionStorage.getItem("walletAddress")),
         amount: 0,
         method: method,
       });
@@ -328,7 +374,8 @@ const ExternalSwapCard = () => {
         responseType: "blob",
       };
 
-      axios.request(config)
+      axios
+        .request(config)
         .then((response) => {
           // Assuming response.data contains the image URL or base64 string
           const qrCodeBlob = response.data;
@@ -354,7 +401,7 @@ const ExternalSwapCard = () => {
   return (
     <div className="appBody">
       <div className="swapContainer">
-        {currentTab === 1 ?
+        {currentTab === 1 ? (
           <div className="swapContent">
             <div className="swapHeader">
               <span className="swapText">MAPCHAIN SWAP</span>
@@ -389,7 +436,9 @@ const ExternalSwapCard = () => {
               <CurrencyPrice ratio={ratio} from={from} to={to} />
             </div>
             <div className="swapFooter">
-              <button className="button-64" role="button" onClick={handleSwap}><span className="text">Swap</span></button>
+              <button className="button-64" role="button" onClick={handleSwap}>
+                <span className="text">Swap</span>
+              </button>
             </div>
             <div className="transaction-container">
               <RatioSwap
@@ -403,63 +452,89 @@ const ExternalSwapCard = () => {
                 latestUpdate={latestUpdate}
               />
             </div>
+          </div>
+        ) : currentTab === 2 ? (
+          <div className="swapContent">
+            <div className="swapHeader">
+              <span
+                className="swapText"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => handleSwitchTab(1)}
+              >
+                SWAP
+              </span>
+              <span className="swapText">DEPOSIT</span>
+              <span
+                className="swapText"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => handleSwitchTab(3)}
+              >
+                WITHDRAW
+              </span>
+            </div>
+            <div className="swapBody">
+              <DepositField
+                field="input"
+                handleChangeDepositType={handleChangeDepositType}
+                qrInfo={qrInfo}
+                qrCode={qrCode}
+                wallet={wallet}
+              />
+            </div>
 
-          </div> : currentTab === 2 ?
-            <div className="swapContent">
-              <div className="swapHeader">
-                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(1)}>SWAP</span>
-                <span className="swapText">DEPOSIT</span>
-                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(3)}>WITHDRAW</span>
-              </div>
-              <div className="swapBody">
-                <DepositField
-                  field="input"
-                  handleChangeDepositType={handleChangeDepositType}
-                  qrInfo={qrInfo}
-                  qrCode={qrCode}
-                  wallet={wallet}
-                />
-              </div>
+            <div className="transaction-container">
+              <DepositSwap
+                className="w-full flex justify-center items-center ml-[20px]"
+                TABLE_NAME={""}
+                TABLE_SUBNAME={""}
+                TABLE_HEAD={TABLE_HEAD_DEPOSIT}
+                TABLE_ROWS={depositSwap}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="swapContent">
+            <div className="swapHeader">
+              <span
+                className="swapText"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => handleSwitchTab(1)}
+              >
+                SWAP
+              </span>
+              <span
+                className="swapText"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => handleSwitchTab(2)}
+              >
+                DEPOSIT
+              </span>
+              <span className="swapText">WITHDRAW</span>
+            </div>
+            <div className="swapBody">
+              <WithdrawField
+                field="input"
+                converted={false}
+                tokenName="MCT"
+                sourceAmount={sourceAmount}
+                handleChangeType={handleChangeType}
+                handleMax={handleMax}
+                getSwapPrice={getSwapPrice}
+                balance={sourceBalance}
+              />
+            </div>
 
-              <div className="transaction-container">
-                <DepositSwap
-                  className="w-full flex justify-center items-center ml-[20px]"
-                  TABLE_NAME={""}
-                  TABLE_SUBNAME={""}
-                  TABLE_HEAD={TABLE_HEAD_DEPOSIT}
-                  TABLE_ROWS={depositSwap}
-                />
-              </div>
-            </div> :
-            <div className="swapContent">
-              <div className="swapHeader">
-                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(1)}>SWAP</span>
-                <span className="swapText" style={{ cursor: "pointer" }} onClick={e => handleSwitchTab(2)}>DEPOSIT</span>
-                <span className="swapText" >WITHDRAW</span>
-              </div>
-              <div className="swapBody">
-                <WithdrawField
-                  field="input"
-                  converted={false}
-                  tokenName="MCT"
-                  sourceAmount={sourceAmount}
-                  handleChangeType={handleChangeType}
-                  handleMax={handleMax}
-                  getSwapPrice={getSwapPrice}
-                  balance={sourceBalance}
-                />
-              </div>
-
-              <div className="transaction-container">
-                <WithdrawSwap
-                  className="w-full flex justify-center items-center ml-[20px]"
-                  TABLE_NAME={""}
-                  TABLE_SUBNAME={""}
-                  TABLE_HEAD={TABLE_HEAD_WITHDRAW}
-                  TABLE_ROWS={withdrawSwap}
-                />
-              </div>
-            </div>}
+            <div className="transaction-container">
+              <WithdrawSwap
+                className="w-full flex justify-center items-center ml-[20px]"
+                TABLE_NAME={""}
+                TABLE_SUBNAME={""}
+                TABLE_HEAD={TABLE_HEAD_WITHDRAW}
+                TABLE_ROWS={withdrawSwap}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

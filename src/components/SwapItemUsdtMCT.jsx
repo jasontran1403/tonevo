@@ -52,6 +52,7 @@ const SwapItemUsdtMCT = ({ swapHistory }) => {
       .then((response) => {
         setBalance(response.data.balances[0].balance);
         setListBalance(response.data.balances);
+        console.log(response.data.price);
         setPrice(response.data.price);
       })
       .catch((error) => {
