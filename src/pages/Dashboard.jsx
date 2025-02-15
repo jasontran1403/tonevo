@@ -204,7 +204,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Notification Modal */}
+      {/* Notification Modal 
       <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
@@ -233,6 +233,7 @@ const Dashboard = () => {
           />
         </div>
       </Modal>
+      */}
 
       <Modal
         isOpen={formSet}
