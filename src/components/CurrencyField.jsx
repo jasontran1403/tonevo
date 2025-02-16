@@ -98,13 +98,7 @@ const CurrencyField = (probs) => {
                             id="symbol-select"
                         >
                             {pairs
-                                .filter((pair) => {
-                                    if (probs.type === "source") {
-                                        return pair.name === "MCTUSDT"; // Chỉ giữ lại MCTUSDT
-                                    } else {
-                                        return pair.name !== "MCTUSDT"; // Loại bỏ MCTUSDT
-                                    }
-                                })
+                                
                                 .map((pair) => (
                                     <option key={pair.id} value={pair.symbol}>
                                         {pair.symbol}

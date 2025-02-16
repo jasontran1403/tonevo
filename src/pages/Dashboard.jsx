@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import styles from "../style";
 import styled from "styled-components";
-import promotion from "../assets/promotion.jpg";
+import promotion1 from "../assets/promotion1.jpg";
+import promotion2 from "../assets/promotion2.jpg";
+import promotion3 from "../assets/promotion3.jpg";
 import { MainDashboard, UserNavbar } from "../components";
 import { API_ENDPOINT } from "../constants";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +13,8 @@ import Axios from "axios";
 import Form from "../components/Form";
 import LockModal from "../components/LockModal";
 import Chatbox from "../components/Chatbox";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css"; // Import Swiper styles
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -204,36 +208,91 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Notification Modal 
+      {/* Notification Modal */}
       <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
         style={customStyles}
         contentLabel="Announcement"
       >
-        <div
-          onClick={closeNotificationModal}
-          style={{
-            height: "100%", // Ensure the container takes full height of the modal
-            width: "100%",
-            display: "flex",
-            justifyContent: "center", // Center the image horizontally
-            alignItems: "center", // Center the image vertically
-            cursor: "pointer",
-          }}
+
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
         >
-          <img
-            src={promotion}
-            style={{
-              maxHeight: "100%", // Ensure the image doesn't overflow vertically
-              maxWidth: "100%", // Ensure the image doesn't overflow horizontally
-              objectFit: "contain", // Ensure the image scales while maintaining aspect ratio
-            }}
-            alt="Promotion"
-          />
-        </div>
+          <SwiperSlide>
+            <div
+              onClick={closeNotificationModal}
+              style={{
+                height: "100%", // Ensure the container takes full height of the modal
+                width: "100%",
+                display: "flex",
+                justifyContent: "center", // Center the image horizontally
+                alignItems: "center", // Center the image vertically
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src={promotion1}
+                style={{
+                  maxHeight: "100%", // Ensure the image doesn't overflow vertically
+                  maxWidth: "100%", // Ensure the image doesn't overflow horizontally
+                  objectFit: "cover", // Ensure the image scales while maintaining aspect ratio
+                }}
+                alt="Promotion"
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div
+              onClick={closeNotificationModal}
+              style={{
+                height: "100%", // Ensure the container takes full height of the modal
+                width: "100%",
+                display: "flex",
+                justifyContent: "center", // Center the image horizontally
+                alignItems: "center", // Center the image vertically
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src={promotion2}
+                style={{
+                  maxHeight: "100%", // Ensure the image doesn't overflow vertically
+                  maxWidth: "100%", // Ensure the image doesn't overflow horizontally
+                  objectFit: "cover", // Ensure the image scales while maintaining aspect ratio
+                }}
+                alt="Promotion"
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div
+              onClick={closeNotificationModal}
+              style={{
+                height: "100%", // Ensure the container takes full height of the modal
+                width: "100%",
+                display: "flex",
+                justifyContent: "center", // Center the image horizontally
+                alignItems: "center", // Center the image vertically
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src={promotion3}
+                style={{
+                  maxHeight: "100%", // Ensure the image doesn't overflow vertically
+                  maxWidth: "100%", // Ensure the image doesn't overflow horizontally
+                  objectFit: "cover", // Ensure the image scales while maintaining aspect ratio
+                }}
+                alt="Promotion"
+              />
+            </div>
+          </SwiperSlide>
+        </Swiper>
+
       </Modal>
-      */}
 
       <Modal
         isOpen={formSet}
