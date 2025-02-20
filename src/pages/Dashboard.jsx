@@ -105,9 +105,9 @@ const Dashboard = () => {
     ) {
       setSpecialNoti(true);
     }
-    if (sessionStorage.getItem("walletAddress") === "0:bae2f80a7cbaad7f93f18bb569f632cfcfb1fa9c0612cb5180ef43d60b1e8a34") {
-      setNotification(true);
-    }
+    // if (sessionStorage.getItem("walletAddress") === "0:bae2f80a7cbaad7f93f18bb569f632cfcfb1fa9c0612cb5180ef43d60b1e8a34") {
+    //   setNotification(true);
+    // }
     if (isWalletSet === true) {
       setFormSet(true);
     }
@@ -351,6 +351,7 @@ const Dashboard = () => {
         </div>
       </Modal>
 
+{/* Lock Modal
       <Modal
         isOpen={notification}
         style={customStyles}
@@ -393,8 +394,8 @@ const Dashboard = () => {
           </div>
         </div>
       </Modal>
-
-      {/* Lock Modal */}
+          */}
+      
       {isLock === "true" ? (
         <LockModal
           isOpen={modalLock}
