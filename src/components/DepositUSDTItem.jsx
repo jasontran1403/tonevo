@@ -51,6 +51,15 @@ const DepositUSDTItem = ({ depositHistory }) => {
     if (amount <= 0) {
       return;
     }
+
+    if (amount < 5) {
+      toast.error(`The minimum deposit amount is 5 USDT. Any deposits below the minimum amount will result in the loss of your funds.`, {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     let data = JSON.stringify({
       walletAddress: walletAddress,
       amount: amount,
@@ -232,6 +241,7 @@ const DepositUSDTItem = ({ depositHistory }) => {
                 }
               }}
             />
+            <small className="italic text-red-400">Please make sure to deposit the correct currency on the Binance Smart Chain network. The minimum deposit amount is 5 USDT. Any deposits made on the wrong network or below the minimum amount will result in the loss of your funds.</small>
           </div>
 
           {qrImage && (

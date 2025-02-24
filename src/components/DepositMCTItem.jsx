@@ -22,10 +22,28 @@ const DepositItem = ({ depositHistory }) => {
     sessionStorage.getItem("access_token")
   );
   const [networkSelected, setNetworkSelected] = useState("");
+  const [minAmount, setMinAmount] = useState(0);
+
+  const formatNumber = (numberString) => {
+    // Parse the input to ensure it's a number
+    const number = parseFloat(numberString);
+
+    // Format the number with commas and two decimal places
+    const formattedNumber = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(number);
+
+    return formattedNumber;
+  };
 
   const [listNetwork, setListNetwork] = useState([
     { id: 2, name: "Mapchain Token" },
   ]);
+
+  useState(() => {
+    setMinAmount(5/sessionStorage.getItem("price"))
+  }, [sessionStorage.getItem("price")]);
 
   const [amount, setAmount] = useState(0);
   const [qrImage, setQrImage] = useState("");
@@ -52,6 +70,15 @@ const DepositItem = ({ depositHistory }) => {
     if (amount <= 0) {
       return;
     }
+
+    if (amount < minAmount) {
+      toast.error(`The minimum deposit amount is ${formatNumber(minAmount)} MCT. Any deposits below the minimum amount will result in the loss of your funds.`, {
+        position: "top-right",
+        autoClose: 1500,
+      });
+      return;
+    }
+
     let data = JSON.stringify({
       walletAddress: walletAddress,
       amount: amount,
@@ -107,7 +134,6 @@ const DepositItem = ({ depositHistory }) => {
   };
 
   const handleCancelDeposit = () => {
-
     Swal.fire({
       title: 'Confirm cancel deposit',
       text: `Are you sure you want to cancel ${amount}?`,
@@ -237,6 +263,7 @@ const DepositItem = ({ depositHistory }) => {
                 }
               }}
             />
+            <small className="italic text-red-400">Please make sure to deposit the correct currency on the TON network. The minimum deposit amount is {formatNumber(minAmount)} MCT. Any deposits made on the wrong network or below the minimum amount will result in the loss of your funds.</small>
           </div>
 
           {qrImage && (

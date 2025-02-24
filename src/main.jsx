@@ -87,6 +87,7 @@ function App() {
             sessionStorage.setItem("bep20", response.data.bep20);
             sessionStorage.setItem("xrp", response.data.xrp);
             sessionStorage.setItem("ton", response.data.ton);
+            sessionStorage.setItem("price", response.data.price);
           });
         }, 500);
       } else {
@@ -109,6 +110,7 @@ function App() {
     sessionStorage.removeItem("ton");
     sessionStorage.removeItem("bep20");
     sessionStorage.removeItem("xrp");
+    sessionStorage.removeItem("price");
 
     let config = {
       method: "get",

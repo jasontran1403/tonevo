@@ -6,9 +6,7 @@ const Binary = ({ content, amount, unit, rank, wallet }) => {
 
   const formatNumber = (numberString) => {
     // Format the number with commas
-
     const formattedNumber = new Intl.NumberFormat("en-US").format(numberString);
-
     return formattedNumber;
   };
 
