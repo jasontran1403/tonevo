@@ -244,25 +244,27 @@ const DepositTable = ({
                         <Chip
                           size="sm"
                           variant="ghost"
-                          value={status}
-                          color={
-                            status === "success" || status === "complete"
-                              ? "green"
-                              : status === "pending" || status === "running"
-                              ? "amber"
-                              : "red"
+                          value={
+                            status === "cancel"
+                              ? "Canceled"
+                              : status === "success"
+                                ? "Successful"
+                                : "Pending"
                           }
-                          onClick={
-                            status === "pending"
-                              ? () => handleCancelPending(code)
-                              : undefined
-                          }
-                          className={
-                            status === "pending" ? "cursor-pointer" : ""
-                          }
+                          color={{
+                            success: "green",
+                            complete: "green",
+                            pending: "yellow",
+                            running: "yellow",
+                            cancel: "red",
+                            failed: "red",
+                          }[status] || "gray"} // Mặc định là "gray" nếu không khớp trạng thái
+                          onClick={status === "pending" ? () => handleCancelPending(code) : undefined}
+                          className={status === "pending" ? "cursor-pointer text-yellow-500" : status === "cancel" ? "text-red-400" : "text-green-400"}
                         />
                       </div>
                     </td>
+
 
                     <td className={classes}>
                       <div className="flex items-center gap-3">

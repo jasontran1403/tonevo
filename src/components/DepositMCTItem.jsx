@@ -83,6 +83,7 @@ const DepositItem = ({ depositHistory }) => {
       walletAddress: walletAddress,
       amount: amount,
       method: 2,
+      price: sessionStorage.getItem("price")
     });
 
     Swal.fire({
