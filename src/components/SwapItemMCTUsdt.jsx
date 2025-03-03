@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_ENDPOINT } from "../constants";
 import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 
-
 const SwapItemMCTUsdt = ({ swapHistory }) => {
   const { multiTabDetect } = useContext(MultiTabDetectContext);
 
@@ -18,9 +17,7 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
+
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
   const [balance, setBalance] = useState(0);
@@ -56,7 +53,7 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [sessionStorage.getItem("access_token")]);
 
   // Updates To Wallet based on From Wallet selection
   useEffect(() => {
@@ -73,10 +70,13 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
 
   const handleCreateDeposit = () => {
     if (multiTabDetect) {
-      toast.error("Multiple instances detected, please close all others window and reload the page!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error(
+        "Multiple instances detected, please close all others window and reload the page!",
+        {
+          position: "top-right",
+          autoClose: 1500,
+        }
+      );
       return;
     }
 
@@ -97,8 +97,8 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
       text: `Are you sure you want to swap?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, confirm it!',
-      cancelButtonText: 'No, cancel order',
+      confirmButtonText: "Yes, confirm it!",
+      cancelButtonText: "No, cancel order",
       reverseButtons: true,
       customClass: {
         confirmButton: "custom-confirm-button", // Custom class for confirm button
@@ -155,6 +155,13 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
     });
   };
 
+  const getSlippageRate = (value) => {
+    const maxSlippage = 20; // 20% max
+    const step = 1000; // Mỗi bậc tăng 1000
+    const slippageRate = Math.min(Math.floor(value / step), maxSlippage);
+    return value - value*slippageRate / 100; // Chuyển thành tỷ lệ phần trăm
+  };
+
   const handleChangeAmount = (amountToSwap) => {
     const value = amountToSwap;
     const regex = /^[0-9]*\.?[0-9]*$/;
@@ -168,7 +175,7 @@ const SwapItemMCTUsdt = ({ swapHistory }) => {
         if (price > 0) {
           if (fromSelected === 2 && toSelected === 1) {
             // MCT to USDT
-            setAmountSwap(value * price); // 1 MCT gets 0.1 USDT (when price = 0.1)
+            setAmountSwap(getSlippageRate(value) * price); // 1 MCT gets 0.1 USDT (when price = 0.1)
           }
         } else {
           // Handle the case where the price is invalid (e.g., set to 0)

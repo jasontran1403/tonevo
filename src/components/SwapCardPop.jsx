@@ -15,9 +15,6 @@ const SwapCardPop = () => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
 
   const [swapHistory, setSwapHistory] = useState([]);
 
@@ -38,7 +35,7 @@ const SwapCardPop = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [sessionStorage.getItem("access_token")]);
 
   return (
     <>

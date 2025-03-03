@@ -15,7 +15,12 @@ import {
   Input,
 } from "@material-tailwind/react";
 
-const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) => {
+const InvestmentTable = ({
+  TABLE_NAME,
+  TABLE_SUBNAME,
+  TABLE_HEAD,
+  TABLE_ROWS,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
@@ -69,23 +74,23 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
 
   const formatNumber = (numberString) => {
     // Format the number with commas
-    const formattedNumber = new Intl.NumberFormat('en-US').format(numberString);
-  
+    const formattedNumber = new Intl.NumberFormat("en-US").format(numberString);
+
     return formattedNumber;
   };
-  
+
   const formatNumberTypeTwo = (numberString) => {
     // Parse the input to ensure it's a number
     const number = parseFloat(numberString);
 
     // Format the number with commas and two decimal places
     const formattedNumber = new Intl.NumberFormat("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(number);
 
     return formattedNumber;
-};
+  };
 
   return (
     <Card className="h-full w-full flex flex-col">
@@ -138,106 +143,96 @@ const InvestmentTable = ({ TABLE_NAME, TABLE_SUBNAME, TABLE_HEAD, TABLE_ROWS }) 
             </tr>
           </thead>
           <tbody className="min-h-[20rem]">
-  {currentRows.map(
-    (
-      {
-        code,
-        date,
-        daily,
-        capital,
-        maxout,
-        status
-      },
-      index
-    ) => {
-      const isLast = index === currentRows.length - 1;
-      const classes = isLast
-        ? "p-4"
-        : "p-4 border-b border-blue-gray-50";
+            {currentRows.map(
+              ({ code, date, daily, capital, maxout, status }, index) => {
+                const isLast = index === currentRows.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
 
-      return (
-        <tr key={code}>
-          <td className={classes}>
-            <div className="flex items-center gap-3">
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
-              >
-                {code}
-              </Typography>
-            </div>
-          </td>
-          
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatDate(date)}
-            </Typography>
-          </td>
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatNumber(daily)}%
-            </Typography>
-          </td>
+                return (
+                  <tr key={code}>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          {code}
+                        </Typography>
+                      </div>
+                    </td>
 
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatNumberTypeTwo(capital)} MCT
-            </Typography>
-          </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatDate(date)}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatNumber(daily)}%
+                      </Typography>
+                    </td>
 
-          <td className={classes}>
-            <Typography
-              variant="small"
-              color="blue-gray"
-              className="font-normal"
-            >
-              {formatNumberTypeTwo(maxout)} / {formatNumberTypeTwo(capital*3)}
-            </Typography>
-          </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatNumberTypeTwo(capital)} MCT
+                      </Typography>
+                    </td>
 
-          <td className={classes}>
-            <div className="w-max">
-              <Chip
-                size="sm"
-                variant="ghost"
-                value={status}
-                color={
-                  status === "success" || status === "complete"
-                    ? "green"
-                    : status === "pending" || status === "running"
-                    ? "amber"
-                    : "red"
-                }
-              />
-            </div>
-          </td>
-          
-          {/* <td className={classes}>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {formatNumberTypeTwo(maxout)} /{" "}
+                        {formatNumberTypeTwo(capital * 3)}
+                      </Typography>
+                    </td>
+
+                    <td className={classes}>
+                      <div className="w-max">
+                        <Chip
+                          size="sm"
+                          variant="ghost"
+                          value={status}
+                          color={
+                            status === "success" || status === "complete"
+                              ? "green"
+                              : status === "pending" || status === "running"
+                              ? "amber"
+                              : "red"
+                          }
+                        />
+                      </div>
+                    </td>
+
+                    {/* <td className={classes}>
             <Tooltip content="Edit User">
               <IconButton variant="text">
                 <PencilIcon className="h-4 w-4" />
               </IconButton>
             </Tooltip>
           </td> */}
-        </tr>
-      );
-    }
-  )}
-</tbody>
-
+                  </tr>
+                );
+              }
+            )}
+          </tbody>
         </table>
       </CardBody>
       <CardFooter className="flex items-center justify-center border-t border-blue-gray-50 p-4">

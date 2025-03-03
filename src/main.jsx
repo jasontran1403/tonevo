@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MultiTabDetectProvider } from "./components/MultiTabDetectContext";
 import PuffLoader from "react-spinners/PuffLoader";
+import { useAuth, AuthProvider } from "./pages/AuthContext";
 
 function App() {
   const wallet = useTonWallet();
@@ -25,8 +26,12 @@ function App() {
   const id = location.pathname.split("/admin/dashboard/")[1];
   const [loading, setLoading] = useState(true);
   let [color] = useState("#42d7f5");
+  const { isAuthLoading } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
+    if (isAuthenticated) return; // Nếu đã auth rồi thì không gọi lại API nữa
+
     var timeout;
     if (isAdmin) {
       timeout = setTimeout(() => {
@@ -51,45 +56,46 @@ function App() {
           sessionStorage.setItem("is_lock", response.data.is_lock);
           sessionStorage.setItem("bep20", response.data.bep20);
           sessionStorage.setItem("xrp", response.data.xrp);
+          setIsAuthenticated(true); // Đánh dấu đã login thành công
         });
       }, 500);
     } else {
       if (wallet === null) return;
 
       if (connect[0].connected) {
-        // Lưu địa chỉ ví vào sessionStorage
-        sessionStorage.setItem("walletAddress", wallet.account.address);
-        sessionStorage.setItem("publicKey", wallet.account.publicKey);
-        sessionStorage.setItem("walletStateInit", wallet.account.walletStateInit);
         sessionStorage.setItem("managerment", "admin");
-        setLastStatus(true);
-        timeout = setTimeout(() => {
-          let data = JSON.stringify({
-            walletAddress: wallet.account.address,
-            publicKey: wallet.account.publicKey,
-            walletStateInit: wallet.account.walletStateInit,
-          });
+        let data = JSON.stringify({
+          walletAddress: wallet.account.address,
+          publicKey: wallet.account.publicKey,
+          walletStateInit: wallet.account.walletStateInit,
+        });
 
-          let config = {
-            method: "post",
-            url: `${API_ENDPOINT}auth/authenticate`,
-            headers: {
-              "Content-Type": "application/json",
-              "ngrok-skip-browser-warning": "69420",
-            },
-            data: data,
-          };
+        let config = {
+          method: "post",
+          url: `${API_ENDPOINT}auth/authenticate`,
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
+          },
+          data: data,
+        };
 
-          Axios.request(config).then((response) => {
-            sessionStorage.setItem("access_token", response.data.access_token);
-            sessionStorage.setItem("is_in_tree", response.data.is_in_tree);
-            sessionStorage.setItem("is_lock", response.data.is_lock);
-            sessionStorage.setItem("bep20", response.data.bep20);
-            sessionStorage.setItem("xrp", response.data.xrp);
-            sessionStorage.setItem("ton", response.data.ton);
-            sessionStorage.setItem("price", response.data.price);
-          });
-        }, 500);
+        Axios.request(config).then((response) => {
+          sessionStorage.setItem("walletAddress", wallet.account.address);
+          sessionStorage.setItem("publicKey", wallet.account.publicKey);
+          sessionStorage.setItem(
+            "walletStateInit",
+            wallet.account.walletStateInit
+          );
+          sessionStorage.setItem("access_token", response.data.access_token);
+          sessionStorage.setItem("is_in_tree", response.data.is_in_tree);
+          sessionStorage.setItem("is_lock", response.data.is_lock);
+          sessionStorage.setItem("bep20", response.data.bep20);
+          sessionStorage.setItem("xrp", response.data.xrp);
+          sessionStorage.setItem("ton", response.data.ton);
+          sessionStorage.setItem("price", response.data.price);
+          setIsAuthenticated(true); // Đánh dấu đã login thành công
+        });
       } else {
         // Xóa thông tin ví khi ngắt kết nối
         disconnect();
@@ -140,14 +146,10 @@ function App() {
     return () => clearTimeout(timeout); // Dọn dẹp timeout khi component unmount
   }, []);
 
-  if (loading) {
+  if (loading || isAuthLoading) {
     return (
       <div className="sweet-loading">
-        <PuffLoader  
-          color={color}
-          loading={loading}
-          size={150}
-        />
+        <PuffLoader color={color} loading={loading} size={150} />
       </div>
     );
   }
@@ -159,24 +161,26 @@ Modal.setAppElement("#root");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <MultiTabDetectProvider>
-    <TonConnectUIProvider
-      manifestUrl="https://www.mapchain.org/tonconnect-manifest.json"
-      uiPreferences={{
-        theme: THEME.LIGHT,
-        borderRadius: "s",
-        colorsSet: {
-          [THEME.DARK]: {
-            connectButton: {
-              background: "#29CC6A",
+    <AuthProvider>
+      <TonConnectUIProvider
+        manifestUrl="https://www.mapchain.org/tonconnect-manifest.json"
+        uiPreferences={{
+          theme: THEME.LIGHT,
+          borderRadius: "s",
+          colorsSet: {
+            [THEME.DARK]: {
+              connectButton: {
+                background: "#29CC6A",
+              },
             },
           },
-        },
-      }}
-    >
-      <BrowserRouter>
-        <App />
-        <ToastContainer stacked />
-      </BrowserRouter>
-    </TonConnectUIProvider>
+        }}
+      >
+        <BrowserRouter>
+          <App />
+          <ToastContainer stacked />
+        </BrowserRouter>
+      </TonConnectUIProvider>
+    </AuthProvider>
   </MultiTabDetectProvider>
 );

@@ -52,7 +52,6 @@ const Investment = () => {
   const [walletStateInit, setWalletStateInit] = useState(
     sessionStorage.getItem("walletStateInit")
   );
-  const [accessToken, setAccessToken] = useState();
 
   const [modalIsOpen, setIsOpen] = useState();
   const [isInTree, setIsInTree] = useState(sessionStorage.getItem("is_in_tree"));

@@ -21,7 +21,6 @@ import { MultiTabDetectContext } from "../components/MultiTabDetectContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const TABLE_HEAD = ["Code", "Date", "Amount", "Status", "Note"];
 
 const columns = [
@@ -70,9 +69,7 @@ const MainDashboard = () => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
+
   const [rank, setRank] = useState(0);
   const [listBalance, setListBalance] = useState([]);
   const [listTransaction, setListTransaction] = useState([]);
@@ -89,21 +86,14 @@ const MainDashboard = () => {
       },
     };
 
-    Axios.request(config)
-      .then((response) => {
-        setListTransaction(response.data.transactionHistory);
-        setListBalance(response.data.balances);
-        setRank(response.data.rank);
-        setLeftRefCode(response.data.leftRefCode)
-        setRightRefCode(response.data.rightRefCode);
-      })
-      .catch((error) => {
-        toast.error("Please try again later", {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      });
-  }, []);
+    Axios.request(config).then((response) => {
+      setListTransaction(response.data.transactionHistory);
+      setListBalance(response.data.balances);
+      setRank(response.data.rank);
+      setLeftRefCode(response.data.leftRefCode);
+      setRightRefCode(response.data.rightRefCode);
+    });
+  }, [sessionStorage.getItem("access_token")]);
 
   return (
     <>
@@ -176,37 +166,29 @@ const MainDashboard = () => {
             />
             <Direct
               content={"Direct Commission"}
-              amount={
-                listBalance[2]?.balance
-              }
+              amount={listBalance[2]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
             <Binary
               content={"Binary Commission"}
-              amount={
-                listBalance[3]?.balance
-              }
+              amount={listBalance[3]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
-            
+
             <Pop
               content={"Pop Commission"}
-              amount={
-                listBalance[5]?.balance
-              }
+              amount={listBalance[5]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
             />
             <Leader
               content={"Leader Commission"}
-              amount={
-                listBalance[4]?.balance
-              }
+              amount={listBalance[4]?.balance}
               unit={"MCT"}
               wallet={false}
               className="flex-1 w-full max-w-xs" // Adjust width for small screens
@@ -224,8 +206,6 @@ const MainDashboard = () => {
             }}
             className="flex-wrap" // Allow wrapping on small screens
           >
-            
-            
             {/* <WalletCard5
               content={"Transfer wallet"}
               amount={listBalance[6]?.balance}
@@ -242,7 +222,6 @@ const MainDashboard = () => {
             />
           </div>
         </div>
-        
       </div>
 
       <div className="investment-container pt-[20px] w-full">

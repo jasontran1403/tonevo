@@ -17,9 +17,7 @@ const SwapItemDirect = ({ swapHistory }) => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
+  
   const [fromSelected, setFromSelected] = useState(1);
   const [toSelected, setToSelected] = useState(2);
   const [balance, setBalance] = useState(0);
@@ -55,7 +53,7 @@ const SwapItemDirect = ({ swapHistory }) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [sessionStorage.getItem("access_token")]);
 
   // Updates To Wallet based on From Wallet selection
   useEffect(() => {
@@ -144,6 +142,13 @@ const SwapItemDirect = ({ swapHistory }) => {
     });
   };
 
+  const getSlippageRate = (value) => {
+    const maxSlippage = 20; // 20% max
+    const step = 1000; // Mỗi bậc tăng 1000
+    const slippageRate = Math.min(Math.floor(value / step), maxSlippage);
+    return value - value*slippageRate / 100; // Chuyển thành tỷ lệ phần trăm
+  };
+
   const handleChangeAmount = (amountToSwap) => {
     const value = amountToSwap;
     const regex = /^[0-9]*\.?[0-9]*$/;
@@ -155,7 +160,7 @@ const SwapItemDirect = ({ swapHistory }) => {
 
         // Check if price is valid before dividing
         if (price > 0) {
-            setAmountSwap(value * price); // 1 MCT gets 0.1 USDT (when price = 0.1)
+            setAmountSwap(getSlippageRate(value) * price); // 1 MCT gets 0.1 USDT (when price = 0.1)
         } else {
           // Handle the case where the price is invalid (e.g., set to 0)
           setAmountSwap(0);

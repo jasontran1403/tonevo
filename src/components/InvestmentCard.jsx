@@ -21,9 +21,7 @@ const InvestmentCard = () => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
+  
   const [packages, setPackages] = useState();
   const [balance, setBalance] = useState();
   const [listInvestment, setListInvestment] = useState([]);
@@ -43,11 +41,8 @@ const InvestmentCard = () => {
         setPackages(response.data.packages);
         setBalance(response.data.balance);
         setListInvestment(response.data.investments);
-      })
-      .catch((error) => {
-        console.log(error);
       });
-  }, []);
+  }, [sessionStorage.getItem("access_token")]);
   
   return (
     <>

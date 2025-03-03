@@ -54,9 +54,7 @@ const Dashboard = () => {
     sessionStorage.getItem("walletStateInit")
   );
   const [isOpen, toggle] = useState(false);
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
+
   const [notificationModalOpen, setNotificationModalOpen] = useState(true); // Notification modal state
 
   const [isInTree] = useState(sessionStorage.getItem("is_in_tree"));
@@ -133,19 +131,12 @@ const Dashboard = () => {
       },
     };
 
-    Axios.request(config)
-      .then((response) => {
-        if (response.data?.length == 0) {
-          setWalletSet(true);
-        }
-      })
-      .catch((error) => {
-        toast.error("Please try again later", {
-          position: "top-right",
-          autoClose: 1500,
-        });
-      });
-  }, []);
+    Axios.request(config).then((response) => {
+      if (response.data?.length === 0) {
+        setWalletSet(true);
+      }
+    });
+  }, [sessionStorage.getItem("access_token")]);
 
   const closeWalletForm = () => {
     setFormSet(false);
@@ -180,8 +171,7 @@ const Dashboard = () => {
       data: data,
     };
 
-    Axios
-      .request(config)
+    Axios.request(config)
       .then((response) => {
         if (response.data === "ok") {
           toast.success("Verify wallet for withdraw order successful!", {
@@ -192,14 +182,14 @@ const Dashboard = () => {
         } else {
           toast.error(response.data, {
             position: "top-right",
-            autoClose: 3000
+            autoClose: 3000,
           });
         }
       })
       .catch((error) => {
         toast.error("Please try again later!", {
           position: "top-right",
-          autoClose: 3000
+          autoClose: 3000,
         });
       });
   };
@@ -208,7 +198,7 @@ const Dashboard = () => {
 
   const handleCloseNoti = () => {
     setNotification(false);
-  }
+  };
   return (
     <div className="bg-primary w-full h-full">
       <div className={`${styles.paddingX} ${styles.flexCenterNav}`}>
@@ -224,7 +214,6 @@ const Dashboard = () => {
         style={customStyles}
         contentLabel="Announcement"
       >
-
         <Swiper
           spaceBetween={50}
           slidesPerView={1}
@@ -300,7 +289,6 @@ const Dashboard = () => {
             </div>
           </SwiperSlide>
         </Swiper>
-
       </Modal>
 
       <Modal
@@ -319,7 +307,7 @@ const Dashboard = () => {
             cursor: "pointer",
             padding: "30px",
             gap: "20px",
-            backgroundColor: "#1f2937"
+            backgroundColor: "#1f2937",
           }}
         >
           <input
@@ -341,17 +329,23 @@ const Dashboard = () => {
             className="bg-white rounded shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
           <div className="form flex justify-center items-center pt-[20px] gap-[20px]">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={closeWalletForm}>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={closeWalletForm}
+            >
               Cancel
             </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleVerifyWallet}>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleVerifyWallet}
+            >
               Verify Wallet
             </button>
           </div>
         </div>
       </Modal>
 
-{/* Lock Modal
+      {/* Lock Modal
       <Modal
         isOpen={notification}
         style={customStyles}
@@ -395,7 +389,7 @@ const Dashboard = () => {
         </div>
       </Modal>
           */}
-      
+
       {isLock === "true" ? (
         <LockModal
           isOpen={modalLock}

@@ -16,9 +16,6 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
   const [walletAddress, setWalletAddress] = useState(
     sessionStorage.getItem("walletAddress")
   );
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem("access_token")
-  );
 
   const [mapchain, setMapchain] = useState(0);
   const [transfer, setTransfer] = useState(0);
@@ -38,11 +35,8 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
       .then((response) => {
         setMapchain(response.data.balances[1].balance);
         setTransfer(response.data.balances[6].balance);
-      })
-      .catch((error) => {
-        console.log(error);
       });
-  }, []);
+  }, [sessionStorage.getItem("access_token")]);
 
   const [listPackages, setListPackages] = useState([]);
   const [packagePrice, setPackagePrice] = useState("");
@@ -64,10 +58,13 @@ const InvestmentPackage = ({ packages = [], balance = 0 }) => {
 
   const buyPackage = () => {
     if (multiTabDetect) {
-      toast.error("Multiple instances detected, please close all others window and reload the page!", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error(
+        "Multiple instances detected, please close all others window and reload the page!",
+        {
+          position: "top-right",
+          autoClose: 1500,
+        }
+      );
       return;
     }
     if (buttonDisabled) return;
