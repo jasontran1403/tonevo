@@ -8,7 +8,7 @@
     /* display: flex; */
     flex-direction: column; /* Ensure the tree layout aligns vertically */
     height: 1200px;
-    width: 2800px;
+    width: 1500px;
 }
 
 .tree ul {

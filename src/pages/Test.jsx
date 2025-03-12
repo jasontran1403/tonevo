@@ -20,6 +20,27 @@ const Test = () => {
   const [userRoot, setUserRoot] = useState({});
   const [treeData, setTreeData] = useState(null);
 
+  const formatLargeNumber = (num) => {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "B" },
+    ];
+    
+    const item = lookup
+      .slice()
+      .reverse()
+      .find((item) => num >= item.value);
+  
+    if (!item) return "0";
+  
+    // Format với 4 số thập phân và loại bỏ số 0 dư ở cuối
+    let formatted = (num / item.value).toFixed(4).replace(/\.?0+$/, "");
+  
+    return formatted + item.symbol;
+  };
+
   useEffect(() => {
     fetchTreeByRoot(currWallet); // Fetch tree using current wallet
   }, [currWallet]);
@@ -66,7 +87,7 @@ const Test = () => {
   };
 
   const renderTree = (node, depth = 0, position = 0) => {
-    if (depth > 4) return null; // Limit depth to 5 levels (0-4)
+    if (depth > 3) return null; // Limit depth to 5 levels (0-4)
 
     const displayName = node?.userInfo?.displayName || null;
     return (
@@ -87,11 +108,11 @@ const Test = () => {
                 Placement: {node.userInfo?.placementDisplayName || "N/A"}
               </p>
               <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p>
-              <p className="sponsor">Sales: {node.userInfo?.sales || 0}</p>
-              <p className="sponsor">Team sales left: {node.userInfo?.teamSalesLeft || 0}</p>
-              <p className="sponsor">Team sales right: {node.userInfo?.teamSalesRight || 0}</p>
-              <p className="sponsor">Binary left matching: {node.userInfo?.teamSalesLeftLeft || 0}</p>
-              <p className="sponsor">Binary right matching: {node.userInfo?.teamSalesRightLeft || 0}</p>
+              <p className="sponsor">Sales: {formatLargeNumber(node.userInfo?.sales) || 0}</p>
+              <p className="sponsor">Sales left: {formatLargeNumber(node.userInfo?.teamSalesLeft) || 0}</p>
+              <p className="sponsor">Sales right: {formatLargeNumber(node.userInfo?.teamSalesRight) || 0}</p>
+              <p className="sponsor">Left matching: {formatLargeNumber(node.userInfo?.teamSalesLeftLeft) || 0}</p>
+              <p className="sponsor">Right matching: {formatLargeNumber(node.userInfo?.teamSalesRightLeft) || 0}</p>
             </a>
           ) : (
             <a>
