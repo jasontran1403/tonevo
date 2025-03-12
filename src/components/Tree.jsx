@@ -114,10 +114,6 @@ const Tree = () => {
               <p className="sponsor">
                 Sponsor: {node.userInfo?.rootDisplayName || "N/A"}
               </p>
-              {/* <p className="sponsor">
-                Placement: {node.userInfo?.placementDisplayName || "N/A"}
-              </p> */}
-              <p className="sponsor">Side: {node.userInfo?.side || "N/A"}</p>
               <p className="sponsor">Sales: {formatLargeNumber(node.userInfo?.sales) || 0}</p>
               <p className="sponsor">Sales left: {formatLargeNumber(node.userInfo?.teamSalesLeft) || 0}</p>
               <p className="sponsor">Sales right: {formatLargeNumber(node.userInfo?.teamSalesRight) || 0}</p>
