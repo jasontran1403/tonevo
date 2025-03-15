@@ -207,8 +207,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Notification Modal */}
-      <Modal
+      {/* Promotion Modal */}
+      {/* <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
         style={customStyles}
@@ -289,7 +289,7 @@ const Dashboard = () => {
             </div>
           </SwiperSlide>
         </Swiper>
-      </Modal>
+      </Modal> */}
 
       <Modal
         isOpen={formSet}
