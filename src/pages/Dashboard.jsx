@@ -132,8 +132,9 @@ const Dashboard = () => {
     };
 
     Axios.request(config).then((response) => {
-      if (response.data?.length === 0) {
+      if (response.data?.length === 0 || response.data === "") {
         setWalletSet(true);
+        setFormSet(true);
       }
     });
   }, [sessionStorage.getItem("access_token")]);
