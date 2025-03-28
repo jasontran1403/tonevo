@@ -5,10 +5,10 @@ const Error404 = () => {
     <div id="notfound">
 		<div className="notfound">
 			<div className="notfound-404">
-				<h1>Oops!</h1>
+				<h1>Upgrade!</h1>
 			</div>
-			<h2>404 - Page not found</h2>
-			<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+			<h2>Mapchain is currently in upgrading progress</h2>
+			<p>Please come back later.</p>
 			<a href="/">Go to Landing page</a>
 		</div>
 	</div>

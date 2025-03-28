@@ -209,7 +209,7 @@ const Dashboard = () => {
       </div>
 
       {/* Promotion Modal */}
-      {/* <Modal
+      <Modal
         isOpen={notificationModalOpen}
         onRequestClose={closeNotificationModal}
         style={customStyles}
@@ -290,9 +290,9 @@ const Dashboard = () => {
             </div>
           </SwiperSlide>
         </Swiper>
-      </Modal> */}
+      </Modal>
 
-      <Modal
+      {/* <Modal
         isOpen={formSet}
         style={customStyles}
         contentLabel="Wallet Verify Form"
@@ -344,7 +344,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
 
       {/* Lock Modal
       <Modal
@@ -391,7 +391,7 @@ const Dashboard = () => {
       </Modal>
           */}
 
-      {isLock === "true" ? (
+      {/* {isLock === "true" ? (
         <LockModal
           isOpen={modalLock}
           onRequestClose={closeLockModal}
@@ -463,7 +463,7 @@ const Dashboard = () => {
             <Form />
           </Modal>
         </div>
-      )}
+      )} */}
 
       <Chatbox />
     </div>
